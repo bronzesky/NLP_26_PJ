@@ -1,0 +1,36 @@
+[
+  {
+    "config": "all",
+    "macro_f1": 0.8176
+  },
+  {
+    "config": "-lexical",
+    "macro_f1": 0.8187,
+    "delta": 0.0011
+  },
+  {
+    "config": "-structural",
+    "macro_f1": 0.8177,
+    "delta": 0.0001
+  },
+  {
+    "config": "-repetition",
+    "macro_f1": 0.8143,
+    "delta": -0.0033
+  },
+  {
+    "config": "-pragmatic",
+    "macro_f1": 0.8074,
+    "delta": -0.0102
+  },
+  {
+    "config": "-discourse",
+    "macro_f1": 0.8176,
+    "delta": 0.0
+  },
+  {
+    "config": "signals_only",
+    "macro_f1": 0.8147,
+    "delta": -0.0029
+  }
+]

@@ -43,9 +43,10 @@ here). The orthogonal stage lifts \texttt{bloomz} recall from
 $0.10$ to $0.70$. We pair the detector with a plagiarism-checker-style
 interpretable report (occlusion-based sentence attribution, a
 human$\leftrightarrow$AI discriminant axis for each linguistic feature) and a
-fixed-detector de-AI robustness probe in which targeted occlusion-guided
-recursive rewriting drives the AI rate from $0.91$ to $0.27$ (verdict flip)
-while light paraphrase barely moves it. A negative result---a hierarchical
+fixed-detector de-AI robustness probe: a fine-tuned detector resists light or
+localized paraphrase, but sustained whole-document recursive rewriting drives
+its AI rate down and flips verdicts (mean drop $0.31$, $38\%$ flips over eight
+documents). A negative result---a hierarchical
 sentence-aware extension that overfits the single-generator dev set
 (test AUROC $0.944\!\rightarrow\!0.672$)---reinforces our thesis: the
 bottleneck is calibration and shift, not model capacity.
@@ -91,10 +92,11 @@ human-like \texttt{bloomz} generator's recall from $0.10$ to $0.70$
 sentence attribution that is coherent with the document score, and a
 per-feature human$\leftrightarrow$AI discriminant axis (Section~\ref{sec:viz}).
 \item A closed-loop de-AI robustness probe under a strict fixed-detector
-protocol: targeted, occlusion-guided recursive rewriting drives the AI rate
-from $0.906$ to $0.269$ (verdict flip) while a single whole-document rewrite
-barely moves it, quantifying exactly how much editing the detector withstands
-(Section~\ref{sec:robust}).
+protocol (the AI rate is one frozen RoBERTa, measured before and after): the
+detector resists light/localized paraphrase but is worn down by sustained
+whole-document recursive rewriting (mean AI-rate drop $0.31$, $38\%$ verdict
+flips over 8 docs); recursion is necessary and occlusion-targeting does not
+beat random under recursion (Section~\ref{sec:robust}).
 \item A documented negative result (HSAD) showing that added hierarchical
 capacity overfits the single-generator dev set and destroys ranking ability
 (Section~\ref{sec:hsad}).
@@ -135,7 +137,16 @@ axes---generator and domain.
 \paragraph{The AUROC/accuracy contradiction.} Table~\ref{tab:ceiling} shows
 fine-tuned RoBERTa-base reaches test AUROC $0.944$ but macro-F1 $0.619$ at
 threshold $0.5$. Per-group analysis reveals near-perfect recall on AI groups
-but $31\%$ accuracy on human---the threshold is displaced, not the ranking.
+but $31\%$ accuracy on human---the threshold is displaced, not the ranking
+(Figure~\ref{fig:opp}).
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig1_operating_point.pdf}
+\caption{The detector ranks well (AUROC $0.944$) but macro-F1 collapses at the
+default threshold (margin$=0$); the oracle threshold is far away. The failure
+is the operating point, not the representation.}
+\label{fig:opp}
+\end{figure}
 
 \paragraph{Dev cannot calibrate test.} The dev-optimal margin threshold
 ($-5.86$) and the test oracle threshold ($+12.0$) point in \emph{opposite}
@@ -178,7 +189,15 @@ $11.9$), while clean AI sits $\geq12.1$. A single global threshold therefore
 trades human specificity against \texttt{bloomz} recall: at margin $12.0$,
 specificity $0.95$ but \texttt{bloomz} recall $0.10$; lowering to $11.0$
 raises \texttt{bloomz} to $0.48$ but drops specificity to $0.72$. The two are
-in direct conflict for any single threshold.
+in direct conflict for any single threshold (Figure~\ref{fig:overlap}).
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig2_margin_overlap.pdf}
+\caption{Margin distributions. \texttt{bloomz} sits inside the human upper
+tail (shaded ambiguous band), while clean AI separates cleanly. No single
+threshold can hold both human specificity and \texttt{bloomz} recall.}
+\label{fig:overlap}
+\end{figure}
 
 \section{Region-Aware Two-Stage Detection}
 \label{sec:method}
@@ -304,46 +323,61 @@ benchmark.) No auxiliary classifier is allowed to override the AI rate---otherwi
 a ``reduction'' would merely fool a secondary stage while the detector still
 flags the text. The verdict is $P(\text{AI})\geq0.5$ throughout.
 
-\paragraph{Targeted, recursive polishing.} Rather than rewriting the whole
-document, we (i) locate the sentences that contribute most to the AI rate by
-\emph{occlusion} ($\Delta P(\text{AI})$ when each sentence is removed), (ii)
-generate rewrite guidance from the document's AI-leaning linguistic features
-(``remove formulaic connectors; vary sentence length sharply''), (iii) rewrite
-\emph{only} the top-contributing sentences in place, and (iv) re-measure with
-the same RoBERTa and recurse on the new top contributors until
-$P(\text{AI})<0.5$ or a round budget is hit.
+\paragraph{De-AI rewriting strategies.} We compare four rewriting strategies,
+all re-scored by the same fixed RoBERTa over up to six rounds on the same eight
+high-AI documents: \textbf{whole-doc recursive}; \textbf{targeted recursive}
+(rewrite only the top-contributing sentences located by occlusion, guided by
+the document's AI-leaning features); \textbf{targeted single-round}; and
+\textbf{random recursive} (rewrite randomly chosen sentences, same budget).
 
-\paragraph{Findings.} A single whole-document rewrite barely moves the fixed
-detector ($P(\text{AI})\,0.906\!\rightarrow\!0.90$), confirming a fine-tuned
-detector is robust to light paraphrase. Targeted recursive polishing, however,
-drives the AI rate down monotonically and eventually flips the verdict:
-Table~\ref{tab:robust} traces one document from $0.906$ to $0.269$ over seven
-rounds (rewriting only $\approx6$ sentences per round), crossing the $0.5$
-threshold at round~7. The descent is smooth and accelerates near the boundary,
-showing the recursion progressively erodes the detector's discriminative signal
-rather than gaming a surface feature.
+\paragraph{Findings.} Table~\ref{tab:robust} reports the mean over eight
+documents. Three results stand out. (1) \textbf{Recursion is essential}: a
+single targeted round moves the AI rate essentially zero (drop $0.000$), only
+recursion erodes it. (2) \textbf{Whole-document recursive rewriting is the
+strongest attack} (mean drop $0.31$, $38\%$ verdict flips), and it is more
+effective even \emph{per unit of editing} ($0.34$ vs.\ $0.15$ for targeted).
+(3) Surgical, occlusion-targeted rewriting does \emph{not} beat random sentence
+selection here (drop $0.14$ vs.\ $0.16$): localizing the most-incriminating
+sentences gives no advantage once rewriting is recursive, because each round
+re-distributes the contribution mass. A fine-tuned detector is thus robust to
+light or localized paraphrase but is defeated by sustained whole-document
+recursive rewriting.
 
 \begin{table}[t]\centering\small
-\begin{tabular}{cccccccc}
+\begin{tabular}{lcccc}
 \toprule
-round & 0 & 1 & 2 & 3 & 4 & 6 & 7 \\
+strategy & AI-rate drop & flip & edit frac & drop/edit \\
 \midrule
-$P(\text{AI})$ & .906 & .904 & .893 & .863 & .792 & .611 & \textbf{.269} \\
+whole-doc, recursive & \textbf{0.31} & \textbf{0.38} & 0.87 & \textbf{0.34} \\
+targeted, recursive & 0.14 & 0.12 & 0.65 & 0.15 \\
+random, recursive & 0.16 & 0.25 & 0.76 & 0.19 \\
+targeted, single-round & 0.00 & 0.00 & 0.10 & 0.00 \\
 \bottomrule
 \end{tabular}
-\caption{Targeted recursive de-AI on one document, measured by the
-\emph{same} fixed RoBERTa. AI rate $0.906\!\rightarrow\!0.269$ in 7 rounds;
-verdict flips AI$\rightarrow$human at round~7. Only $\sim$6 high-contribution
-sentences are rewritten per round.}
+\caption{De-AI rewriting ablation (mean over 8 high-AI docs, fixed RoBERTa,
+$\leq$6 rounds). Recursion is necessary; whole-document recursive is strongest
+even per edit; occlusion-targeting does not beat random under recursion.}
 \label{tab:robust}
 \end{table}
 
-\paragraph{Interpretation.} Because the detector is held fixed, the drop is a
-faithful measure of its robustness: it withstands single/light paraphrase but
-is eventually defeated by occlusion-guided, feature-steered recursive editing
-of its own most-incriminating sentences. The rewritten text remains fluent and
-on-topic (it reads markedly more human), at the cost of mild redundancy
-introduced by rewriting sentences independently of one another.
+\paragraph{Interpretation.} Because the detector is held fixed, these drops
+faithfully measure its robustness rather than gaming a secondary stage. The
+single-document trajectory in Figure~\ref{fig:deai} (one favourable case,
+$0.906\!\rightarrow\!0.27$) illustrates the recursive descent, but the
+eight-document means show such full flips are the exception, not the rule, and
+require aggressive whole-document editing (edit fraction $0.87$). Rewritten
+text stays fluent and on-topic; targeting trades effectiveness for smaller
+edits but, contrary to our initial single-case impression, is not the more
+efficient attack.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig4_deai_descent.pdf}
+\caption{A favourable single-document case: targeted recursive de-AI driving
+the (fixed-RoBERTa) AI rate across the $0.5$ verdict threshold. Means over
+eight documents (Table~\ref{tab:robust}) show this is the exception; whole-doc
+recursive rewriting is the stronger attack on average.}
+\label{fig:deai}
+\end{figure}
 
 \section{Negative Result: Hierarchical Overfitting}
 \label{sec:hsad}
@@ -379,9 +413,9 @@ artifact: calibration plus an in-distribution threshold recovers $0.886$.
 A region-aware two-stage rule that routes ambiguous-margin documents to an
 orthogonal-feature classifier reaches a deployable $0.857$, beats the prior
 best single model, and recovers the hardest human-like generator. Holding the
-detector fixed, a targeted occlusion-guided recursive rewrite drives its AI
-rate from $0.91$ to $0.27$ only after seven rounds---it resists light
-paraphrase---while a hierarchical capacity extension overfits and fails.
+detector fixed, it resists light or localized paraphrase and is only worn down
+by sustained whole-document recursive rewriting (mean AI-rate drop $0.31$),
+while a hierarchical capacity extension overfits and fails.
 Together these argue that calibration and distribution shift, not model
 capacity, are the levers that matter.
 

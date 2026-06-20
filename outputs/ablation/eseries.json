@@ -1,0 +1,299 @@
+{
+  "summary": {
+    "E-full targeted+rec": {
+      "mean_drop": 0.14,
+      "mean_after": 0.766,
+      "flip_rate": 0.125,
+      "mean_edit_frac": 0.648,
+      "drop_per_edit": 0.153
+    },
+    "E1 whole+rec": {
+      "mean_drop": 0.31,
+      "mean_after": 0.596,
+      "flip_rate": 0.375,
+      "mean_edit_frac": 0.872,
+      "drop_per_edit": 0.339
+    },
+    "E2 targeted+single": {
+      "mean_drop": 0.0,
+      "mean_after": 0.906,
+      "flip_rate": 0.0,
+      "mean_edit_frac": 0.102,
+      "drop_per_edit": 0.004
+    },
+    "E4 random+rec": {
+      "mean_drop": 0.163,
+      "mean_after": 0.743,
+      "flip_rate": 0.25,
+      "mean_edit_frac": 0.759,
+      "drop_per_edit": 0.19
+    }
+  },
+  "raw": {
+    "E-full targeted+rec": [
+      {
+        "before": 0.9061,
+        "after": 0.5735,
+        "drop": 0.3326,
+        "edit_frac": 0.895,
+        "flip": 0,
+        "drop_per_edit": 0.372
+      },
+      {
+        "before": 0.9058,
+        "after": 0.9045,
+        "drop": 0.0013000000000000789,
+        "edit_frac": 0.558,
+        "flip": 0,
+        "drop_per_edit": 0.002
+      },
+      {
+        "before": 0.9059,
+        "after": 0.1646,
+        "drop": 0.7413000000000001,
+        "edit_frac": 0.933,
+        "flip": 1,
+        "drop_per_edit": 0.795
+      },
+      {
+        "before": 0.9061,
+        "after": 0.8997,
+        "drop": 0.006399999999999961,
+        "edit_frac": 0.756,
+        "flip": 0,
+        "drop_per_edit": 0.008
+      },
+      {
+        "before": 0.9059,
+        "after": 0.903,
+        "drop": 0.0029000000000000137,
+        "edit_frac": 0.827,
+        "flip": 0,
+        "drop_per_edit": 0.004
+      },
+      {
+        "before": 0.906,
+        "after": 0.9055,
+        "drop": 0.000500000000000056,
+        "edit_frac": 0.38,
+        "flip": 0,
+        "drop_per_edit": 0.001
+      },
+      {
+        "before": 0.906,
+        "after": 0.8712,
+        "drop": 0.03480000000000005,
+        "edit_frac": 0.788,
+        "flip": 0,
+        "drop_per_edit": 0.044
+      },
+      {
+        "before": 0.906,
+        "after": 0.906,
+        "drop": 0.0,
+        "edit_frac": 0.05,
+        "flip": 0,
+        "drop_per_edit": 0.0
+      }
+    ],
+    "E1 whole+rec": [
+      {
+        "before": 0.9061,
+        "after": 0.1268,
+        "drop": 0.7793,
+        "edit_frac": 0.886,
+        "flip": 1,
+        "drop_per_edit": 0.88
+      },
+      {
+        "before": 0.9058,
+        "after": 0.9034,
+        "drop": 0.0024000000000000687,
+        "edit_frac": 0.75,
+        "flip": 0,
+        "drop_per_edit": 0.003
+      },
+      {
+        "before": 0.9059,
+        "after": 0.8701,
+        "drop": 0.035800000000000054,
+        "edit_frac": 0.95,
+        "flip": 0,
+        "drop_per_edit": 0.038
+      },
+      {
+        "before": 0.9061,
+        "after": 0.1893,
+        "drop": 0.7168,
+        "edit_frac": 0.946,
+        "flip": 1,
+        "drop_per_edit": 0.758
+      },
+      {
+        "before": 0.9059,
+        "after": 0.8789,
+        "drop": 0.027000000000000024,
+        "edit_frac": 0.906,
+        "flip": 0,
+        "drop_per_edit": 0.03
+      },
+      {
+        "before": 0.906,
+        "after": 0.7882,
+        "drop": 0.11780000000000002,
+        "edit_frac": 0.893,
+        "flip": 0,
+        "drop_per_edit": 0.132
+      },
+      {
+        "before": 0.906,
+        "after": 0.1181,
+        "drop": 0.7879,
+        "edit_frac": 0.926,
+        "flip": 1,
+        "drop_per_edit": 0.851
+      },
+      {
+        "before": 0.906,
+        "after": 0.8933,
+        "drop": 0.012700000000000045,
+        "edit_frac": 0.716,
+        "flip": 0,
+        "drop_per_edit": 0.018
+      }
+    ],
+    "E2 targeted+single": [
+      {
+        "before": 0.9061,
+        "after": 0.9042,
+        "drop": 0.0019000000000000128,
+        "edit_frac": 0.26,
+        "flip": 0,
+        "drop_per_edit": 0.007
+      },
+      {
+        "before": 0.9058,
+        "after": 0.9057,
+        "drop": 0.00010000000000010001,
+        "edit_frac": 0.009,
+        "flip": 0,
+        "drop_per_edit": 0.011
+      },
+      {
+        "before": 0.9059,
+        "after": 0.9059,
+        "drop": 0.0,
+        "edit_frac": 0.036,
+        "flip": 0,
+        "drop_per_edit": 0.0
+      },
+      {
+        "before": 0.9061,
+        "after": 0.906,
+        "drop": 9.999999999998899e-05,
+        "edit_frac": 0.072,
+        "flip": 0,
+        "drop_per_edit": 0.001
+      },
+      {
+        "before": 0.9059,
+        "after": 0.9056,
+        "drop": 0.000300000000000078,
+        "edit_frac": 0.301,
+        "flip": 0,
+        "drop_per_edit": 0.001
+      },
+      {
+        "before": 0.906,
+        "after": 0.9059,
+        "drop": 9.999999999998899e-05,
+        "edit_frac": 0.009,
+        "flip": 0,
+        "drop_per_edit": 0.011
+      },
+      {
+        "before": 0.906,
+        "after": 0.906,
+        "drop": 0.0,
+        "edit_frac": 0.079,
+        "flip": 0,
+        "drop_per_edit": 0.0
+      },
+      {
+        "before": 0.906,
+        "after": 0.906,
+        "drop": 0.0,
+        "edit_frac": 0.05,
+        "flip": 0,
+        "drop_per_edit": 0.0
+      }
+    ],
+    "E4 random+rec": [
+      {
+        "before": 0.9061,
+        "after": 0.2993,
+        "drop": 0.6068,
+        "edit_frac": 0.868,
+        "flip": 1,
+        "drop_per_edit": 0.699
+      },
+      {
+        "before": 0.9058,
+        "after": 0.9047,
+        "drop": 0.001100000000000101,
+        "edit_frac": 0.651,
+        "flip": 0,
+        "drop_per_edit": 0.002
+      },
+      {
+        "before": 0.9059,
+        "after": 0.2463,
+        "drop": 0.6596000000000001,
+        "edit_frac": 0.849,
+        "flip": 1,
+        "drop_per_edit": 0.777
+      },
+      {
+        "before": 0.9061,
+        "after": 0.8991,
+        "drop": 0.007000000000000006,
+        "edit_frac": 0.894,
+        "flip": 0,
+        "drop_per_edit": 0.008
+      },
+      {
+        "before": 0.9059,
+        "after": 0.9045,
+        "drop": 0.0014000000000000679,
+        "edit_frac": 0.742,
+        "flip": 0,
+        "drop_per_edit": 0.002
+      },
+      {
+        "before": 0.906,
+        "after": 0.9051,
+        "drop": 0.0009000000000000119,
+        "edit_frac": 0.574,
+        "flip": 0,
+        "drop_per_edit": 0.002
+      },
+      {
+        "before": 0.906,
+        "after": 0.8816,
+        "drop": 0.024399999999999977,
+        "edit_frac": 0.782,
+        "flip": 0,
+        "drop_per_edit": 0.031
+      },
+      {
+        "before": 0.906,
+        "after": 0.9056,
+        "drop": 0.00040000000000006697,
+        "edit_frac": 0.713,
+        "flip": 0,
+        "drop_per_edit": 0.001
+      }
+    ]
+  },
+  "n": 8
+}
