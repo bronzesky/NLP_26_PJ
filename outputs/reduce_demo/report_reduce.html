@@ -36,17 +36,27 @@ body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif;
 .para-tag { display:inline-block; color:#fff; font-size:11px; font-weight:600;
             padding:2px 10px; border-radius:10px; margin-bottom:6px; }
 .para-body { line-height:2.0; font-size:15px; }
-.sent { padding:1px 0; }
+.sent { padding:1px 2px; border-radius:3px; }
 table.ev { width:100%; border-collapse:collapse; font-size:13px; }
-table.ev td { padding:7px 8px; border-bottom:1px solid #eef1f5; vertical-align:middle; }
-.ev .fname { width:200px; color:#3a4452; font-family:monospace; font-size:12px; }
-.ev .fbar { width:auto; }
-.ev .track { position:relative; height:18px; background:linear-gradient(90deg,#eafaef,#fdeaea);
-             border-radius:9px; }
-.ev .marker { position:absolute; top:-1px; width:4px; height:20px; border-radius:2px; }
-.ev .hm,.ev .am { position:absolute; top:2px; font-size:10px; color:#9aa3b0; }
-.ev .fval { width:70px; text-align:right; font-family:monospace; }
-.ev .fsig { width:80px; font-weight:600; }
+table.ev th { font-weight:600; color:#6b7480; font-size:12px; padding:4px 8px; text-align:left; }
+table.ev td { padding:10px 8px; border-bottom:1px solid #eef1f5; vertical-align:middle; }
+.ev .fname { width:190px; color:#3a4452; font-family:monospace; font-size:12px; }
+.ev .fbar { width:auto; min-width:260px; }
+.dax-head { display:flex; justify-content:space-between; font-size:11px; color:#9aa3b0; }
+.dax-head .mid { color:#b6c0cf; }
+.dax { position:relative; height:24px; border-radius:12px;
+       background:linear-gradient(90deg,#2ea043 0%, #d6e8d8 38%, #f1f0f2 50%, #f3dada 62%, #da3633 100%);
+       border:1px solid #e2e6ec; }
+.dax-mid { position:absolute; left:50%; top:0; bottom:0; width:2px;
+           background:rgba(31,39,51,.35); transform:translateX(-1px); }
+.dax .tick { position:absolute; top:50%; width:2px; height:14px; transform:translate(-1px,-50%);
+             opacity:.65; }
+.dax .tick.h { background:#0b5d20; }
+.dax .tick.a { background:#7a1210; }
+.dax .dot { position:absolute; top:50%; width:16px; height:16px; border-radius:50%;
+            border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.25);
+            transform:translate(-8px,-50%); z-index:3; }
+.ev .fval { width:90px; text-align:right; font-weight:600; font-size:12px; }
 .sug-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .sug-card { border:1px solid #e7ebf0; border-radius:8px; padding:12px 14px; }
 .sug-head { font-weight:700; font-size:13px; color:#27313f; margin-bottom:6px; }
@@ -70,8 +80,8 @@ table.ev td { padding:7px 8px; border-bottom:1px solid #eef1f5; vertical-align:m
            border:1px solid #eef1f5; border-radius:8px; padding:14px; max-height:560px; overflow:auto; }
 </style></head><body><div class="wrap">
 <div class="topbar"><h1>降 AIGC 前后对比报告</h1>
-<span class="verdict" style="background:#2ea043">改写后判定：人类</span></div>
-<div class="card"><div class="rd-head"><div class="rd-col"><div class="rd-lbl">降AIGC前</div><div class="rd-ring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#da3633" stroke-width="14" stroke-dasharray="333.01 333.01" stroke-linecap="round" transform="rotate(-90 65.0 65.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#da3633">100.0%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">AI疑似度</text></svg></div><div class="rd-meta">RoBERTa P(AI) 90.6% · margin 12.2 · ppl 13 · burst 0.30</div></div><div class="rd-arrow">→<br><span>claude-sonnet-4-6<br>递归改写</span></div><div class="rd-col"><div class="rd-lbl">降AIGC后</div><div class="rd-ring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#2ea043" stroke-width="14" stroke-dasharray="0.00 333.01" stroke-linecap="round" transform="rotate(-90 65.0 65.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#2ea043">0.0%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">AI疑似度</text></svg></div><div class="rd-meta">RoBERTa P(AI) 82.7% · margin 8.4 · ppl 36 · burst 0.33</div></div></div><div class="rd-delta">疑似度 100% → 0%（↓ 100 个百分点）· RoBERTa 深层信号 90.6% → 82.7%</div></div>
+<span class="verdict" style="background:#da3633">改写后判定：人类</span></div>
+<div class="card"><div class="rd-head"><div class="rd-col"><div class="rd-lbl">降AIGC前</div><div class="rd-ring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#da3633" stroke-width="14" stroke-dasharray="301.74 333.01" stroke-linecap="round" transform="rotate(-90 65.0 65.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#da3633">90.6%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">P(AI)</text></svg></div><div class="rd-meta">最终判定 AI · margin 12.2 · ppl 13 · burst 0.30</div></div><div class="rd-arrow">→<br><span>claude-sonnet-4-6<br>递归改写</span></div><div class="rd-col"><div class="rd-lbl">降AIGC后</div><div class="rd-ring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#da3633" stroke-width="14" stroke-dasharray="233.77 333.01" stroke-linecap="round" transform="rotate(-90 65.0 65.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#da3633">70.2%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">P(AI)</text></svg></div><div class="rd-meta">最终判定 人类 · margin 4.6 · ppl 35 · burst 0.42</div></div></div><div class="rd-delta">RoBERTa 校准 P(AI) 90.6% → 70.2%（↓ 20.4 个百分点）· margin 12.2 → 4.6 · 最终判定 AI → 人类</div></div>
 <div class="card"><h2>原文 / 降AIGC后 全文对比</h2><div class="rd-side"><div class="rd-pane"><h3>原文</h3><div class="rd-text">In recent years, the debate surrounding the use of online classes in schools has intensified. With the onset of the COVID-19 pandemic, many educational institutions were forced to adopt remote learning methodologies. However, the question remains: should schools continue to offer online classes even beyond the pandemic? Although online classes have their benefits, such as flexibility and accessibility, I argue against their widespread use in schools due to their potential negative impact on student learning and teacher employment.
 
 One of the key arguments against online classes is the loss of hands-on learning experiences. Traditional classrooms provide a dynamic environment where students can actively engage in discussions, experiments, and group activities. These experiences foster critical thinking, problem-solving, and social skills, which are essential for a well-rounded education. Online classes, on the other hand, often lack the collaborative aspect and can limit students&#x27; ability to fully grasp complex concepts. The absence of hands-on learning can hinder students&#x27; overall development and limit their potential for success in future endeavors.
@@ -80,14 +90,12 @@ Furthermore, the value of teachers&#x27; education and expertise cannot be under
 
 While it is true that online classes offer flexibility and accessibility, particularly for students in remote areas or with limited resources, these benefits should not be overshadowed by the potential drawbacks. To address the limitations of online classes, schools should invest in technology that enhances interactive learning experiences, such as virtual reality and specialized software. This way, students can still benefit from the advantages of technology while maintaining the vital aspects of in-person education.
 
-In conclusion, while online classes have their merits, such as flexibility and accessibility, their widespread use in schools should be carefully considered. Their potential negative impact on student learning and teacher employment suggests that a balanced approach, combining hands-on learning experiences with well-supported online resources, would provide the best educational outcome for students.</div></div><div class="rd-pane"><h3>降AIGC后</h3><div class="rd-text">Here&#x27;s the rewritten text:
+In conclusion, while online classes have their merits, such as flexibility and accessibility, their widespread use in schools should be carefully considered. Their potential negative impact on student learning and teacher employment suggests that a balanced approach, combining hands-on learning experiences with well-supported online resources, would provide the best educational outcome for students.</div></div><div class="rd-pane"><h3>降AIGC后</h3><div class="rd-text">In recent years, the debate around online classes in schools has grown louder. When the COVID-19 pandemic hit, educational institutions scrambled to shift to remote learning almost overnight. Now that things have stabilized, a real question lingers: should schools keep offering online classes going forward? There are genuine benefits — flexibility, broader access — but the case against making them the norm is hard to ignore, especially when you look at what students lose and what it means for teachers.
 
-The debate over online classes in schools has been building for years, but the COVID-19 pandemic forced the question into the open. Nearly every educational institution had to pivot to remote learning almost overnight. Now that the immediate crisis has passed, the question is whether schools should keep offering online classes as a permanent fixture. Flexible and accessible as they are, the case against making them the norm is worth taking seriously — the costs to student learning and teacher employment are too significant to brush aside.
+The most immediate cost is the loss of hands-on learning. Traditional classrooms give students a space to debate ideas, run experiments, and work through problems together. That kind of environment builds critical thinking and social skills in ways that are difficult to replicate on a screen. Remote setups tend to strip away the collaborative texture of learning, leaving students to wrestle with complex material in isolation. For many, that gap shows up not just in grades but in confidence and long-term readiness.
 
-The most immediate concern is what students lose when they&#x27;re not in a physical classroom. Traditional learning environments give students room to debate ideas, run experiments, and work through problems as a group. That kind of engagement builds critical thinking and social skills in ways that are hard to replicate on a screen. Remote formats tend to strip away the collaborative texture of a lesson, and without it, students often struggle to get a genuine grip on difficult material. The long-term effects on their development are easy to underestimate until the gaps start to show.
+Teachers are another piece of this that often gets glossed over. A good teacher does more than deliver content — they read the room, adjust on the fly, and push individual students in ways an algorithm simply cannot. That responsiveness is hard to replace. Beyond the classroom itself, a wide shift to online learning could quietly erode teaching jobs, with real ripple effects on employment and the communities that depend on those positions.
 
-Teachers bring something to the room that a recorded lecture or auto-graded quiz simply can&#x27;t. They read the energy of a class, adjust on the fly, and give the kind of specific, timely feedback that actually moves a student forward. Shifting to a predominantly digital model doesn&#x27;t just dilute that — it puts real pressure on teacher employment, with ripple effects that go beyond any single school budget.
-
-Online learning does have genuine advantages, especially for students in rural areas or those without reliable access to in-person education. Schools can close some of those gaps by investing in tools like virtual reality or purpose-built educational software that make digital lessons more engaging. That&#x27;s a reasonable middle ground — using technology to support learning rather than replace the conditions that make it work.</div></div></div></div>
+Online classes do work well in specific situations — for students in remote areas, or those juggling circumstances that make a fixed schedule impossible. Schools could invest in tools like virtual reality or adaptive software to make those options richer and more interactive, bridging some of the gap without abandoning what works about in-person learning.</div></div></div></div>
 <div class="foot">攻防评测：改写攻击使 AI 疑似度下降，量化检测器鲁棒性。仅研究用途。</div>
 </div></body></html>

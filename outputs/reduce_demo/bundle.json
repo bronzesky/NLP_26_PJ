@@ -1,0 +1,958 @@
+{
+  "attacker": "claude-sonnet-4-6",
+  "before": {
+    "title": "原文",
+    "doc_prob_ai": 0.9061,
+    "doc_label": 1,
+    "doc_verdict": "AI",
+    "doc_region": "clean_ai",
+    "doc_grade": "high",
+    "doc_margin": 12.167,
+    "char_count": 2691,
+    "word_count": 373,
+    "paragraph_count": 5,
+    "ppl": 13.37,
+    "burstiness": 0.305,
+    "feature_evidence": [
+      {
+        "feature": "discourse_conclusive",
+        "value": 0.1053,
+        "human_mean": 0.0039,
+        "ai_mean": 0.0223,
+        "human_std": 0.0206,
+        "ai_std": 0.0432,
+        "disc": 0.9999,
+        "disc_human": -0.3931,
+        "disc_ai": -0.1691,
+        "signal": "AI-like"
+      },
+      {
+        "feature": "discourse_total_density",
+        "value": 0.3684,
+        "human_mean": 0.0983,
+        "ai_mean": 0.1488,
+        "human_std": 0.0991,
+        "ai_std": 0.1344,
+        "disc": 0.7771,
+        "disc_human": -0.1855,
+        "disc_ai": -0.0873,
+        "signal": "AI-like"
+      },
+      {
+        "feature": "discourse_contrastive",
+        "value": 0.1579,
+        "human_mean": 0.0269,
+        "ai_mean": 0.0357,
+        "human_std": 0.0514,
+        "ai_std": 0.0642,
+        "disc": 0.5437,
+        "disc_human": -0.1158,
+        "disc_ai": -0.1037,
+        "signal": "AI-like"
+      },
+      {
+        "feature": "rhetorical_question_ratio",
+        "value": 0.0,
+        "human_mean": 0.0001,
+        "ai_mean": 0.0,
+        "human_std": 0.0037,
+        "ai_std": 0.0014,
+        "disc": 0.4355,
+        "disc_human": 0.4339,
+        "disc_ai": 0.4354,
+        "signal": "AI-like"
+      },
+      {
+        "feature": "mattr",
+        "value": 0.8447,
+        "human_mean": 0.7833,
+        "ai_mean": 0.7475,
+        "human_std": 0.0455,
+        "ai_std": 0.0636,
+        "disc": -0.2859,
+        "disc_human": -0.2421,
+        "disc_ai": -0.014,
+        "signal": "neutral"
+      },
+      {
+        "feature": "hapax_ratio",
+        "value": 0.7463,
+        "human_mean": 0.6764,
+        "ai_mean": 0.6234,
+        "human_std": 0.0715,
+        "ai_std": 0.1298,
+        "disc": -0.2762,
+        "disc_human": -0.3269,
+        "disc_ai": -0.159,
+        "signal": "neutral"
+      },
+      {
+        "feature": "subordination_ratio",
+        "value": 0.9474,
+        "human_mean": 1.1022,
+        "ai_mean": 0.9731,
+        "human_std": 0.5793,
+        "ai_std": 1.0037,
+        "disc": -0.2516,
+        "disc_human": -0.2719,
+        "disc_ai": -0.2565,
+        "signal": "neutral"
+      },
+      {
+        "feature": "sentence_length_cv",
+        "value": 0.3053,
+        "human_mean": 0.5393,
+        "ai_mean": 0.4165,
+        "human_std": 0.2279,
+        "ai_std": 0.234,
+        "disc": 0.1915,
+        "disc_human": -0.0818,
+        "disc_ai": 0.0593,
+        "signal": "neutral"
+      },
+      {
+        "feature": "contraction_ratio",
+        "value": 0.0,
+        "human_mean": 0.0051,
+        "ai_mean": 0.0021,
+        "human_std": 0.009,
+        "ai_std": 0.007,
+        "disc": 0.182,
+        "disc_human": 0.078,
+        "disc_ai": 0.1525,
+        "signal": "neutral"
+      },
+      {
+        "feature": "latinate_ratio",
+        "value": 0.0814,
+        "human_mean": 0.042,
+        "ai_mean": 0.0478,
+        "human_std": 0.0266,
+        "ai_std": 0.0273,
+        "disc": 0.1542,
+        "disc_human": -0.0236,
+        "disc_ai": -0.0006,
+        "signal": "neutral"
+      },
+      {
+        "feature": "avg_word_length",
+        "value": 5.9134,
+        "human_mean": 4.8691,
+        "ai_mean": 4.9667,
+        "human_std": 0.4981,
+        "ai_std": 0.4791,
+        "disc": 0.1414,
+        "disc_human": 0.009,
+        "disc_ai": 0.029,
+        "signal": "neutral"
+      },
+      {
+        "feature": "sentence_length_std",
+        "value": 5.9931,
+        "human_mean": 10.8477,
+        "ai_mean": 8.3414,
+        "human_std": 9.277,
+        "ai_std": 13.907,
+        "disc": -0.1402,
+        "disc_human": -0.2075,
+        "disc_ai": -0.1821,
+        "signal": "neutral"
+      },
+      {
+        "feature": "passive_ratio",
+        "value": 0.0889,
+        "human_mean": 0.1089,
+        "ai_mean": 0.1259,
+        "human_std": 0.0938,
+        "ai_std": 0.1212,
+        "disc": -0.1391,
+        "disc_human": -0.1321,
+        "disc_ai": -0.1192,
+        "signal": "neutral"
+      },
+      {
+        "feature": "pos_bigram_entropy",
+        "value": 5.4828,
+        "human_mean": 5.7087,
+        "ai_mean": 5.445,
+        "human_std": 0.3729,
+        "ai_std": 0.3657,
+        "disc": 0.0985,
+        "disc_human": -0.1197,
+        "disc_ai": 0.134,
+        "signal": "neutral"
+      },
+      {
+        "feature": "hedge_position_std",
+        "value": 0.0,
+        "human_mean": 0.0009,
+        "ai_mean": 0.0007,
+        "human_std": 0.0148,
+        "ai_std": 0.0122,
+        "disc": 0.097,
+        "disc_human": 0.0969,
+        "disc_ai": 0.097,
+        "signal": "neutral"
+      },
+      {
+        "feature": "first_person_ratio",
+        "value": 0.0026,
+        "human_mean": 0.0086,
+        "ai_mean": 0.0078,
+        "human_std": 0.0125,
+        "ai_std": 0.0158,
+        "disc": -0.0864,
+        "disc_human": -0.1181,
+        "disc_ai": -0.1163,
+        "signal": "neutral"
+      },
+      {
+        "feature": "modal_ratio",
+        "value": 0.0262,
+        "human_mean": 0.013,
+        "ai_mean": 0.0113,
+        "human_std": 0.0123,
+        "ai_std": 0.012,
+        "disc": -0.0832,
+        "disc_human": 0.0074,
+        "disc_ai": 0.0167,
+        "signal": "neutral"
+      },
+      {
+        "feature": "hedge_density",
+        "value": 0.0,
+        "human_mean": 0.002,
+        "ai_mean": 0.0019,
+        "human_std": 0.0133,
+        "ai_std": 0.0155,
+        "disc": -0.0765,
+        "disc_human": -0.0786,
+        "disc_ai": -0.0785,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_causal",
+        "value": 0.0,
+        "human_mean": 0.013,
+        "ai_mean": 0.0113,
+        "human_std": 0.0408,
+        "ai_std": 0.0377,
+        "disc": 0.0415,
+        "disc_human": 0.0381,
+        "disc_ai": 0.039,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_additive",
+        "value": 0.1053,
+        "human_mean": 0.0579,
+        "ai_mean": 0.084,
+        "human_std": 0.0748,
+        "ai_std": 0.0957,
+        "disc": -0.0355,
+        "disc_human": -0.1409,
+        "disc_ai": -0.0926,
+        "signal": "neutral"
+      },
+      {
+        "feature": "structural_completeness",
+        "value": 0.4,
+        "human_mean": 0.1707,
+        "ai_mean": 0.2434,
+        "human_std": 0.2708,
+        "ai_std": 0.3217,
+        "disc": 0.0339,
+        "disc_human": -0.0986,
+        "disc_ai": -0.068,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_position_std",
+        "value": 0.2576,
+        "human_mean": 0.1054,
+        "ai_mean": 0.1055,
+        "human_std": 0.1264,
+        "ai_std": 0.1176,
+        "disc": -0.0194,
+        "disc_human": 0.0359,
+        "disc_ai": 0.0359,
+        "signal": "neutral"
+      }
+    ],
+    "paragraphs": [
+      {
+        "index": 0,
+        "text": "In recent years, the debate surrounding the use of online classes in schools has intensified. With the onset of the COVID-19 pandemic, many educational institutions were forced to adopt remote learning methodologies. However, the question remains: should schools continue to offer online classes even beyond the pandemic? Although online classes have their benefits, such as flexibility and accessibility, I argue against their widespread use in schools due to their potential negative impact on student learning and teacher employment.",
+        "prob_ai": 0.9042,
+        "label": 1,
+        "region": "clean_ai",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "In recent years, the debate surrounding the use of online classes in schools has intensified.",
+            "contrib": 0.0001,
+            "heat": 0.6151,
+            "direction": "neutral"
+          },
+          {
+            "text": "With the onset of the COVID-19 pandemic, many educational institutions were forced to adopt remote learning methodologies.",
+            "contrib": 0.0001,
+            "heat": 0.5675,
+            "direction": "neutral"
+          },
+          {
+            "text": "However, the question remains: should schools continue to offer online classes even beyond the pandemic?",
+            "contrib": 0.0,
+            "heat": 0.5118,
+            "direction": "neutral"
+          },
+          {
+            "text": "Although online classes have their benefits, such as flexibility and accessibility, I argue against their widespread use in schools due to their potential negative impact on student learning and teacher employment.",
+            "contrib": 0.0,
+            "heat": 0.5319,
+            "direction": "neutral"
+          }
+        ],
+        "ppl": 23.64,
+        "burstiness": 0.343
+      },
+      {
+        "index": 1,
+        "text": "One of the key arguments against online classes is the loss of hands-on learning experiences. Traditional classrooms provide a dynamic environment where students can actively engage in discussions, experiments, and group activities. These experiences foster critical thinking, problem-solving, and social skills, which are essential for a well-rounded education. Online classes, on the other hand, often lack the collaborative aspect and can limit students' ability to fully grasp complex concepts. The absence of hands-on learning can hinder students' overall development and limit their potential for success in future endeavors.",
+        "prob_ai": 0.9062,
+        "label": 1,
+        "region": "clean_ai",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "One of the key arguments against online classes is the loss of hands-on learning experiences.",
+            "contrib": 0.0,
+            "heat": 0.528,
+            "direction": "neutral"
+          },
+          {
+            "text": "Traditional classrooms provide a dynamic environment where students can actively engage in discussions, experiments, and group activities.",
+            "contrib": 0.0,
+            "heat": 0.557,
+            "direction": "neutral"
+          },
+          {
+            "text": "These experiences foster critical thinking, problem-solving, and social skills, which are essential for a well-rounded education.",
+            "contrib": 0.0001,
+            "heat": 0.5715,
+            "direction": "neutral"
+          },
+          {
+            "text": "Online classes, on the other hand, often lack the collaborative aspect and can limit students' ability to fully grasp complex concepts.",
+            "contrib": 0.0001,
+            "heat": 0.5939,
+            "direction": "neutral"
+          },
+          {
+            "text": "The absence of hands-on learning can hinder students' overall development and limit their potential for success in future endeavors.",
+            "contrib": 0.0001,
+            "heat": 0.6252,
+            "direction": "neutral"
+          }
+        ],
+        "ppl": 13.35,
+        "burstiness": 0.122
+      },
+      {
+        "index": 2,
+        "text": "Furthermore, the value of teachers' education and expertise cannot be undermined. Teachers play a crucial role in guiding and motivating students. They possess the knowledge and experience to tailor lessons based on individual students' needs and provide real-time feedback. Online classes, though beneficial in certain circumstances, cannot replicate the same level of personalization and interaction that teachers offer. Moreover, widespread adoption of online classes may result in a decline in teacher employment, exacerbating unemployment rates and contributing to economic instability.",
+        "prob_ai": 0.9047,
+        "label": 1,
+        "region": "clean_ai",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "Furthermore, the value of teachers' education and expertise cannot be undermined.",
+            "contrib": 0.0001,
+            "heat": 0.6234,
+            "direction": "neutral"
+          },
+          {
+            "text": "Teachers play a crucial role in guiding and motivating students.",
+            "contrib": 0.0001,
+            "heat": 0.6255,
+            "direction": "neutral"
+          },
+          {
+            "text": "They possess the knowledge and experience to tailor lessons based on individual students' needs and provide real-time feedback.",
+            "contrib": 0.0001,
+            "heat": 0.6022,
+            "direction": "neutral"
+          },
+          {
+            "text": "Online classes, though beneficial in certain circumstances, cannot replicate the same level of personalization and interaction that teachers offer.",
+            "contrib": 0.0001,
+            "heat": 0.644,
+            "direction": "neutral"
+          },
+          {
+            "text": "Moreover, widespread adoption of online classes may result in a decline in teacher employment, exacerbating unemployment rates and contributing to economic instability.",
+            "contrib": 0.0001,
+            "heat": 0.6269,
+            "direction": "neutral"
+          }
+        ],
+        "ppl": 22.96,
+        "burstiness": 0.293
+      },
+      {
+        "index": 3,
+        "text": "While it is true that online classes offer flexibility and accessibility, particularly for students in remote areas or with limited resources, these benefits should not be overshadowed by the potential drawbacks. To address the limitations of online classes, schools should invest in technology that enhances interactive learning experiences, such as virtual reality and specialized software. This way, students can still benefit from the advantages of technology while maintaining the vital aspects of in-person education.",
+        "prob_ai": 0.9058,
+        "label": 1,
+        "region": "clean_ai",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "While it is true that online classes offer flexibility and accessibility, particularly for students in remote areas or with limited resources, these benefits should not be overshadowed by the potential drawbacks.",
+            "contrib": 0.0001,
+            "heat": 0.6114,
+            "direction": "neutral"
+          },
+          {
+            "text": "To address the limitations of online classes, schools should invest in technology that enhances interactive learning experiences, such as virtual reality and specialized software.",
+            "contrib": 0.0001,
+            "heat": 0.6895,
+            "direction": "neutral"
+          },
+          {
+            "text": "This way, students can still benefit from the advantages of technology while maintaining the vital aspects of in-person education.",
+            "contrib": 0.0002,
+            "heat": 0.7482,
+            "direction": "neutral"
+          }
+        ],
+        "ppl": 20.01,
+        "burstiness": 0.2
+      },
+      {
+        "index": 4,
+        "text": "In conclusion, while online classes have their merits, such as flexibility and accessibility, their widespread use in schools should be carefully considered. Their potential negative impact on student learning and teacher employment suggests that a balanced approach, combining hands-on learning experiences with well-supported online resources, would provide the best educational outcome for students.",
+        "prob_ai": 0.9059,
+        "label": 1,
+        "region": "clean_ai",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "In conclusion, while online classes have their merits, such as flexibility and accessibility, their widespread use in schools should be carefully considered.",
+            "contrib": 0.0004,
+            "heat": 1.0,
+            "direction": "neutral"
+          },
+          {
+            "text": "Their potential negative impact on student learning and teacher employment suggests that a balanced approach, combining hands-on learning experiences with well-supported online resources, would provide the best educational outcome for students.",
+            "contrib": 0.0001,
+            "heat": 0.5817,
+            "direction": "neutral"
+          }
+        ],
+        "ppl": 25.74,
+        "burstiness": 0.17
+      }
+    ],
+    "grade_distribution": {
+      "high": 100.0,
+      "middle": 0.0,
+      "low": 0.0,
+      "ok": 0.0
+    },
+    "suggestions": {
+      "tier1_lexical": [
+        {
+          "feature": "mattr",
+          "deviation": 1.72,
+          "suggestion": "Vocabulary diversity is low (MATTR=0.845, human average=0.783). AI text reuses the same structural phrases repeatedly. Vary your word choices: if you've used 'important' twice, use 'crucial', 'worth noting', or 'significant' instead.",
+          "prompt_fragment": "Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives."
+        },
+        {
+          "feature": "latinate_ratio",
+          "deviation": 6.8,
+          "suggestion": "Too many Latinate/formal words (words ending in -tion, -ment, -ance, etc.). Human writing mixes formal and informal vocabulary naturally. Replace some: 'implementation' → 'how it works', 'examination' → 'look at', 'utilization' → 'use'.",
+          "prompt_fragment": "Replace some Latinate words with simpler alternatives: implementation → how it works, utilization → use, examination → look at, demonstration → show."
+        }
+      ],
+      "tier2_syntactic": [],
+      "tier3_discourse": [
+        {
+          "feature": "discourse_total_density",
+          "deviation": 5.35,
+          "suggestion": "Remove or restructure sentences using: \"furthermore\", \"moreover\", \"however\", \"on the other hand\", \"in conclusion\", \"overall\". These connective phrases are the strongest AI signal in this text. Let ideas connect implicitly — start the next sentence directly without announcing the transition.",
+          "prompt_fragment": "Do NOT use these transition phrases: \"furthermore\", \"moreover\", \"however\", \"on the other hand\", \"in conclusion\", \"overall\". Instead, let each paragraph flow into the next without explicit connectors."
+        },
+        {
+          "feature": "structural_completeness",
+          "deviation": 3.15,
+          "suggestion": "The text follows a rigid 5-paragraph essay structure: every paragraph has a topic sentence, evidence, and transition. Break this pattern: let one paragraph be deliberately short (1-2 sentences), or end the piece mid-thought without a formal conclusion paragraph.",
+          "prompt_fragment": "Do not write a formal conclusion paragraph. Allow one body paragraph to remain underdeveloped. End where the last substantive point ends."
+        }
+      ],
+      "tier4_pragmatic": [],
+      "composite_prompt": "Rewrite the following text to sound more naturally human-written. Apply ALL of these changes:\n\n[LEXICAL] Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives.\n\n[LEXICAL] Replace some Latinate words with simpler alternatives: implementation → how it works, utilization → use, examination → look at, demonstration → show.\n\n[DISCOURSE] Do NOT use these transition phrases: \"furthermore\", \"moreover\", \"however\", \"on the other hand\", \"in conclusion\", \"overall\". Instead, let each paragraph flow into the next without explicit connectors.\n\n[DISCOURSE] Do not write a formal conclusion paragraph. Allow one body paragraph to remain underdeveloped. End where the last substantive point ends.\n\nText to rewrite:\n{TEXT}",
+      "priority_features": [
+        [
+          "discourse_total_density",
+          5.352615512453412
+        ]
+      ],
+      "total_suggestions": 4
+    }
+  },
+  "after": {
+    "title": "降AIGC后",
+    "doc_prob_ai": 0.702,
+    "doc_label": 0,
+    "doc_verdict": "human",
+    "doc_region": "ambiguous",
+    "doc_grade": "high",
+    "doc_margin": 4.599,
+    "char_count": 1832,
+    "word_count": 290,
+    "paragraph_count": 4,
+    "ppl": 35.04,
+    "burstiness": 0.418,
+    "feature_evidence": [
+      {
+        "feature": "rhetorical_question_ratio",
+        "value": 0.0,
+        "human_mean": 0.0001,
+        "ai_mean": 0.0,
+        "human_std": 0.0037,
+        "ai_std": 0.0014,
+        "disc": 0.4355,
+        "disc_human": 0.4339,
+        "disc_ai": 0.4354,
+        "signal": "AI-like"
+      },
+      {
+        "feature": "discourse_conclusive",
+        "value": 0.0,
+        "human_mean": 0.0039,
+        "ai_mean": 0.0223,
+        "human_std": 0.0206,
+        "ai_std": 0.0432,
+        "disc": -0.4034,
+        "disc_human": -0.3931,
+        "disc_ai": -0.1691,
+        "signal": "human-like"
+      },
+      {
+        "feature": "subordination_ratio",
+        "value": 1.3333,
+        "human_mean": 1.1022,
+        "ai_mean": 0.9731,
+        "human_std": 0.5793,
+        "ai_std": 1.0037,
+        "disc": -0.261,
+        "disc_human": -0.2719,
+        "disc_ai": -0.2565,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_total_density",
+        "value": 0.0,
+        "human_mean": 0.0983,
+        "ai_mean": 0.1488,
+        "human_std": 0.0991,
+        "ai_std": 0.1344,
+        "disc": -0.2095,
+        "disc_human": -0.1855,
+        "disc_ai": -0.0873,
+        "signal": "neutral"
+      },
+      {
+        "feature": "contraction_ratio",
+        "value": 0.0,
+        "human_mean": 0.0051,
+        "ai_mean": 0.0021,
+        "human_std": 0.009,
+        "ai_std": 0.007,
+        "disc": 0.182,
+        "disc_human": 0.078,
+        "disc_ai": 0.1525,
+        "signal": "neutral"
+      },
+      {
+        "feature": "sentence_length_std",
+        "value": 8.0719,
+        "human_mean": 10.8477,
+        "ai_mean": 8.3414,
+        "human_std": 9.277,
+        "ai_std": 13.907,
+        "disc": -0.1782,
+        "disc_human": -0.2075,
+        "disc_ai": -0.1821,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_additive",
+        "value": 0.0,
+        "human_mean": 0.0579,
+        "ai_mean": 0.084,
+        "human_std": 0.0748,
+        "ai_std": 0.0957,
+        "disc": -0.1645,
+        "disc_human": -0.1409,
+        "disc_ai": -0.0926,
+        "signal": "neutral"
+      },
+      {
+        "feature": "hapax_ratio",
+        "value": 0.822,
+        "human_mean": 0.6764,
+        "ai_mean": 0.6234,
+        "human_std": 0.0715,
+        "ai_std": 0.1298,
+        "disc": 0.1504,
+        "disc_human": -0.3269,
+        "disc_ai": -0.159,
+        "signal": "neutral"
+      },
+      {
+        "feature": "pos_bigram_entropy",
+        "value": 5.7327,
+        "human_mean": 5.7087,
+        "ai_mean": 5.445,
+        "human_std": 0.3729,
+        "ai_std": 0.3657,
+        "disc": -0.143,
+        "disc_human": -0.1197,
+        "disc_ai": 0.134,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_contrastive",
+        "value": 0.0,
+        "human_mean": 0.0269,
+        "ai_mean": 0.0357,
+        "human_std": 0.0514,
+        "ai_std": 0.0642,
+        "disc": -0.12,
+        "disc_human": -0.1158,
+        "disc_ai": -0.1037,
+        "signal": "neutral"
+      },
+      {
+        "feature": "structural_completeness",
+        "value": 0.125,
+        "human_mean": 0.1707,
+        "ai_mean": 0.2434,
+        "human_std": 0.2708,
+        "ai_std": 0.3217,
+        "disc": -0.1124,
+        "disc_human": -0.0986,
+        "disc_ai": -0.068,
+        "signal": "neutral"
+      },
+      {
+        "feature": "hedge_position_std",
+        "value": 0.0,
+        "human_mean": 0.0009,
+        "ai_mean": 0.0007,
+        "human_std": 0.0148,
+        "ai_std": 0.0122,
+        "disc": 0.097,
+        "disc_human": 0.0969,
+        "disc_ai": 0.097,
+        "signal": "neutral"
+      },
+      {
+        "feature": "hedge_density",
+        "value": 0.0,
+        "human_mean": 0.002,
+        "ai_mean": 0.0019,
+        "human_std": 0.0133,
+        "ai_std": 0.0155,
+        "disc": -0.0765,
+        "disc_human": -0.0786,
+        "disc_ai": -0.0785,
+        "signal": "neutral"
+      },
+      {
+        "feature": "avg_word_length",
+        "value": 5.1869,
+        "human_mean": 4.8691,
+        "ai_mean": 4.9667,
+        "human_std": 0.4981,
+        "ai_std": 0.4791,
+        "disc": 0.0683,
+        "disc_human": 0.009,
+        "disc_ai": 0.029,
+        "signal": "neutral"
+      },
+      {
+        "feature": "mattr",
+        "value": 0.8875,
+        "human_mean": 0.7833,
+        "ai_mean": 0.7475,
+        "human_std": 0.0455,
+        "ai_std": 0.0636,
+        "disc": -0.0624,
+        "disc_human": -0.2421,
+        "disc_ai": -0.014,
+        "signal": "neutral"
+      },
+      {
+        "feature": "passive_ratio",
+        "value": 0.0,
+        "human_mean": 0.1089,
+        "ai_mean": 0.1259,
+        "human_std": 0.0938,
+        "ai_std": 0.1212,
+        "disc": -0.0611,
+        "disc_human": -0.1321,
+        "disc_ai": -0.1192,
+        "signal": "neutral"
+      },
+      {
+        "feature": "first_person_ratio",
+        "value": 0.0,
+        "human_mean": 0.0086,
+        "ai_mean": 0.0078,
+        "human_std": 0.0125,
+        "ai_std": 0.0158,
+        "disc": -0.0589,
+        "disc_human": -0.1181,
+        "disc_ai": -0.1163,
+        "signal": "neutral"
+      },
+      {
+        "feature": "sentence_length_cv",
+        "value": 0.4175,
+        "human_mean": 0.5393,
+        "ai_mean": 0.4165,
+        "human_std": 0.2279,
+        "ai_std": 0.234,
+        "disc": 0.0582,
+        "disc_human": -0.0818,
+        "disc_ai": 0.0593,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_causal",
+        "value": 0.0,
+        "human_mean": 0.013,
+        "ai_mean": 0.0113,
+        "human_std": 0.0408,
+        "ai_std": 0.0377,
+        "disc": 0.0415,
+        "disc_human": 0.0381,
+        "disc_ai": 0.039,
+        "signal": "neutral"
+      },
+      {
+        "feature": "modal_ratio",
+        "value": 0.0104,
+        "human_mean": 0.013,
+        "ai_mean": 0.0113,
+        "human_std": 0.0123,
+        "ai_std": 0.012,
+        "disc": 0.0217,
+        "disc_human": 0.0074,
+        "disc_ai": 0.0167,
+        "signal": "neutral"
+      },
+      {
+        "feature": "latinate_ratio",
+        "value": 0.0519,
+        "human_mean": 0.042,
+        "ai_mean": 0.0478,
+        "human_std": 0.0266,
+        "ai_std": 0.0273,
+        "disc": 0.0163,
+        "disc_human": -0.0236,
+        "disc_ai": -0.0006,
+        "signal": "neutral"
+      },
+      {
+        "feature": "discourse_position_std",
+        "value": 0.0,
+        "human_mean": 0.1054,
+        "ai_mean": 0.1055,
+        "human_std": 0.1264,
+        "ai_std": 0.1176,
+        "disc": 0.0085,
+        "disc_human": 0.0359,
+        "disc_ai": 0.0359,
+        "signal": "neutral"
+      }
+    ],
+    "paragraphs": [
+      {
+        "index": 0,
+        "text": "In recent years, the debate around online classes in schools has grown louder. When the COVID-19 pandemic hit, educational institutions scrambled to shift to remote learning almost overnight. Now that things have stabilized, a real question lingers: should schools keep offering online classes going forward? There are genuine benefits — flexibility, broader access — but the case against making them the norm is hard to ignore, especially when you look at what students lose and what it means for teachers.",
+        "prob_ai": 0.8721,
+        "label": 0,
+        "region": "ambiguous",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "In recent years, the debate around online classes in schools has grown louder.",
+            "contrib": 0.3251,
+            "heat": 0.8375,
+            "direction": "AI"
+          },
+          {
+            "text": "When the COVID-19 pandemic hit, educational institutions scrambled to shift to remote learning almost overnight.",
+            "contrib": -0.0821,
+            "heat": 0.4147,
+            "direction": "human"
+          },
+          {
+            "text": "Now that things have stabilized, a real question lingers: should schools keep offering online classes going forward?",
+            "contrib": 0.3145,
+            "heat": 0.8265,
+            "direction": "AI"
+          },
+          {
+            "text": "There are genuine benefits — flexibility, broader access — but the case against making them the norm is hard to ignore, especially when you look at what students lose and what it means for teachers.",
+            "contrib": 0.4815,
+            "heat": 1.0,
+            "direction": "AI"
+          }
+        ],
+        "ppl": 43.65,
+        "burstiness": 0.439
+      },
+      {
+        "index": 1,
+        "text": "The most immediate cost is the loss of hands-on learning. Traditional classrooms give students a space to debate ideas, run experiments, and work through problems together. That kind of environment builds critical thinking and social skills in ways that are difficult to replicate on a screen. Remote setups tend to strip away the collaborative texture of learning, leaving students to wrestle with complex material in isolation. For many, that gap shows up not just in grades but in confidence and long-term readiness.",
+        "prob_ai": 0.8902,
+        "label": 1,
+        "region": "clean_ai",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "The most immediate cost is the loss of hands-on learning.",
+            "contrib": 0.1032,
+            "heat": 0.6072,
+            "direction": "AI"
+          },
+          {
+            "text": "Traditional classrooms give students a space to debate ideas, run experiments, and work through problems together.",
+            "contrib": 0.1657,
+            "heat": 0.6721,
+            "direction": "AI"
+          },
+          {
+            "text": "That kind of environment builds critical thinking and social skills in ways that are difficult to replicate on a screen.",
+            "contrib": 0.2956,
+            "heat": 0.8069,
+            "direction": "AI"
+          },
+          {
+            "text": "Remote setups tend to strip away the collaborative texture of learning, leaving students to wrestle with complex material in isolation.",
+            "contrib": 0.2396,
+            "heat": 0.7488,
+            "direction": "AI"
+          },
+          {
+            "text": "For many, that gap shows up not just in grades but in confidence and long-term readiness.",
+            "contrib": -0.0312,
+            "heat": 0.4676,
+            "direction": "human"
+          }
+        ],
+        "ppl": 34.26,
+        "burstiness": 0.224
+      },
+      {
+        "index": 2,
+        "text": "Teachers are another piece of this that often gets glossed over. A good teacher does more than deliver content — they read the room, adjust on the fly, and push individual students in ways an algorithm simply cannot. That responsiveness is hard to replace. Beyond the classroom itself, a wide shift to online learning could quietly erode teaching jobs, with real ripple effects on employment and the communities that depend on those positions.",
+        "prob_ai": 0.819,
+        "label": 0,
+        "region": "ambiguous",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "Teachers are another piece of this that often gets glossed over.",
+            "contrib": 0.0151,
+            "heat": 0.5157,
+            "direction": "neutral"
+          },
+          {
+            "text": "A good teacher does more than deliver content — they read the room, adjust on the fly, and push individual students in ways an algorithm simply cannot.",
+            "contrib": 0.3206,
+            "heat": 0.8329,
+            "direction": "AI"
+          },
+          {
+            "text": "That responsiveness is hard to replace.",
+            "contrib": 0.0392,
+            "heat": 0.5407,
+            "direction": "AI"
+          },
+          {
+            "text": "Beyond the classroom itself, a wide shift to online learning could quietly erode teaching jobs, with real ripple effects on employment and the communities that depend on those positions.",
+            "contrib": 0.3299,
+            "heat": 0.8426,
+            "direction": "AI"
+          }
+        ],
+        "ppl": 49.43,
+        "burstiness": 0.544
+      },
+      {
+        "index": 3,
+        "text": "Online classes do work well in specific situations — for students in remote areas, or those juggling circumstances that make a fixed schedule impossible. Schools could invest in tools like virtual reality or adaptive software to make those options richer and more interactive, bridging some of the gap without abandoning what works about in-person learning.",
+        "prob_ai": 0.8021,
+        "label": 0,
+        "region": "ambiguous",
+        "grade": "high",
+        "sentences": [
+          {
+            "text": "Online classes do work well in specific situations — for students in remote areas, or those juggling circumstances that make a fixed schedule impossible.",
+            "contrib": 0.1944,
+            "heat": 0.7019,
+            "direction": "AI"
+          },
+          {
+            "text": "Schools could invest in tools like virtual reality or adaptive software to make those options richer and more interactive, bridging some of the gap without abandoning what works about in-person learning.",
+            "contrib": 0.1113,
+            "heat": 0.6156,
+            "direction": "AI"
+          }
+        ],
+        "ppl": 75.34,
+        "burstiness": 0.127
+      }
+    ],
+    "grade_distribution": {
+      "high": 100.0,
+      "middle": 0.0,
+      "low": 0.0,
+      "ok": 0.0
+    },
+    "suggestions": {
+      "tier1_lexical": [
+        {
+          "feature": "mattr",
+          "deviation": 2.92,
+          "suggestion": "Vocabulary diversity is low (MATTR=0.887, human average=0.783). AI text reuses the same structural phrases repeatedly. Vary your word choices: if you've used 'important' twice, use 'crucial', 'worth noting', or 'significant' instead.",
+          "prompt_fragment": "Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives."
+        },
+        {
+          "feature": "latinate_ratio",
+          "deviation": 1.71,
+          "suggestion": "Too many Latinate/formal words (words ending in -tion, -ment, -ance, etc.). Human writing mixes formal and informal vocabulary naturally. Replace some: 'implementation' → 'how it works', 'examination' → 'look at', 'utilization' → 'use'.",
+          "prompt_fragment": "Replace some Latinate words with simpler alternatives: implementation → how it works, utilization → use, examination → look at, demonstration → show."
+        }
+      ],
+      "tier2_syntactic": [],
+      "tier3_discourse": [],
+      "tier4_pragmatic": [],
+      "composite_prompt": "Rewrite the following text to sound more naturally human-written. Apply ALL of these changes:\n\n[LEXICAL] Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives.\n\n[LEXICAL] Replace some Latinate words with simpler alternatives: implementation → how it works, utilization → use, examination → look at, demonstration → show.\n\nText to rewrite:\n{TEXT}",
+      "priority_features": [],
+      "total_suggestions": 2
+    }
+  },
+  "original_text": "In recent years, the debate surrounding the use of online classes in schools has intensified. With the onset of the COVID-19 pandemic, many educational institutions were forced to adopt remote learning methodologies. However, the question remains: should schools continue to offer online classes even beyond the pandemic? Although online classes have their benefits, such as flexibility and accessibility, I argue against their widespread use in schools due to their potential negative impact on student learning and teacher employment.\n\nOne of the key arguments against online classes is the loss of hands-on learning experiences. Traditional classrooms provide a dynamic environment where students can actively engage in discussions, experiments, and group activities. These experiences foster critical thinking, problem-solving, and social skills, which are essential for a well-rounded education. Online classes, on the other hand, often lack the collaborative aspect and can limit students' ability to fully grasp complex concepts. The absence of hands-on learning can hinder students' overall development and limit their potential for success in future endeavors.\n\nFurthermore, the value of teachers' education and expertise cannot be undermined. Teachers play a crucial role in guiding and motivating students. They possess the knowledge and experience to tailor lessons based on individual students' needs and provide real-time feedback. Online classes, though beneficial in certain circumstances, cannot replicate the same level of personalization and interaction that teachers offer. Moreover, widespread adoption of online classes may result in a decline in teacher employment, exacerbating unemployment rates and contributing to economic instability.\n\nWhile it is true that online classes offer flexibility and accessibility, particularly for students in remote areas or with limited resources, these benefits should not be overshadowed by the potential drawbacks. To address the limitations of online classes, schools should invest in technology that enhances interactive learning experiences, such as virtual reality and specialized software. This way, students can still benefit from the advantages of technology while maintaining the vital aspects of in-person education.\n\nIn conclusion, while online classes have their merits, such as flexibility and accessibility, their widespread use in schools should be carefully considered. Their potential negative impact on student learning and teacher employment suggests that a balanced approach, combining hands-on learning experiences with well-supported online resources, would provide the best educational outcome for students.",
+  "rewritten_text": "In recent years, the debate around online classes in schools has grown louder. When the COVID-19 pandemic hit, educational institutions scrambled to shift to remote learning almost overnight. Now that things have stabilized, a real question lingers: should schools keep offering online classes going forward? There are genuine benefits — flexibility, broader access — but the case against making them the norm is hard to ignore, especially when you look at what students lose and what it means for teachers.\n\nThe most immediate cost is the loss of hands-on learning. Traditional classrooms give students a space to debate ideas, run experiments, and work through problems together. That kind of environment builds critical thinking and social skills in ways that are difficult to replicate on a screen. Remote setups tend to strip away the collaborative texture of learning, leaving students to wrestle with complex material in isolation. For many, that gap shows up not just in grades but in confidence and long-term readiness.\n\nTeachers are another piece of this that often gets glossed over. A good teacher does more than deliver content — they read the room, adjust on the fly, and push individual students in ways an algorithm simply cannot. That responsiveness is hard to replace. Beyond the classroom itself, a wide shift to online learning could quietly erode teaching jobs, with real ripple effects on employment and the communities that depend on those positions.\n\nOnline classes do work well in specific situations — for students in remote areas, or those juggling circumstances that make a fixed schedule impossible. Schools could invest in tools like virtual reality or adaptive software to make those options richer and more interactive, bridging some of the gap without abandoning what works about in-person learning.",
+  "label_before": 1,
+  "label_after": 0,
+  "prob_ai_drop": 0.2041
+}

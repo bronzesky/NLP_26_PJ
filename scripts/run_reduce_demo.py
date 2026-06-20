@@ -36,13 +36,14 @@ bundle = {
     "after": after,
     "original_text": text,
     "rewritten_text": rewritten,
-    "suspicion_drop": round(before["doc_suspicion"] - after["doc_suspicion"], 4),
+    "label_before": before["doc_label"],
+    "label_after": after["doc_label"],
     "prob_ai_drop": round(before["doc_prob_ai"] - after["doc_prob_ai"], 4),
 }
 (OUT / "bundle.json").write_text(json.dumps(bundle, ensure_ascii=False, indent=2))
 print(f"attacker={attacker}")
-print(f"BEFORE suspicion={before['doc_suspicion']:.3f} prob_ai={before['doc_prob_ai']:.3f} "
+print(f"BEFORE prob_ai={before['doc_prob_ai']:.3f} verdict={before['doc_label']} "
       f"grade={before['doc_grade']} margin={before['doc_margin']:.2f}")
-print(f"AFTER  suspicion={after['doc_suspicion']:.3f} prob_ai={after['doc_prob_ai']:.3f} "
+print(f"AFTER  prob_ai={after['doc_prob_ai']:.3f} verdict={after['doc_label']} "
       f"grade={after['doc_grade']} margin={after['doc_margin']:.2f}")
 print(f"Wrote {OUT/'bundle.json'}")

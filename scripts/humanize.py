@@ -28,6 +28,34 @@ sys.path.insert(0, str(REPO))
 
 QWEN_DIR = "/inspire/hdd/project/fdu-aidake-cfff/public/Group35/qwen3-8b"
 
+import re as _re
+
+_PREAMBLE_RE = _re.compile(
+    r"^\s*(here(?:'s| is| are)[^\n:]*:?|sure[,!.][^\n]*|certainly[,!.][^\n]*|"
+    r"below is[^\n:]*:?|the rewritten[^\n:]*:?|rewritten (?:text|version)[^\n:]*:?|"
+    r"i(?:'ve| have) rewritten[^\n:]*:?)\s*\n+", _re.IGNORECASE)
+
+_CODEFENCE_RE = _re.compile(r"^\s*```[a-zA-Z]*\s*\n|\n```\s*$")
+
+
+def _strip_preamble(text: str) -> str:
+    """Remove LLM chat preambles ('Here's the rewritten text:'), code fences,
+    and trailing notes. These are assistant-framing tokens that (a) are not
+    part of the document and (b) are themselves strong AI signals."""
+    t = text.strip()
+    t = _CODEFENCE_RE.sub("", t).strip()
+    # strip a leading preamble line if present
+    m = _PREAMBLE_RE.match(t)
+    if m:
+        t = t[m.end():].strip()
+    # drop a trailing meta note like "I varied sentence length..." after a blank line
+    parts = t.rsplit("\n\n", 1)
+    if len(parts) == 2 and _re.match(
+            r"^\s*(i\b|note:|the (?:above|rewrite)|this version|changes made)",
+            parts[1].strip(), _re.IGNORECASE) and len(parts[1]) < 400:
+        t = parts[0].strip()
+    return t
+
 
 class Humanizer:
     def __init__(self, model_dir: str = QWEN_DIR):
@@ -55,7 +83,7 @@ class Humanizer:
             temperature=0.7, top_p=0.9, repetition_penalty=1.05,
             pad_token_id=self.tok.eos_token_id)
         gen = self.tok.decode(out[0][ids.input_ids.shape[1]:], skip_special_tokens=True)
-        return gen.strip()
+        return _strip_preamble(gen)
 
 
 class APIHumanizer:
@@ -76,6 +104,9 @@ class APIHumanizer:
             instruction = composite_prompt.replace("{TEXT}", text)
         else:
             instruction = composite_prompt + "\n\nText to rewrite:\n" + text
+        instruction += ("\n\nIMPORTANT: Output ONLY the rewritten text itself. "
+                        "Do not add any preamble, explanation, quotation marks, "
+                        "code fences, or notes about what you changed.")
         payload = {
             "model": self.model,
             "messages": [{"role": "user", "content": instruction}],
@@ -88,7 +119,7 @@ class APIHumanizer:
                      "Content-Type": "application/json"})
         with urllib.request.urlopen(req, timeout=120) as resp:
             d = _json.load(resp)
-        return d["choices"][0]["message"]["content"].strip()
+        return _strip_preamble(d["choices"][0]["message"]["content"])
 
 
 def closed_loop(text: str, title: str = "sample", detector=None, humanizer=None,
