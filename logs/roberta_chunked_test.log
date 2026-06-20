@@ -1,0 +1,16 @@
+[HAMI-core Msg(32281:139662807544384:libvgpu.c:837)]: Initializing.....
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 4325.49it/s]
+[HAMI-core Msg(32281:139662807544384:libvgpu.c:853)]: Initialized
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (561 > 512). Running this sequence through the model will result in indexing errors
+{
+  "accuracy": 0.7123015873015873,
+  "macro_f1": 0.6767625900370624,
+  "micro_f1": 0.7123015873015873,
+  "auroc": 0.9582010167431443,
+  "fpr_at_95_tpr": 0.23936823992133727,
+  "brier": 0.24163122930549588,
+  "nll": 1.7612485831555635,
+  "ece": 0.21464022650505005,
+  "rows": 34272
+}
+[HAMI-core Msg(32281:139662807544384:multiprocess_memory_limit.c:459)]: Calling exit handler 32281

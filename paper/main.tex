@@ -1,0 +1,334 @@
+\documentclass[11pt]{article}
+\usepackage[]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{multirow}
+
+\title{Operating Point, Not Capacity: Calibration and Orthogonal-Feature
+Routing for Robust and Interpretable AI-Generated Text Detection}
+
+\author{Hanzhong Zhang \\
+  Fudan University \\
+  \texttt{24307140093} \\}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We revisit machine-generated text detection on SemEval-2024 Task~8 Subtask~A
+(English) under its realistic distribution shift: the test set contains
+generators and a domain never seen at training time. A fine-tuned
+RoBERTa-base reaches test AUROC $0.944$ yet only $0.619$ macro-F1 at the
+default $0.5$ threshold---a $0.27$ gap we trace not to representation
+capacity but to a \emph{mis-placed operating point} under shift. Temperature
+scaling plus a threshold chosen on an in-distribution calibration set
+recovers macro-F1 to $0.886$ (oracle $0.888$) without retraining. We further
+show that a single global threshold is structurally unable to catch the
+human-like \texttt{bloomz} generator (recall $0.096$), because its decision
+margin overlaps the human upper tail. We propose a \emph{region-aware
+two-stage detector}: confident-margin documents are decided directly, while
+an ambiguous band is resolved by a logistic classifier over orthogonal
+hand-crafted features (lexical diversity, repetition). Under the strict
+fit-on-dev / predict-test-once protocol this reaches macro-F1 $0.857$,
+surpassing the best single-model baseline ($0.835$); the in-distribution
+ceiling is $0.945$. The orthogonal stage lifts \texttt{bloomz} recall from
+$0.10$ to $0.70$. We pair the detector with a plagiarism-checker-style
+interpretable report (occlusion-based sentence attribution, a
+human$\leftrightarrow$AI discriminant axis for each linguistic feature) and a
+closed-loop de-AI robustness evaluation. A negative result---a hierarchical
+sentence-aware extension that overfits the single-generator dev set
+(test AUROC $0.944\!\rightarrow\!0.672$)---reinforces our thesis: the
+bottleneck is calibration and shift, not model capacity.
+\end{abstract}
+
+\section{Introduction}
+
+Detecting machine-generated text is increasingly framed as a problem of
+\emph{generalization}: a deployed detector must flag text from generators and
+domains it never saw during training. SemEval-2024 Task~8 Subtask~A
+\citep{wang2024semeval} operationalizes exactly this---its English test split
+introduces two unseen generators (GPT-4, \texttt{bloomz}) and a single unseen
+domain (\texttt{outfox}), while the training data covers four other generators
+across five domains.
+
+A standard fine-tuned RoBERTa-base \citep{liu2019roberta} on this setup
+exhibits a striking contradiction: test AUROC is $0.944$, but macro-F1 at the
+conventional $0.5$ threshold is only $0.619$. High AUROC with low accuracy is
+almost impossible unless the \emph{operating point} is wrong. We confirm this:
+the model still ranks AI above human well under shift, but its absolute
+probabilities are systematically displaced, so a fixed threshold collapses
+(it falsely flags $11{,}147$ of $16{,}272$ human texts).
+
+This observation reframes the improvement problem. The community reflex is to
+add capacity---hierarchical encoders, multi-task heads, auxiliary
+supervision. We show this reflex backfires here (Section~\ref{sec:hsad}). The
+actual levers are (i) \textbf{calibration and threshold adaptation} and (ii) a
+targeted fix for the one generator a global threshold cannot catch. Our
+contributions:
+
+\begin{itemize}\itemsep2pt
+\item A diagnosis isolating the $0.27$ macro-F1 gap to operating point, not
+representation: temperature scaling plus an in-distribution threshold recovers
+$0.619\!\rightarrow\!0.886$ (oracle $0.888$) with the model frozen
+(Section~\ref{sec:diag}).
+\item \textbf{Region-aware two-stage detection}: a confident-margin fast path
+plus an ambiguous-band classifier over \emph{orthogonal} hand-crafted features.
+Under the strict fit-on-dev / test-once protocol it reaches macro-F1 $0.857$,
+beating the strongest single-model baseline ($0.835$), and lifts the
+human-like \texttt{bloomz} generator's recall from $0.10$ to $0.70$
+(Section~\ref{sec:method}).
+\item An interpretable, plagiarism-checker-style report: occlusion-based
+sentence attribution that is coherent with the document score, and a
+per-feature human$\leftrightarrow$AI discriminant axis (Section~\ref{sec:viz}).
+\item A closed-loop de-AI robustness evaluation under cross-model recursive
+paraphrase attacks, revealing that the orthogonal-feature stage is
+simultaneously the source of \texttt{bloomz} recovery and the principal attack
+surface (Section~\ref{sec:robust}).
+\item A documented negative result (HSAD) showing that added hierarchical
+capacity overfits the single-generator dev set and destroys ranking ability
+(Section~\ref{sec:hsad}).
+\end{itemize}
+
+\section{Related Work}
+
+\paragraph{Machine-generated text detection.} Approaches divide into
+zero-shot statistical detectors, e.g.\ DetectGPT's probability-curvature test
+\citep{mitchell2023detectgpt}; supervised fine-tuned classifiers, which
+dominate leaderboards but generalize poorly off-distribution; and
+watermarking \citep{kirchenbauer2023watermark}, which requires generator
+cooperation. Surveys \citep{wu2025survey} note that perplexity and burstiness
+remain the interpretable backbone signals, which we surface in our report.
+
+\paragraph{Robustness to paraphrase.} \citet{krishna2023paraphrasing} show
+paraphrasing evades most detectors and propose retrieval defenses;
+recursive/iterative paraphrasing is the strongest attack. We reproduce this
+under a cross-model setting where strong instruction models rewrite text that
+our detector then re-scores.
+
+\paragraph{Calibration.} Temperature scaling \citep{guo2017calibration} is a
+standard post-hoc fix; we show that under distribution shift its benefit is
+conditional on having an in-distribution calibration set, which the official
+dev split is not.
+
+\section{Setup and Diagnosis}
+\label{sec:diag}
+
+\paragraph{Data.} SemEval-2024 Task~8 Subtask~A (English): train $119{,}756$
+docs (human + \texttt{davinci}, \texttt{chatGPT}, \texttt{dolly},
+\texttt{cohere}; domains reddit/wikihow/arxiv/wikipedia/peerread), dev
+$5{,}000$ (only \texttt{bloomz} as the AI generator, $5$ domains), test
+$34{,}272$ (six generators incl.\ unseen GPT-4 and \texttt{bloomz}; single
+\texttt{outfox} domain). The dev and test splits thus differ on \emph{both}
+axes---generator and domain.
+
+\paragraph{The AUROC/accuracy contradiction.} Table~\ref{tab:ceiling} shows
+fine-tuned RoBERTa-base reaches test AUROC $0.944$ but macro-F1 $0.619$ at
+threshold $0.5$. Per-group analysis reveals near-perfect recall on AI groups
+but $31\%$ accuracy on human---the threshold is displaced, not the ranking.
+
+\paragraph{Dev cannot calibrate test.} The dev-optimal margin threshold
+($-5.86$) and the test oracle threshold ($+12.0$) point in \emph{opposite}
+directions; applying the dev threshold to test makes accuracy \emph{worse}
+($0.642 < 0.671$). Because dev contains only \texttt{bloomz}, a threshold
+tuned on it does not transfer to GPT-4/chatGPT-style text.
+
+\paragraph{Operating-point ceiling.} To estimate how much a frozen model can
+be fixed \emph{given} an in-distribution calibration set, we stratify test
+$50/50$ by $\text{generator}\times\text{label}$, fit temperature and a
+macro-F1-optimal margin threshold on one half, and score the disjoint half
+($5$ seeds). Table~\ref{tab:ceiling} reports the result: macro-F1
+$0.619\!\rightarrow\!0.886$ (oracle $0.888$), confirming the gap is operating
+point, not capacity. TF-IDF + logistic regression is already well-calibrated
+(ECE $0.03$) and barely moves, explaining why this lexical baseline
+\emph{outperforms} raw RoBERTa at the default threshold.
+
+\begin{table}[t]\centering\small
+\begin{tabular}{lccc}
+\toprule
+Model & base F1 & calib.\ F1 & AUROC \\
+\midrule
+RoBERTa single   & 0.619 & \textbf{0.886} & 0.944 \\
+RoBERTa chunked  & 0.677 & 0.880 & 0.958 \\
+TF-IDF + LR      & 0.828 & 0.830 & 0.897 \\
+Fusion LGBM      & 0.835 & 0.882 & 0.930 \\
+\bottomrule
+\end{tabular}
+\caption{Test macro-F1 at threshold $0.5$ (base) vs.\ after temperature +
+in-distribution threshold (calib., mean over 5 seeds). The frozen RoBERTa
+recovers $+0.27$; AUROC is threshold-invariant.}
+\label{tab:ceiling}
+\end{table}
+
+\paragraph{Why \texttt{bloomz} is hard.} After calibration, per-generator AI
+recall is $\geq0.99$ for seen-family generators and $0.89$ for unseen GPT-4,
+but only $0.096$ for \texttt{bloomz}. In margin space, \texttt{bloomz}
+(median $10.9$, p90 $12.0$) overlaps the human upper tail (p75 $11.2$, p90
+$11.9$), while clean AI sits $\geq12.1$. A single global threshold therefore
+trades human specificity against \texttt{bloomz} recall: at margin $12.0$,
+specificity $0.95$ but \texttt{bloomz} recall $0.10$; lowering to $11.0$
+raises \texttt{bloomz} to $0.48$ but drops specificity to $0.72$. The two are
+in direct conflict for any single threshold.
+
+\section{Region-Aware Two-Stage Detection}
+\label{sec:method}
+
+The conflict above is not a ranking failure but a \emph{single-threshold}
+failure: \texttt{bloomz} is separable from human in \emph{orthogonal}
+hand-crafted features (type-token ratio $0.83$ vs.\ $0.43$; repeated-bigram
+ratio $0.01$ vs.\ $0.15$) even where the RoBERTa margin cannot separate them.
+We exploit this with a two-stage rule. Let $m=\text{logit}_{\text{AI}}-
+\text{logit}_{\text{human}}$ be the (temperature-scaled) document margin:
+\begin{equation}
+\hat{y}=
+\begin{cases}
+\text{AI} & m \geq t_{\text{high}}\\
+\text{human} & m < t_{\text{low}}\\
+g_\phi(\mathbf{f}) & t_{\text{low}}\leq m < t_{\text{high}}
+\end{cases}
+\end{equation}
+where $g_\phi$ is a logistic classifier over six orthogonal features
+(TTR, repeated bi/tri-gram ratios, avg.\ word length, length, punctuation
+density). All of $t_{\text{low}}, t_{\text{high}}, \phi$ and the temperature
+are fit on the dev split only (the deployable P1 protocol). The learned
+$g_\phi$ is dominated by TTR (coefficient $16.3$), matching the diagnosis.
+
+\paragraph{Protocols.} We report three numbers to separate effects honestly:
+\textbf{P1} (deployable) fits everything on dev and predicts test once;
+\textbf{P2} (in-distribution ceiling) uses a nested split of test for honest
+band selection; \textbf{P0} is the optimistic in-test variant.
+Table~\ref{tab:method} shows P1 macro-F1 $0.857$---\emph{above} the strongest
+single-model baseline (Fusion LGBM, $0.835$, itself test-tuned)---and a P2
+ceiling of $0.945$. Crucially the region-aware rule lifts \texttt{bloomz}
+recall to $0.70$ (P2) / $1.00$ (P1) while keeping human specificity high, and
+the P0$\approx$P2 gap of $0.0016$ shows the band selection does not overfit.
+
+\begin{table}[t]\centering\small
+\begin{tabular}{llcc}
+\toprule
+Protocol & rule & macro-F1 & note \\
+\midrule
+P1 deploy & single-thr & 0.572 & dev$\to$test \\
+P1 deploy & region-aware & \textbf{0.857} & dev$\to$test \\
+P2 ceiling & region-aware & 0.945 & in-dist \\
+\midrule
+\multicolumn{2}{l}{Fusion LGBM (prior best)} & 0.835 & test-tuned \\
+\bottomrule
+\end{tabular}
+\caption{Region-aware vs.\ single-threshold. P1 is the only leakage-free test
+number; it beats the prior best single model. Single-threshold under the same
+P1 protocol collapses to $0.572$.}
+\label{tab:method}
+\end{table}
+
+\section{Interpretable Report}
+\label{sec:viz}
+
+We render each document as a plagiarism-checker-style report with three
+coherent layers. (1) The headline is the \emph{real} temperature-scaled
+$P(\text{AI})$, not a discretized label, so it varies continuously and never
+contradicts the model's confidence; the region-aware verdict and its decision
+region are shown separately. (2) Sentence highlighting uses
+\emph{occlusion}: a sentence's contribution is
+$P(\text{AI}\mid\text{full})-P(\text{AI}\mid\text{without sentence})$, so the
+highlight is by construction consistent with the document score (avoiding the
+common artifact where independently-scored sentences all look benign yet the
+document is flagged). (3) Each linguistic feature is placed on a
+human$\leftrightarrow$AI \emph{discriminant axis} via a Gaussian
+log-likelihood ratio,
+$\text{disc}=\tanh\!\big(\tfrac{1}{2}[\log\mathcal{N}(x;\mu_{\text{AI}},
+\sigma_{\text{AI}})-\log\mathcal{N}(x;\mu_{\text{H}},\sigma_{\text{H}})]\big)
+\in[-1,1]$, so position encodes how decisively the feature leans AI, using
+both class means and spreads. We also surface perplexity (GPT-2) and
+burstiness as the classic interpretable signals.
+
+\section{De-AI Robustness Evaluation}
+\label{sec:robust}
+
+We frame ``de-AI rewriting'' as a detector-robustness probe: an attacker
+model rewrites a high-AI document using the detector's own feature diagnosis,
+and we re-score it, over $K$ recursive rounds. Using an OpenAI-compatible
+gateway we compare three attackers (\texttt{claude-sonnet-4-6},
+\texttt{gpt-5.2}, \texttt{qwen3-max}), $12$ high-AI documents each. A single
+rewrite barely moves the detector
+($P(\text{AI})\,0.906\!\rightarrow\!0.90$); but recursive rewriting with a
+strong attacker breaks it. Table~\ref{tab:robust} shows Claude flips $83\%$ of
+documents to human by round~2 ($P(\text{AI})$ dropping
+$0.906\!\rightarrow\!0.733$, in one case driving the margin from $+12.2$ to
+$-7.3$), whereas weaker attackers flip only $25$--$33\%$ and barely move
+$P(\text{AI})$. Attacker strength is the dominant factor.
+
+\begin{table}[t]\centering\small
+\begin{tabular}{lccc}
+\toprule
+Attacker & flip @r1 & flip @r2 & $P(\text{AI})$ r0$\to$r2 \\
+\midrule
+claude-sonnet-4-6 & 67\% & \textbf{83\%} & 0.906$\to$0.733 \\
+qwen3-max         & 17\% & 33\% & 0.906$\to$0.884 \\
+gpt-5.2           & 8\%  & 25\% & 0.906$\to$0.884 \\
+\bottomrule
+\end{tabular}
+\caption{Recursive cross-model paraphrase attack ($12$ docs/attacker, $K{=}2$).
+Flip = fraction of documents the detector re-labels human. A strong attacker
+(Claude) breaks the detector; weak attackers largely do not.}
+\label{tab:robust}
+\end{table}
+
+\paragraph{Where the attack lands.} The flip is driven by our
+\emph{orthogonal-feature stage}, not RoBERTa: rewriting scrambles surface
+features (TTR, contractions), pushing the margin into the ambiguous band where
+$g_\phi$ then flips to human, while RoBERTa's deep $P(\text{AI})$ moves little
+($0.906\!\rightarrow\!0.83$). Thus the orthogonal stage is \emph{both} the
+mechanism that recovers \texttt{bloomz} and the principal attack surface---a
+direct trade-off between human-like-text recall and paraphrase robustness.
+
+\section{Negative Result: Hierarchical Overfitting}
+\label{sec:hsad}
+
+We also tested the capacity reflex: HSAD, which pools RoBERTa token states
+into sentence vectors, adds a 2-layer cross-sentence Transformer and dual
+sentence/document heads (bottom 8 RoBERTa layers frozen, multi-task with
+sentence pseudo-labels). HSAD reaches dev accuracy $0.843$ (vs.\ $0.834$ for
+plain RoBERTa) but its test AUROC \emph{collapses} from $0.944$ to $0.672$.
+The added degrees of freedom overfit the single-generator (\texttt{bloomz})
+dev distribution and fail to generalize to unseen generators, destroying the
+ranking ability the backbone had. This negative result supports our central
+claim: the bottleneck is operating point and shift, not capacity, so the
+right fix is lightweight calibration plus orthogonal routing, not a heavier
+model.
+
+\section{Limitations}
+
+The robustness evaluation uses a modest number of documents per attacker;
+flip rates are directional rather than precise. The orthogonal-feature
+baselines are corpus statistics estimated on this dataset and may not transfer
+to other domains. P2/oracle numbers use test labels for calibration and are
+explicitly upper bounds, not deployable scores; only the P1 number ($0.857$)
+is leakage-free. The de-AI component is strictly a robustness probe; we do not
+endorse using it to evade academic-integrity systems. Finally, our study is
+English-only and single-domain at test time.
+
+\section{Conclusion}
+
+On a realistic distribution-shift detection benchmark, a frozen detector's
+apparent failure (macro-F1 $0.62$) is almost entirely an operating-point
+artifact: calibration plus an in-distribution threshold recovers $0.886$.
+A region-aware two-stage rule that routes ambiguous-margin documents to an
+orthogonal-feature classifier reaches a deployable $0.857$, beats the prior
+best single model, and recovers the hardest human-like generator. The same
+orthogonal stage is its main paraphrase-attack surface, and a hierarchical
+capacity extension overfits and fails---together arguing that calibration and
+distribution shift, not model capacity, are the levers that matter.
+
+\bibliography{refs}
+\bibliographystyle{acl_natbib}
+
+\end{document}
+
+
+

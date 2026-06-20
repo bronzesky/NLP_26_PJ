@@ -1,0 +1,118 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPT-4 样本（未见生成器） · AI检测报告</title><style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif;
+       margin: 0; background: #f4f6f9; color: #1f2733; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+.topbar { display:flex; justify-content:space-between; align-items:center;
+          background:#fff; border-radius:12px; padding:18px 24px; margin-bottom:18px;
+          box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.topbar h1 { font-size:18px; margin:0; }
+.topbar .verdict { font-size:14px; font-weight:700; padding:6px 14px; border-radius:20px;
+                   color:#fff; }
+.dash { display:grid; grid-template-columns: 170px 1fr 1fr; gap:20px;
+        background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); align-items:center; }
+.dash .gauge { text-align:center; }
+.bars { }
+.bars .row { display:flex; align-items:center; margin:6px 0; font-size:13px; }
+.bars .lbl { width:110px; color:#5b6573; }
+.bars .track { flex:1; height:12px; background:#eceff3; border-radius:6px; overflow:hidden; margin:0 8px; }
+.bars .fill { height:100%; border-radius:6px; }
+.bars .pc { width:48px; text-align:right; font-weight:600; }
+.signals { font-size:13px; color:#5b6573; }
+.signals .sig-item { display:flex; justify-content:space-between; padding:6px 0;
+                     border-bottom:1px solid #eef1f5; }
+.signals .sig-item b { color:#1f2733; }
+.card { background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.card h2 { font-size:16px; margin:0 0 14px; color:#27313f; }
+.legend { font-size:12px; color:#6b7480; margin-bottom:12px; }
+.legend span { display:inline-block; margin-right:14px; }
+.legend i { display:inline-block; width:22px; height:4px; vertical-align:middle;
+            margin-right:5px; border-radius:2px; }
+.para { margin:14px 0; }
+.para-tag { display:inline-block; color:#fff; font-size:11px; font-weight:600;
+            padding:2px 10px; border-radius:10px; margin-bottom:6px; }
+.para-body { line-height:2.0; font-size:15px; }
+.sent { padding:1px 2px; border-radius:3px; }
+table.ev { width:100%; border-collapse:collapse; font-size:13px; }
+table.ev th { font-weight:600; color:#6b7480; font-size:12px; padding:4px 8px; text-align:left; }
+table.ev td { padding:10px 8px; border-bottom:1px solid #eef1f5; vertical-align:middle; }
+.ev .fname { width:190px; color:#3a4452; font-family:monospace; font-size:12px; }
+.ev .fbar { width:auto; min-width:260px; }
+.dax-head { display:flex; justify-content:space-between; font-size:11px; color:#9aa3b0; }
+.dax-head .mid { color:#b6c0cf; }
+.dax { position:relative; height:24px; border-radius:12px;
+       background:linear-gradient(90deg,#2ea043 0%, #d6e8d8 38%, #f1f0f2 50%, #f3dada 62%, #da3633 100%);
+       border:1px solid #e2e6ec; }
+.dax-mid { position:absolute; left:50%; top:0; bottom:0; width:2px;
+           background:rgba(31,39,51,.35); transform:translateX(-1px); }
+.dax .tick { position:absolute; top:50%; width:2px; height:14px; transform:translate(-1px,-50%);
+             opacity:.65; }
+.dax .tick.h { background:#0b5d20; }
+.dax .tick.a { background:#7a1210; }
+.dax .dot { position:absolute; top:50%; width:16px; height:16px; border-radius:50%;
+            border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.25);
+            transform:translate(-8px,-50%); z-index:3; }
+.ev .fval { width:90px; text-align:right; font-weight:600; font-size:12px; }
+.sug-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.sug-card { border:1px solid #e7ebf0; border-radius:8px; padding:12px 14px; }
+.sug-head { font-weight:700; font-size:13px; color:#27313f; margin-bottom:6px; }
+.sug-dev { float:right; font-weight:500; font-size:11px; color:#da3633; }
+.sug-body { font-size:13px; color:#4a5562; line-height:1.6; }
+.composite { background:#0f1620; color:#cfe3ff; padding:16px; border-radius:8px;
+             font-size:12px; white-space:pre-wrap; line-height:1.55; overflow-x:auto; }
+.foot { text-align:center; color:#9aa3b0; font-size:12px; padding:16px; }
+</style></head><body><div class="wrap">
+<div class="topbar"><h1>GPT-4 样本（未见生成器）</h1>
+<span class="verdict" style="background:#da3633">最终判定：AI 生成 · 高置信AI区 · 高度疑似</span></div>
+
+<div class="dash">
+  <div class="gauge"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75.0" cy="75.0" r="63.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="75.0" cy="75.0" r="63.0" fill="none" stroke="#da3633" stroke-width="14" stroke-dasharray="358.24 395.84" stroke-linecap="round" transform="rotate(-90 75.0 75.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#da3633">90.5%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">P(AI)</text></svg></div>
+  <div class="bars"><div style="font-size:13px;color:#5b6573;margin-bottom:6px">疑似度分布（按段落）</div><div class="row"><span class="lbl">高度疑似</span><div class="track"><div class="fill" style="width:100.0%;background:#da3633"></div></div><span class="pc">100%</span></div>
+<div class="row"><span class="lbl">中度疑似</span><div class="track"><div class="fill" style="width:0.0%;background:#e8870c"></div></div><span class="pc">0%</span></div>
+<div class="row"><span class="lbl">轻度疑似</span><div class="track"><div class="fill" style="width:0.0%;background:#8957e5"></div></div><span class="pc">0%</span></div>
+<div class="row"><span class="lbl">合格</span><div class="track"><div class="fill" style="width:0.0%;background:#2ea043"></div></div><span class="pc">0%</span></div></div>
+  <div class="signals"><div class="sig-item"><span>困惑度 (perplexity)</span><b>24.3</b></div><div class="sig-item"><span>突发性 (burstiness)</span><b>0.316</b></div><div class="sig-item"><span>RoBERTa 原始 P(AI)</span><b>90.5%</b></div><div class="sig-item"><span>判定区域</span><b>clean_ai</b></div><div class="sig-item"><span>字数</span><b>406 词 / 2825 字符</b></div><div class="sig-item"><span>段落数</span><b>6</b></div></div>
+</div>
+
+<div class="card"><h2>正文逐句高亮</h2><div class="legend"><span><i style="background:rgba(218,54,51,0.6)"></i>该句推高AI概率</span><span><i style="background:rgba(46,160,67,0.6)"></i>该句推向人类</span><span style="color:#9aa3b0">底色＝遮挡法：删去该句后文档AI概率的变化量，悬停看数值</span></div><div class="para"><div class="para-tag" style="background:#da3633">#1 · 段落P(AI) 91% · ppl 27 · burst 0.18</div><div class="para-body"><span class="sent" style="background:rgba(218,54,51,0.17)" title="对文档AI概率的贡献 +0.000（neutral）">The automobile, since its advent, has revolutionized the way humans move, shrinking distances and enabling unprecedented mobility.</span> <span class="sent" style="background:rgba(218,54,51,0.18)" title="对文档AI概率的贡献 +0.000（neutral）">Cars have long been symbols of freedom, economic status, and practicality in transportation.</span> <span class="sent" style="background:rgba(218,54,51,0.19)" title="对文档AI概率的贡献 +0.000（neutral）">However, as environmental and safety concerns mount, some have begun to question the sustainability of car culture.</span> <span class="sent" style="background:rgba(46,160,67,0.12)" title="对文档AI概率的贡献 -0.000（neutral）">This essay will examine the significance of automobiles, the potential repercussions of rejecting car culture, and the necessitation of responsible car ownership.</span> </div></div>
+<div class="para"><div class="para-tag" style="background:#da3633">#2 · 段落P(AI) 91% · ppl 32 · burst 0.30</div><div class="para-body"><span class="sent" style="background:rgba(218,54,51,0.12)" title="对文档AI概率的贡献 +0.000（neutral）">Firstly, cars as a mode of transportation are indispensable.</span> <span class="sent" style="background:rgba(218,54,51,0.15)" title="对文档AI概率的贡献 +0.000（neutral）">They provide flexibility and convenience for personal travel, surpassing the limitations of scheduled public transportation.</span> <span class="sent" style="background:rgba(218,54,51,0.16)" title="对文档AI概率的贡献 +0.000（neutral）">They have also enabled the development of suburban areas, where the density might be too low for public transport to be viable.</span> <span class="sent" style="background:rgba(218,54,51,0.17)" title="对文档AI概率的贡献 +0.000（neutral）">Furthermore, the driving population is diversifying, with increasing female and older drivers.</span> <span class="sent" style="background:rgba(218,54,51,0.16)" title="对文档AI概率的贡献 +0.000（neutral）">This demographic shift reflects a societal dependence on automobiles that cater to a wider range of mobility needs.</span> </div></div>
+<div class="para"><div class="para-tag" style="background:#da3633">#3 · 段落P(AI) 90% · ppl 41 · burst 0.23</div><div class="para-body"><span class="sent" style="background:rgba(218,54,51,0.18)" title="对文档AI概率的贡献 +0.000（neutral）">However, the reliance on cars has not come without consequences.</span> <span class="sent" style="background:rgba(218,54,51,0.14)" title="对文档AI概率的贡献 +0.000（neutral）">As evidence from paragraph 36 suggests, car emissions significantly contribute to air pollution and global warming.</span> <span class="sent" style="background:rgba(46,160,67,0.14)" title="对文档AI概率的贡献 -0.000（neutral）">Critics argue that this environmental toll, alongside the dangers posed by vehicular accidents, calls for a re-evaluation of car culture.</span> <span class="sent" style="background:rgba(218,54,51,0.14)" title="对文档AI概率的贡献 +0.000（neutral）">Some individuals even believe that driving should be heavily regulated or outlawed, pointing to the hazardous statistics associated with it.</span> <span class="sent" style="background:rgba(46,160,67,0.13)" title="对文档AI概率的贡献 -0.000（neutral）">While their concerns are valid, outright rejection of car culture is an extreme measure that could disrupt society&#x27;s operational fabric.</span> </div></div>
+<div class="para"><div class="para-tag" style="background:#da3633">#4 · 段落P(AI) 87% · ppl 39 · burst 0.14</div><div class="para-body"><span class="sent" style="background:rgba(46,160,67,0.17)" title="对文档AI概率的贡献 -0.000（neutral）">Enter Bill Ford&#x27;s business plan, which addresses these concerns pragmatically through proposals aimed at enhancing safety and reducing emissions.</span> <span class="sent" style="background:rgba(46,160,67,0.16)" title="对文档AI概率的贡献 -0.000（neutral）">Technologies like autonomous driving and electric vehicles, part of Ford&#x27;s vision, can mitigate risks and lower the carbon footprint of cars.</span> <span class="sent" style="background:rgba(218,54,51,0.13)" title="对文档AI概率的贡献 +0.000（neutral）">Embracing such innovations could preserve the benefits of automotive transportation while curtailing its adverse effects.</span> </div></div>
+<div class="para"><div class="para-tag" style="background:#da3633">#5 · 段落P(AI) 91% · ppl 22 · burst 0.29</div><div class="para-body"><span class="sent" style="background:rgba(218,54,51,0.13)" title="对文档AI概率的贡献 +0.000（neutral）">Finally, car ownership and driving privileges come with substantial responsibility.</span> <span class="sent" style="background:rgba(218,54,51,0.17)" title="对文档AI概率的贡献 +0.000（neutral）">Drivers must be cognizant of their impact on public safety and the environment.</span> <span class="sent" style="background:rgba(46,160,67,0.15)" title="对文档AI概率的贡献 -0.000（neutral）">Responsible use includes adhering to traffic laws, maintaining vehicles to reduce emissions, and considering alternative modes of transport when feasible.</span> </div></div>
+<div class="para"><div class="para-tag" style="background:#da3633">#6 · 段落P(AI) 90% · ppl 44 · burst 0.29</div><div class="para-body"><span class="sent" style="background:rgba(218,54,51,0.67)" title="对文档AI概率的贡献 +0.002（neutral）">In conclusion, while cars remain central to modern transit, the onus is on us as a society to balance the benefits of this freedom with the duty to preserve our environment and ensure safety.</span> <span class="sent" style="background:rgba(218,54,51,0.14)" title="对文档AI概率的贡献 +0.000（neutral）">Rejecting car culture is not comprehensively viable, but a responsible, innovative approach could render it sustainable.</span> <span class="sent" style="background:rgba(46,160,67,0.17)" title="对文档AI概率的贡献 -0.000（neutral）">Bill Ford&#x27;s business plan may very well chart a path towards such a future, but it will demand collective adherence to a more conscientious use of cars.</span> </div></div></div>
+
+<div class="card"><h2>AI 特征检测（语言学证据）</h2>
+<div class="legend"><span style="color:#9aa3b0">每个特征按高斯似然比映射到判别轴：圆点越靠左＝该特征越确定指向人类，越靠右＝越确定指向AI，正中为决策边界。竖线标出人类均值（深绿）与AI均值（深红）位置。最具区分度的特征排在前。</span></div>
+<table class="ev"><thead><tr><th>特征</th><th><div class="dax-head"><span>← 确定是人类</span><span class="mid">决策边界</span><span>确定是AI →</span></div></th><th>倾向</th></tr></thead><tbody><tr><td class="fname">discourse_conclusive</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:30.3%" title="人类均值"></span><span class="tick a" style="left:41.5%" title="AI均值"></span><span class="dot" style="left:72.8%;background:#da3633" title="判别分 +0.46（46% 偏AI）｜本文值 0.043"></span></div></td><td class="fval" style="color:#da3633">46% 偏AI</td></tr>
+<tr><td class="fname">rhetorical_question_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:71.7%" title="人类均值"></span><span class="tick a" style="left:71.8%" title="AI均值"></span><span class="dot" style="left:71.8%;background:#da3633" title="判别分 +0.44（44% 偏AI）｜本文值 0.000"></span></div></td><td class="fval" style="color:#da3633">44% 偏AI</td></tr>
+<tr><td class="fname">subordination_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:36.4%" title="人类均值"></span><span class="tick a" style="left:37.2%" title="AI均值"></span><span class="dot" style="left:36.7%;background:#2ea043" title="判别分 -0.27（27% 偏人类）｜本文值 1.044"></span></div></td><td class="fval" style="color:#2ea043">27% 偏人类</td></tr>
+<tr><td class="fname">hapax_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:33.7%" title="人类均值"></span><span class="tick a" style="left:42.0%" title="AI均值"></span><span class="dot" style="left:39.0%;background:#2ea043" title="判别分 -0.22（22% 偏人类）｜本文值 0.762"></span></div></td><td class="fval" style="color:#2ea043">22% 偏人类</td></tr>
+<tr><td class="fname">contraction_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:53.9%" title="人类均值"></span><span class="tick a" style="left:57.6%" title="AI均值"></span><span class="dot" style="left:59.1%;background:#da3633" title="判别分 +0.18（18% 偏AI）｜本文值 0.000"></span></div></td><td class="fval" style="color:#da3633">18% 偏AI</td></tr>
+<tr><td class="fname">latinate_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:48.8%" title="人类均值"></span><span class="tick a" style="left:50.0%" title="AI均值"></span><span class="dot" style="left:59.0%;background:#da3633" title="判别分 +0.18（18% 偏AI）｜本文值 0.086"></span></div></td><td class="fval" style="color:#da3633">18% 偏AI</td></tr>
+<tr><td class="fname">sentence_length_cv</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:45.9%" title="人类均值"></span><span class="tick a" style="left:53.0%" title="AI均值"></span><span class="dot" style="left:58.9%;background:#da3633" title="判别分 +0.18（18% 偏AI）｜本文值 0.316"></span></div></td><td class="fval" style="color:#da3633">18% 偏AI</td></tr>
+<tr><td class="fname">discourse_total_density</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:40.7%" title="人类均值"></span><span class="tick a" style="left:45.6%" title="AI均值"></span><span class="dot" style="left:57.1%;background:#da3633" title="判别分 +0.14（14% 偏AI）｜本文值 0.217"></span></div></td><td class="fval" style="color:#da3633">14% 偏AI</td></tr>
+<tr><td class="fname">mattr</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:37.9%" title="人类均值"></span><span class="tick a" style="left:49.3%" title="AI均值"></span><span class="dot" style="left:43.0%;background:#2ea043" title="判别分 -0.14（14% 偏人类）｜本文值 0.877"></span></div></td><td class="fval" style="color:#2ea043">14% 偏人类</td></tr>
+<tr><td class="fname">avg_word_length</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:50.4%" title="人类均值"></span><span class="tick a" style="left:51.4%" title="AI均值"></span><span class="dot" style="left:56.8%;background:#da3633" title="判别分 +0.14（14% 偏AI）｜本文值 5.805"></span></div></td><td class="fval" style="color:#da3633">14% 偏AI</td></tr>
+<tr><td class="fname">sentence_length_std</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:39.6%" title="人类均值"></span><span class="tick a" style="left:40.9%" title="AI均值"></span><span class="dot" style="left:43.5%;background:#2ea043" title="判别分 -0.13（13% 偏人类）｜本文值 5.576"></span></div></td><td class="fval" style="color:#2ea043">13% 偏人类</td></tr>
+<tr><td class="fname">structural_completeness</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:45.1%" title="人类均值"></span><span class="tick a" style="left:46.6%" title="AI均值"></span><span class="dot" style="left:43.9%;background:#2ea043" title="判别分 -0.12（12% 偏人类）｜本文值 0.083"></span></div></td><td class="fval" style="color:#2ea043">12% 偏人类</td></tr></tbody></table></div>
+
+<div class="card"><h2>辅助降 AI 率</h2><div class="sug-grid"><div class="sug-card"><div class="sug-head">篇章 / 衔接 <span class="sug-dev">偏离 2.36</span></div><div class="sug-body">Remove or restructure sentences using: &quot;furthermore&quot;, &quot;however&quot;, &quot;in conclusion&quot;. These connective phrases are the strongest AI signal in this text. Let ideas connect implicitly — start the next sentence directly without announcing the transition.</div></div>
+<div class="sug-card"><div class="sug-head">词汇 / 多样性 <span class="sug-dev">偏离 2.62</span></div><div class="sug-body">Vocabulary diversity is low (MATTR=0.877, human average=0.783). AI text reuses the same structural phrases repeatedly. Vary your word choices: if you&#x27;ve used &#x27;important&#x27; twice, use &#x27;crucial&#x27;, &#x27;worth noting&#x27;, or &#x27;significant&#x27; instead.</div></div>
+<div class="sug-card"><div class="sug-head">词汇 / 多样性 <span class="sug-dev">偏离 7.64</span></div><div class="sug-body">Too many Latinate/formal words (words ending in -tion, -ment, -ance, etc.). Human writing mixes formal and informal vocabulary naturally. Replace some: &#x27;implementation&#x27; → &#x27;how it works&#x27;, &#x27;examination&#x27; → &#x27;look at&#x27;, &#x27;utilization&#x27; → &#x27;use&#x27;.</div></div></div><h3>一键降AI Prompt（粘贴到改写模型）</h3><pre class="composite">Rewrite the following text to sound more naturally human-written. Apply ALL of these changes:
+
+[LEXICAL] Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives.
+
+[LEXICAL] Replace some Latinate words with simpler alternatives: implementation → how it works, utilization → use, examination → look at, demonstration → show.
+
+[DISCOURSE] Do NOT use these transition phrases: &quot;furthermore&quot;, &quot;however&quot;, &quot;in conclusion&quot;. Instead, let each paragraph flow into the next without explicit connectors.
+
+Text to rewrite:
+{TEXT}</pre></div>
+
+<div class="foot">Region-Aware AI-Text Detector · SemEval-2024 Task 8 · 校准+正交特征两阶段判定<br>
+本报告仅表示文本由 AI 生成的统计可能性，与内容质量无关。</div>
+</div></body></html>

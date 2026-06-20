@@ -1,0 +1,15 @@
+[HAMI-core Msg(29408:139807371919936:libvgpu.c:837)]: Initializing.....
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights:   5%|▍         | 10/201 [00:00<00:03, 59.70it/s]Loading weights:   8%|▊         | 16/201 [00:00<00:03, 58.64it/s]Loading weights:  11%|█         | 22/201 [00:00<00:03, 53.49it/s]Loading weights:  14%|█▍        | 28/201 [00:00<00:03, 46.99it/s]Loading weights:  20%|█▉        | 40/201 [00:00<00:02, 58.86it/s]Loading weights:  23%|██▎       | 46/201 [00:00<00:02, 56.67it/s]Loading weights:  26%|██▋       | 53/201 [00:00<00:02, 52.47it/s]Loading weights:  32%|███▏      | 64/201 [00:01<00:02, 60.16it/s]Loading weights:  38%|███▊      | 76/201 [00:01<00:01, 63.74it/s]Loading weights:  41%|████▏     | 83/201 [00:01<00:01, 61.92it/s]Loading weights:  45%|████▍     | 90/201 [00:01<00:01, 62.59it/s]Loading weights:  49%|████▉     | 98/201 [00:01<00:01, 66.30it/s]Loading weights:  53%|█████▎    | 107/201 [00:01<00:01, 70.27it/s]Loading weights:  57%|█████▋    | 115/201 [00:01<00:01, 67.84it/s]Loading weights:  62%|██████▏   | 125/201 [00:02<00:01, 68.25it/s]Loading weights:  66%|██████▌   | 132/201 [00:02<00:01, 51.19it/s]Loading weights:  69%|██████▉   | 139/201 [00:02<00:01, 49.96it/s]Loading weights:  75%|███████▌  | 151/201 [00:02<00:00, 58.90it/s]Loading weights:  83%|████████▎ | 166/201 [00:02<00:00, 76.09it/s]Loading weights:  87%|████████▋ | 175/201 [00:02<00:00, 79.09it/s]Loading weights:  92%|█████████▏| 185/201 [00:03<00:00, 55.92it/s]Loading weights: 100%|██████████| 201/201 [00:03<00:00, 65.42it/s]
+[HAMI-core Msg(29408:139807371919936:libvgpu.c:853)]: Initialized
+{
+  "accuracy": 0.9565533250943585,
+  "macro_f1": 0.95654384282208,
+  "micro_f1": 0.9565533250943585,
+  "auroc": 0.9998523080817753,
+  "fpr_at_95_tpr": 6.314127861089187e-05,
+  "brier": 0.04175714604196225,
+  "nll": 0.27295702689842166,
+  "ece": 0.04087449162513301,
+  "rows": 119756
+}
+[HAMI-core Msg(29408:139807371919936:multiprocess_memory_limit.c:459)]: Calling exit handler 29408

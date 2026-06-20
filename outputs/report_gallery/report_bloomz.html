@@ -1,0 +1,122 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>bloomz 样本（拟人难例） · AI检测报告</title><style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif;
+       margin: 0; background: #f4f6f9; color: #1f2733; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+.topbar { display:flex; justify-content:space-between; align-items:center;
+          background:#fff; border-radius:12px; padding:18px 24px; margin-bottom:18px;
+          box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.topbar h1 { font-size:18px; margin:0; }
+.topbar .verdict { font-size:14px; font-weight:700; padding:6px 14px; border-radius:20px;
+                   color:#fff; }
+.dash { display:grid; grid-template-columns: 170px 1fr 1fr; gap:20px;
+        background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); align-items:center; }
+.dash .gauge { text-align:center; }
+.bars { }
+.bars .row { display:flex; align-items:center; margin:6px 0; font-size:13px; }
+.bars .lbl { width:110px; color:#5b6573; }
+.bars .track { flex:1; height:12px; background:#eceff3; border-radius:6px; overflow:hidden; margin:0 8px; }
+.bars .fill { height:100%; border-radius:6px; }
+.bars .pc { width:48px; text-align:right; font-weight:600; }
+.signals { font-size:13px; color:#5b6573; }
+.signals .sig-item { display:flex; justify-content:space-between; padding:6px 0;
+                     border-bottom:1px solid #eef1f5; }
+.signals .sig-item b { color:#1f2733; }
+.card { background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.card h2 { font-size:16px; margin:0 0 14px; color:#27313f; }
+.legend { font-size:12px; color:#6b7480; margin-bottom:12px; }
+.legend span { display:inline-block; margin-right:14px; }
+.legend i { display:inline-block; width:22px; height:4px; vertical-align:middle;
+            margin-right:5px; border-radius:2px; }
+.para { margin:14px 0; }
+.para-tag { display:inline-block; color:#fff; font-size:11px; font-weight:600;
+            padding:2px 10px; border-radius:10px; margin-bottom:6px; }
+.para-body { line-height:2.0; font-size:15px; }
+.sent { padding:1px 2px; border-radius:3px; }
+table.ev { width:100%; border-collapse:collapse; font-size:13px; }
+table.ev th { font-weight:600; color:#6b7480; font-size:12px; padding:4px 8px; text-align:left; }
+table.ev td { padding:10px 8px; border-bottom:1px solid #eef1f5; vertical-align:middle; }
+.ev .fname { width:190px; color:#3a4452; font-family:monospace; font-size:12px; }
+.ev .fbar { width:auto; min-width:260px; }
+.dax-head { display:flex; justify-content:space-between; font-size:11px; color:#9aa3b0; }
+.dax-head .mid { color:#b6c0cf; }
+.dax { position:relative; height:24px; border-radius:12px;
+       background:linear-gradient(90deg,#2ea043 0%, #d6e8d8 38%, #f1f0f2 50%, #f3dada 62%, #da3633 100%);
+       border:1px solid #e2e6ec; }
+.dax-mid { position:absolute; left:50%; top:0; bottom:0; width:2px;
+           background:rgba(31,39,51,.35); transform:translateX(-1px); }
+.dax .tick { position:absolute; top:50%; width:2px; height:14px; transform:translate(-1px,-50%);
+             opacity:.65; }
+.dax .tick.h { background:#0b5d20; }
+.dax .tick.a { background:#7a1210; }
+.dax .dot { position:absolute; top:50%; width:16px; height:16px; border-radius:50%;
+            border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.25);
+            transform:translate(-8px,-50%); z-index:3; }
+.ev .fval { width:90px; text-align:right; font-weight:600; font-size:12px; }
+.sug-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.sug-card { border:1px solid #e7ebf0; border-radius:8px; padding:12px 14px; }
+.sug-head { font-weight:700; font-size:13px; color:#27313f; margin-bottom:6px; }
+.sug-dev { float:right; font-weight:500; font-size:11px; color:#da3633; }
+.sug-body { font-size:13px; color:#4a5562; line-height:1.6; }
+.composite { background:#0f1620; color:#cfe3ff; padding:16px; border-radius:8px;
+             font-size:12px; white-space:pre-wrap; line-height:1.55; overflow-x:auto; }
+.foot { text-align:center; color:#9aa3b0; font-size:12px; padding:16px; }
+</style></head><body><div class="wrap">
+<div class="topbar"><h1>bloomz 样本（拟人难例）</h1>
+<span class="verdict" style="background:#da3633">最终判定：AI 生成 · 高置信AI区 · 高度疑似</span></div>
+
+<div class="dash">
+  <div class="gauge"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75.0" cy="75.0" r="63.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="75.0" cy="75.0" r="63.0" fill="none" stroke="#da3633" stroke-width="14" stroke-dasharray="352.65 395.84" stroke-linecap="round" transform="rotate(-90 75.0 75.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#da3633">89.1%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">P(AI)</text></svg></div>
+  <div class="bars"><div style="font-size:13px;color:#5b6573;margin-bottom:6px">疑似度分布（按段落）</div><div class="row"><span class="lbl">高度疑似</span><div class="track"><div class="fill" style="width:100.0%;background:#da3633"></div></div><span class="pc">100%</span></div>
+<div class="row"><span class="lbl">中度疑似</span><div class="track"><div class="fill" style="width:0.0%;background:#e8870c"></div></div><span class="pc">0%</span></div>
+<div class="row"><span class="lbl">轻度疑似</span><div class="track"><div class="fill" style="width:0.0%;background:#8957e5"></div></div><span class="pc">0%</span></div>
+<div class="row"><span class="lbl">合格</span><div class="track"><div class="fill" style="width:0.0%;background:#2ea043"></div></div><span class="pc">0%</span></div></div>
+  <div class="signals"><div class="sig-item"><span>困惑度 (perplexity)</span><b>19.8</b></div><div class="sig-item"><span>突发性 (burstiness)</span><b>0.604</b></div><div class="sig-item"><span>RoBERTa 原始 P(AI)</span><b>89.1%</b></div><div class="sig-item"><span>判定区域</span><b>clean_ai</b></div><div class="sig-item"><span>字数</span><b>201 词 / 1275 字符</b></div><div class="sig-item"><span>段落数</span><b>1</b></div></div>
+</div>
+
+<div class="card"><h2>正文逐句高亮</h2><div class="legend"><span><i style="background:rgba(218,54,51,0.6)"></i>该句推高AI概率</span><span><i style="background:rgba(46,160,67,0.6)"></i>该句推向人类</span><span style="color:#9aa3b0">底色＝遮挡法：删去该句后文档AI概率的变化量，悬停看数值</span></div><div class="para"><div class="para-tag" style="background:#da3633">#1 · 段落P(AI) 89% · ppl 20 · burst 0.60</div><div class="para-body"><span class="sent" style="background:rgba(218,54,51,0.41)" title="对文档AI概率的贡献 +0.021（AI）">The electoral college has been around since 1787 when it was first introduced by James Madison as part of his proposal for an amendment to the United States Constitution.</span> <span class="sent" style="background:rgba(218,54,51,0.14)" title="对文档AI概率的贡献 +0.001（neutral）">The purpose behind this institution at that time was twofold; one being to protect small states from having too much power over large ones through representation based upon population size rather than number of votes cast within each state.</span> <span class="sent" style="background:rgba(46,160,67,0.23)" title="对文档AI概率的贡献 -0.010（neutral）">Another reason given for introducing the electoral college into our political process back then was so that electors would be able to vote according to their conscience instead of voting strictly along party lines which were commonplace during elections prior to the adoption of the electoral college.</span> <span class="sent" style="background:rgba(218,54,51,0.20)" title="对文档AI概率的贡献 +0.006（neutral）">In other words, electors are supposedly allowed some degree of independence while casting their ballots in order to ensure fairness between candidates who may otherwise not have received equal amounts of attention throughout election season due to lackluster campaigning efforts (i.</span> <span class="sent" style="background:rgba(218,54,51,0.67)" title="对文档AI概率的贡献 +0.041（AI）">e.</span> <span class="sent" style="background:rgba(218,54,51,0.42)" title="对文档AI概率的贡献 +0.022（AI）">, those running unopposed).</span> <span class="sent" style="background:rgba(218,54,51,0.32)" title="对文档AI概率的贡献 +0.015（neutral）">However, these reasons no longer hold true today because we now live in what can only be described as modern times where technology plays such a pivotal role in every aspect of life including how people get informed about issues they care...</span> </div></div></div>
+
+<div class="card"><h2>AI 特征检测（语言学证据）</h2>
+<div class="legend"><span style="color:#9aa3b0">每个特征按高斯似然比映射到判别轴：圆点越靠左＝该特征越确定指向人类，越靠右＝越确定指向AI，正中为决策边界。竖线标出人类均值（深绿）与AI均值（深红）位置。最具区分度的特征排在前。</span></div>
+<table class="ev"><thead><tr><th>特征</th><th><div class="dax-head"><span>← 确定是人类</span><span class="mid">决策边界</span><span>确定是AI →</span></div></th><th>倾向</th></tr></thead><tbody><tr><td class="fname">hapax_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:33.7%" title="人类均值"></span><span class="tick a" style="left:42.0%" title="AI均值"></span><span class="dot" style="left:92.3%;background:#da3633" title="判别分 +0.85（85% 偏AI）｜本文值 0.917"></span></div></td><td class="fval" style="color:#da3633">85% 偏AI</td></tr>
+<tr><td class="fname">subordination_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:36.4%" title="人类均值"></span><span class="tick a" style="left:37.2%" title="AI均值"></span><span class="dot" style="left:89.0%;background:#da3633" title="判别分 +0.78（78% 偏AI）｜本文值 2.800"></span></div></td><td class="fval" style="color:#da3633">78% 偏AI</td></tr>
+<tr><td class="fname">structural_completeness</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:45.1%" title="人类均值"></span><span class="tick a" style="left:46.6%" title="AI均值"></span><span class="dot" style="left:85.2%;background:#da3633" title="判别分 +0.70（70% 偏AI）｜本文值 1.000"></span></div></td><td class="fval" style="color:#da3633">70% 偏AI</td></tr>
+<tr><td class="fname">discourse_contrastive</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:44.2%" title="人类均值"></span><span class="tick a" style="left:44.8%" title="AI均值"></span><span class="dot" style="left:71.8%;background:#da3633" title="判别分 +0.44（44% 偏AI）｜本文值 0.143"></span></div></td><td class="fval" style="color:#da3633">44% 偏AI</td></tr>
+<tr><td class="fname">rhetorical_question_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:71.7%" title="人类均值"></span><span class="tick a" style="left:71.8%" title="AI均值"></span><span class="dot" style="left:71.8%;background:#da3633" title="判别分 +0.44（44% 偏AI）｜本文值 0.000"></span></div></td><td class="fval" style="color:#da3633">44% 偏AI</td></tr>
+<tr><td class="fname">discourse_conclusive</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:30.3%" title="人类均值"></span><span class="tick a" style="left:41.5%" title="AI均值"></span><span class="dot" style="left:29.8%;background:#2ea043" title="判别分 -0.40（40% 偏人类）｜本文值 0.000"></span></div></td><td class="fval" style="color:#2ea043">40% 偏人类</td></tr>
+<tr><td class="fname">mattr</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:37.9%" title="人类均值"></span><span class="tick a" style="left:49.3%" title="AI均值"></span><span class="dot" style="left:67.8%;background:#da3633" title="判别分 +0.36（36% 偏AI）｜本文值 0.929"></span></div></td><td class="fval" style="color:#da3633">36% 偏AI</td></tr>
+<tr><td class="fname">contraction_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:53.9%" title="人类均值"></span><span class="tick a" style="left:57.6%" title="AI均值"></span><span class="dot" style="left:59.1%;background:#da3633" title="判别分 +0.18（18% 偏AI）｜本文值 0.000"></span></div></td><td class="fval" style="color:#da3633">18% 偏AI</td></tr>
+<tr><td class="fname">sentence_length_std</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:39.6%" title="人类均值"></span><span class="tick a" style="left:40.9%" title="AI均值"></span><span class="dot" style="left:41.0%;background:#2ea043" title="判别分 -0.18（18% 偏人类）｜本文值 17.509"></span></div></td><td class="fval" style="color:#2ea043">18% 偏人类</td></tr>
+<tr><td class="fname">discourse_additive</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:43.0%" title="人类均值"></span><span class="tick a" style="left:45.4%" title="AI均值"></span><span class="dot" style="left:41.8%;background:#2ea043" title="判别分 -0.16（16% 偏人类）｜本文值 0.000"></span></div></td><td class="fval" style="color:#2ea043">16% 偏人类</td></tr>
+<tr><td class="fname">sentence_length_cv</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:45.9%" title="人类均值"></span><span class="tick a" style="left:53.0%" title="AI均值"></span><span class="dot" style="left:42.4%;background:#2ea043" title="判别分 -0.15（15% 偏人类）｜本文值 0.604"></span></div></td><td class="fval" style="color:#2ea043">15% 偏人类</td></tr>
+<tr><td class="fname">first_person_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:44.1%" title="人类均值"></span><span class="tick a" style="left:44.2%" title="AI均值"></span><span class="dot" style="left:44.8%;background:#2ea043" title="判别分 -0.10（10% 偏人类）｜本文值 0.015"></span></div></td><td class="fval" style="color:#2ea043">10% 偏人类</td></tr></tbody></table></div>
+
+<div class="card"><h2>辅助降 AI 率</h2><div class="sug-grid"><div class="sug-card"><div class="sug-head">篇章 / 衔接 <span class="sug-dev">偏离 0.88</span></div><div class="sug-body">Remove or restructure sentences using: &quot;however&quot;. These connective phrases are the strongest AI signal in this text. Let ideas connect implicitly — start the next sentence directly without announcing the transition.</div></div>
+<div class="sug-card"><div class="sug-head">篇章 / 衔接 <span class="sug-dev">偏离 11.41</span></div><div class="sug-body">The text follows a rigid 5-paragraph essay structure: every paragraph has a topic sentence, evidence, and transition. Break this pattern: let one paragraph be deliberately short (1-2 sentences), or end the piece mid-thought without a formal conclusion paragraph.</div></div>
+<div class="sug-card"><div class="sug-head">句法 / 句长节奏 <span class="sug-dev">偏离 0.53</span></div><div class="sug-body">Sentence length is too uniform (CV=0.60, human average=0.54). AI text has rhythmically consistent sentences. After every 2-3 medium sentences, add either: a short sentence under 8 words making a direct point, OR a long sentence over 35 words with embedded clauses.</div></div>
+<div class="sug-card"><div class="sug-head">句法 / 句长节奏 <span class="sug-dev">偏离 4.28</span></div><div class="sug-body">Passive voice rate is high (18.2%). Convert passive constructions to active: &#x27;it was found that X&#x27; → &#x27;X showed that&#x27;, &#x27;results were obtained&#x27; → &#x27;we obtained results&#x27;.</div></div>
+<div class="sug-card"><div class="sug-head">词汇 / 多样性 <span class="sug-dev">偏离 4.09</span></div><div class="sug-body">Vocabulary diversity is low (MATTR=0.929, human average=0.783). AI text reuses the same structural phrases repeatedly. Vary your word choices: if you&#x27;ve used &#x27;important&#x27; twice, use &#x27;crucial&#x27;, &#x27;worth noting&#x27;, or &#x27;significant&#x27; instead.</div></div>
+<div class="sug-card"><div class="sug-head">词汇 / 多样性 <span class="sug-dev">偏离 4.78</span></div><div class="sug-body">Too many Latinate/formal words (words ending in -tion, -ment, -ance, etc.). Human writing mixes formal and informal vocabulary naturally. Replace some: &#x27;implementation&#x27; → &#x27;how it works&#x27;, &#x27;examination&#x27; → &#x27;look at&#x27;, &#x27;utilization&#x27; → &#x27;use&#x27;.</div></div></div><h3>一键降AI Prompt（粘贴到改写模型）</h3><pre class="composite">Rewrite the following text to sound more naturally human-written. Apply ALL of these changes:
+
+[LEXICAL] Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives.
+
+[LEXICAL] Replace some Latinate words with simpler alternatives: implementation → how it works, utilization → use, examination → look at, demonstration → show.
+
+[SYNTACTIC] Vary sentence length significantly: after every 2-3 regular sentences, add one sentence under 8 words. Occasionally use a longer sentence over 35 words with subordinate clauses.
+
+[SYNTACTIC] Prefer active voice. Rephrase passive constructions: &#x27;it was found&#x27; → name who found it, &#x27;was demonstrated&#x27; → &#x27;showed&#x27;, &#x27;were observed&#x27; → &#x27;we observed&#x27;.
+
+[DISCOURSE] Do NOT use these transition phrases: &quot;however&quot;. Instead, let each paragraph flow into the next without explicit connectors.
+
+[DISCOURSE] Do not write a formal conclusion paragraph. Allow one body paragraph to remain underdeveloped. End where the last substantive point ends.
+
+Text to rewrite:
+{TEXT}</pre></div>
+
+<div class="foot">Region-Aware AI-Text Detector · SemEval-2024 Task 8 · 校准+正交特征两阶段判定<br>
+本报告仅表示文本由 AI 生成的统计可能性，与内容质量无关。</div>
+</div></body></html>

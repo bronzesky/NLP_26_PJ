@@ -1,0 +1,830 @@
+[
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.17,
+        0.906,
+        1
+      ],
+      [
+        10.82,
+        0.882,
+        0
+      ],
+      [
+        8.29,
+        0.824,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Here's the rewritten version:\n\nThe landform on Mars that looks like a face has captured the imagination of space enthusiasts and conspiracy theorists for decades. It's a striking image, but the \"Face on Mars\" is almost certainly a natural formation with no connection to extraterrestrial life.\n\nThe strongest case for a natural origin comes from pareidolia — the psychological tendency to see familia"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        7.85,
+        0.812,
+        0
+      ],
+      [
+        7.25,
+        0.794,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Texting while driving is a reckless habit that belongs in the same legal category as drunk driving. The toll it takes on road safety is hard to overstate — it doesn't just put the person behind the wheel at risk, it threatens everyone else sharing that road.\n\nThe most immediate problem is attention. The moment a driver picks up their phone, their focus shifts away from the road, and their ability "
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        10.01,
+        0.866,
+        0
+      ],
+      [
+        8.68,
+        0.834,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Being a Seagoing Cowboy during World War II reshaped me in ways I never saw coming. The work meant caring for animals shipped across the ocean to countries torn apart by war, but it also dropped me into places and lives I never would have encountered otherwise. Those two things together — the duty and the discovery — left a mark I still carry.\n\nThe job itself was clear enough: keep the animals ali"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.17,
+        0.906,
+        1
+      ],
+      [
+        11.93,
+        0.902,
+        1
+      ],
+      [
+        10.0,
+        0.866,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Here's the rewritten version:\n\nCell phones have become a central part of daily life — people rely on them for communication, information, and entertainment. Their place in schools, though, has sparked real debate. Should students be allowed to use them during school hours? There's a solid case against Policy 1, which lets students keep their phones out at all times.\n\nThe most obvious problem with "
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        12.02,
+        0.904,
+        1
+      ],
+      [
+        11.46,
+        0.894,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Here's the rewritten version:\n\nIn \"The Challenge of Exploring Venus,\" the author builds a persuasive case for studying Venus despite the very real dangers involved. Taking a closer look at the planet gives scientists a genuine opportunity to investigate the possibility of life elsewhere and what that might mean for our own world.\n\nThe author doesn't shy away from how hostile Venus actually is — th"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        6.44,
+        0.769,
+        0
+      ],
+      [
+        2.97,
+        0.635,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The Electoral College has sparked fierce debate for decades. Many see it as a relic — a system that no longer fits the country it was designed to serve. I think it's time to replace it with something more democratic, something that actually reflects how the American people vote.\n\nThe most glaring problem is that a candidate can win the presidency without winning the popular vote. This has happened"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        8.46,
+        0.829,
+        0
+      ],
+      [
+        -7.32,
+        0.204,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The \"Face on Mars\" has sparked debate for decades. Some people are convinced it's an alien artifact, while others see it as nothing more than a quirk of geology. Looking at the evidence, though, the natural landform explanation wins out pretty convincingly.\n\nThe clearest case for this comes from high-resolution images taken by NASA's Mars Reconnaissance Orbiter in 2006. Those images show the \"Face"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.66,
+        0.898,
+        1
+      ],
+      [
+        11.89,
+        0.902,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Here's the rewritten version:\n\nThe idea that an alien could have created the Face on Mars has captured a lot of people's imagination. Taking a closer look at the evidence, though, there simply isn't enough to back the claim up.\n\nThe most prominent piece of evidence is the photograph taken by the Viking 1 spacecraft in 1976, which shows what appears to be a face-like formation on the surface of Mar"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        10.62,
+        0.879,
+        0
+      ],
+      [
+        10.46,
+        0.875,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The \"face\" on the moon has long captured people's imaginations, fueling endless debate about where it came from. Some believe it could be a human construction or the work of extraterrestrial beings, but either way, the conversation deserves a grounded, evidence-based approach before anyone starts drawing conclusions.\n\nThe most basic problem is that no proof of alien life exists. Countless claims o"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.38,
+        0.893,
+        1
+      ],
+      [
+        10.47,
+        0.875,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Here's the rewritten version:\n\nThe \"Face on Mars\" has captured a lot of imaginations over the years, feeding speculation about extraterrestrial life and ancient civilizations. But a closer look makes it pretty clear we're dealing with a natural landform.\n\nThe face sits in the Cydonia region, an area already known for its unusual geology. Mesas and buttes dominate the landscape there, all shaped by"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        2.12,
+        0.597,
+        0
+      ],
+      [
+        -4.02,
+        0.321,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Here's the rewritten version with varied phrasing throughout:\n\nLuke works two part-time jobs — one at a bank, another at a grocery store — and carries both with the kind of quiet seriousness that's hard to fake. He graduated just last year, which makes the weight he's already taken on all the more striking. Most people his age are still figuring out what they want; Luke is already building it.\n\nTh"
+  },
+  {
+    "attacker": "claude-sonnet-4-6",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        6.6,
+        0.774,
+        0
+      ],
+      [
+        6.6,
+        0.774,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The face on Mars has long captured imaginations and sparked debate. Some take it as proof of alien life; others write it off as a quirk of geology. A closer look at the 2001 Mars Global Surveyor image, alongside familiar landforms here on Earth, makes a strong case for the latter.\n\nThe 2001 Mars Global Surveyor image was something of a reality check. When the satellite sent back its high-resolutio"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.17,
+        0.906,
+        1
+      ],
+      [
+        11.87,
+        0.901,
+        1
+      ],
+      [
+        11.84,
+        0.901,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The Martian landform that seems to resemble a face has captured the imagination of space enthusiasts and conspiracy-minded readers for decades. To me, though, the “Face on Mars” is just a natural rock formation rather than evidence of extraterrestrial life.\n\nOne of the strongest explanations is pareidolia, our habit of seeing familiar patterns in random objects. That is the same reason people noti"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        11.97,
+        0.903,
+        1
+      ],
+      [
+        11.77,
+        0.9,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Using a phone to text behind the wheel is dangerous and should be illegal. It endangers the person driving, passengers, pedestrians, cyclists, and anyone else sharing the road.\n\nWhen a driver looks down to read or send a message, their attention leaves the traffic around them. A momentary glance can be enough to miss a sudden stop, a changing light, or someone crossing the street. Studies have fou"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.13,
+        0.906,
+        1
+      ],
+      [
+        12.06,
+        0.904,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Serving as a Seagoing Cowboy during World War II was an unusual, unforgettable experience. I was tasked with caring for animals bound for overseas destinations, and along the way I encountered places and communities far removed from my own. That period reshaped how I understood others, what people need to endure, and why humility matters.\n\nMy primary duty was to safeguard animals being delivered t"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.17,
+        0.906,
+        1
+      ],
+      [
+        8.1,
+        0.819,
+        0
+      ],
+      [
+        7.39,
+        0.798,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "I’ll rewrite it directly, keeping the meaning while varying repeated wording and making it sound more natural.Phones have become an everyday part of life, and students rely on them to stay in touch with family, look up information, and fill spare moments. But their role at school is far more complicated. Policy 1, which allows students to have their phones out all the time, is too permissive becau"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        12.07,
+        0.905,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "In the article “The Challenge of Exploring Venus,” the author clearly sees Venus as a planet worth studying, even though getting there and gathering information is risky. Research on Venus could help scientists think more deeply about life beyond Earth and about what might happen to our own planet in the future.\n\nThe author describes Venus as a brutal place, with scorching heat and atmospheric pre"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.03,
+        0.904,
+        1
+      ],
+      [
+        7.68,
+        0.807,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "I’ll rewrite it directly, keeping the argument intact while varying repeated wording and avoiding a formal wrap-up.The Electoral College has been debated for decades, and not without reason. A lot of people view it as unfair and out of sync with how a modern democracy should work. It makes more sense to replace it with a method that more accurately matches what voters choose.\n\nOne major issue is t"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.1,
+        0.905,
+        1
+      ],
+      [
+        10.89,
+        0.884,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The “Face on Mars” has been argued about for decades. Some people have treated it as possible evidence of aliens, while others see it as an ordinary feature of the Martian landscape. To me, the better explanation is that it is a landform shaped by geology, not something built by intelligent life.\n\nA major clue came from sharper images taken by NASA’s Mars Reconnaissance Orbiter in 2006. Those phot"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.99,
+        0.903,
+        1
+      ],
+      [
+        12.01,
+        0.904,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The idea that aliens may have created the Face on Mars is definitely intriguing, and it has sparked people’s curiosity for years. But when you look closely at the evidence discussed in the essay, the claim just doesn’t hold up very well.\n\nOne key piece of evidence is the photograph taken by the Viking 1 spacecraft in 1976. In that picture, part of the Martian surface appears to resemble a human fa"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.03,
+        0.904,
+        1
+      ],
+      [
+        11.68,
+        0.898,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The “face” on the moon has intrigued people for a long time and sparked plenty of theories about how it formed. Some think it could be an artificial structure or even something connected to beings from another world, but claims like that need real evidence before they can be taken seriously.\n\nWhat we do know is that there’s still no convincing proof that aliens exist. People have shared stories ab"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.12,
+        0.905,
+        1
+      ],
+      [
+        11.9,
+        0.902,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The “Face on Mars” has intrigued people for years, fueling speculation about aliens and vanished civilizations. But when you look at the evidence, it turns out to be a naturally formed feature.\n\nOne key clue is its location in the Cydonia region, a place known for odd-looking terrain. The area is full of mesas and buttes shaped over long stretches of time by erosion and weathering. The so-called f"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.84,
+        0.901,
+        1
+      ],
+      [
+        12.03,
+        0.904,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Luke works two part-time jobs, one at a bank and the other at a grocery store, and he puts a great deal of effort into creating a more secure future for himself. He graduated just last year, but he has already taken on adult responsibilities with a clear sense of direction. That determination comes through in how consistently he keeps trying to grow, both professionally and personally.\n\nHe also kn"
+  },
+  {
+    "attacker": "gpt-5.2",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.12,
+        0.905,
+        1
+      ],
+      [
+        12.03,
+        0.904,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The so-called face on Mars has intrigued people for decades and fueled plenty of debate. Some take it as evidence of alien life, while others see nothing more than an unusual rock formation. But a closer look at the 2001 Mars Global Surveyor image, especially alongside similar features on Earth, suggests it is not evidence of extraterrestrials.\n\nThe 2001 Mars Global Surveyor photo is one of the st"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.17,
+        0.906,
+        1
+      ],
+      [
+        11.55,
+        0.896,
+        1
+      ],
+      [
+        11.82,
+        0.9,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The so-called “Face on Mars” has captivated imaginations for decades—drawing in everyone from space enthusiasts to conspiracy theorists—but it’s not evidence of alien civilizations. Instead, it’s a classic case of light playing tricks on us, amplified by how our brains are wired.\n\nMuch of the illusion comes down to pareidolia: our mind’s tendency to spot familiar forms, especially faces, in random"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        12.03,
+        0.904,
+        1
+      ],
+      [
+        12.0,
+        0.903,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Texting while driving is a dangerously reckless habit—one that should be banned outright. It doesn’t just put the driver at risk; it endangers passengers, pedestrians, and anyone else on the road.\n\nWhen someone looks down at their phone to fire off a message, their attention drifts from what’s happening around them. Even that brief moment of inattention can seriously delay their reaction to sudden"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.06,
+        0.904,
+        1
+      ],
+      [
+        11.99,
+        0.903,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Serving as a Seagoing Cowboy during World War II was an experience like no other—one that permanently shifted my perspective on the world. Not only did I tend to livestock destined for war-devastated regions, but I also found myself immersed in places and ways of life I’d never even dreamed of. That chapter of my life left a deep imprint, expanding my awareness of human needs and reinforcing just "
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.17,
+        0.906,
+        1
+      ],
+      [
+        12.01,
+        0.903,
+        1
+      ],
+      [
+        12.0,
+        0.903,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "Cell phones have woven themselves into the fabric of everyday life—whether we’re texting friends, looking up answers, or simply killing time. It’s no wonder, then, that their place in schools has sparked heated debate. Should students be allowed to use their phones during the school day? While having one nearby can be helpful, particularly in emergencies, permitting constant access tends to cause "
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.15,
+        0.906,
+        1
+      ],
+      [
+        12.14,
+        0.906,
+        1
+      ],
+      [
+        11.26,
+        0.891,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "In “The Challenge of Exploring Venus,” the author builds a persuasive argument for why this scorched world deserves our attention—even though it’s arguably the solar system’s most hostile environment. Getting up close with Venus offers scientists a rare opportunity to probe whether life might thrive beyond Earth, and what such a discovery could reveal about our own world.\n\nThe planet’s searing tem"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        10.87,
+        0.883,
+        0
+      ],
+      [
+        9.85,
+        0.862,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The Electoral College has stirred strong disagreement for generations. Detractors argue it clashes with today’s democratic expectations and doesn’t give all voters an equal say. I believe we’ve reached the point where it should be replaced with a method that genuinely reflects the will of the people.\n\nOne glaring flaw is that it allows a candidate to win the presidency without securing the most vo"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.79,
+        0.9,
+        1
+      ],
+      [
+        11.82,
+        0.9,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The “Face on Mars” has fueled speculation for decades—some believe it’s evidence of extraterrestrial intelligence, while others argue it’s simply a quirk of the terrain. Personally, the scientific consensus leans heavily toward the latter: it’s an optical illusion created by shadows and geology, not a signal from another civilization.\n\nA major factor behind this conclusion comes from NASA’s Mars R"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        12.01,
+        0.904,
+        1
+      ],
+      [
+        8.66,
+        0.834,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The notion that aliens might have sculpted the Face on Mars has captured plenty of imaginations. Yet, when you sift through the evidence the essay presents, it’s tough to find anything substantial enough to support that theory.\n\nA central piece of the argument hinges on a 1976 image snapped by the Viking 1 orbiter, which shows a Martian landform bearing a vague resemblance to a human face. Propone"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.84,
+        0.901,
+        1
+      ],
+      [
+        11.91,
+        0.902,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The so-called “face” on the moon has captivated imaginations for years, spawning all sorts of theories about its origin. Some speculate it could be the handiwork of ancient astronauts—or even extraterrestrials—but leaping to such conclusions without solid proof isn’t just a stretch; it’s a plunge into pure fantasy.\n\nLet’s be real: despite decades of UFO sightings and tales of close encounters, no "
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.9,
+        0.902,
+        1
+      ],
+      [
+        9.61,
+        0.857,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "The “Face on Mars” has captivated countless imaginations, fueling tales of alien civilizations and long-lost ruins. Yet a closer look reveals something far less mysterious: it’s simply a natural rock formation.\n\nNestled in the Cydonia region—known for its striking and irregular terrain of mesas and buttes sculpted over eons by wind and erosion—the so-called face is just one among many such feature"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        8.46,
+        0.829,
+        0
+      ],
+      [
+        9.92,
+        0.864,
+        0
+      ]
+    ],
+    "final_label": 0,
+    "ok": true,
+    "final_text": "Luke lives and breathes determination. Between his part-time gigs at a bank and a grocery store, he’s constantly striving—not only to climb the career ladder but also to grow as an individual. That momentum hits an abrupt detour, however, when a sudden injury lands him with broken ribs, forcing him to return home to recover.\n\nFresh out of college just last year, Luke didn’t hesitate to shoulder re"
+  },
+  {
+    "attacker": "qwen/qwen3-max",
+    "trajectory": [
+      [
+        12.16,
+        0.906,
+        1
+      ],
+      [
+        11.02,
+        0.886,
+        1
+      ],
+      [
+        11.37,
+        0.893,
+        1
+      ]
+    ],
+    "final_label": 1,
+    "ok": true,
+    "final_text": "The so-called \"face on Mars\" has sparked wonder for decades. To some, it hints at alien intelligence; to others, it’s just a quirk of natural geology. But when we examine the 2001 Mars Global Surveyor image—alongside similar features found right here on Earth—it becomes pretty obvious: this isn’t some alien artifact.\n\nThat 2001 photo, captured by a high-resolution satellite, delivered our clearest"
+  }
+]

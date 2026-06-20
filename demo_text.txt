@@ -1,0 +1,5 @@
+I wrote this paragraph to describe a personal observation from class. The wording is a little uneven, and the argument does not follow a perfect template. I am mainly trying to explain why students may feel uncertain when teachers introduce new AI tools.
+
+Artificial intelligence has transformed modern education by enabling personalized learning, automated feedback, and scalable assessment. These technologies can improve efficiency and broaden access to educational resources, but they also raise important concerns about academic integrity and responsible use.
+
+In my opinion, a useful detector should not be treated as final proof. It should provide a warning signal, a confidence score, and enough context for a human reviewer to inspect the suspicious parts of the text.

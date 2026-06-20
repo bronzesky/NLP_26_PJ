@@ -1,0 +1,107 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人类写作样本 · AI检测报告</title><style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif;
+       margin: 0; background: #f4f6f9; color: #1f2733; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+.topbar { display:flex; justify-content:space-between; align-items:center;
+          background:#fff; border-radius:12px; padding:18px 24px; margin-bottom:18px;
+          box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.topbar h1 { font-size:18px; margin:0; }
+.topbar .verdict { font-size:14px; font-weight:700; padding:6px 14px; border-radius:20px;
+                   color:#fff; }
+.dash { display:grid; grid-template-columns: 170px 1fr 1fr; gap:20px;
+        background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); align-items:center; }
+.dash .gauge { text-align:center; }
+.bars { }
+.bars .row { display:flex; align-items:center; margin:6px 0; font-size:13px; }
+.bars .lbl { width:110px; color:#5b6573; }
+.bars .track { flex:1; height:12px; background:#eceff3; border-radius:6px; overflow:hidden; margin:0 8px; }
+.bars .fill { height:100%; border-radius:6px; }
+.bars .pc { width:48px; text-align:right; font-weight:600; }
+.signals { font-size:13px; color:#5b6573; }
+.signals .sig-item { display:flex; justify-content:space-between; padding:6px 0;
+                     border-bottom:1px solid #eef1f5; }
+.signals .sig-item b { color:#1f2733; }
+.card { background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.card h2 { font-size:16px; margin:0 0 14px; color:#27313f; }
+.legend { font-size:12px; color:#6b7480; margin-bottom:12px; }
+.legend span { display:inline-block; margin-right:14px; }
+.legend i { display:inline-block; width:22px; height:4px; vertical-align:middle;
+            margin-right:5px; border-radius:2px; }
+.para { margin:14px 0; }
+.para-tag { display:inline-block; color:#fff; font-size:11px; font-weight:600;
+            padding:2px 10px; border-radius:10px; margin-bottom:6px; }
+.para-body { line-height:2.0; font-size:15px; }
+.sent { padding:1px 2px; border-radius:3px; }
+table.ev { width:100%; border-collapse:collapse; font-size:13px; }
+table.ev th { font-weight:600; color:#6b7480; font-size:12px; padding:4px 8px; text-align:left; }
+table.ev td { padding:10px 8px; border-bottom:1px solid #eef1f5; vertical-align:middle; }
+.ev .fname { width:190px; color:#3a4452; font-family:monospace; font-size:12px; }
+.ev .fbar { width:auto; min-width:260px; }
+.dax-head { display:flex; justify-content:space-between; font-size:11px; color:#9aa3b0; }
+.dax-head .mid { color:#b6c0cf; }
+.dax { position:relative; height:24px; border-radius:12px;
+       background:linear-gradient(90deg,#2ea043 0%, #d6e8d8 38%, #f1f0f2 50%, #f3dada 62%, #da3633 100%);
+       border:1px solid #e2e6ec; }
+.dax-mid { position:absolute; left:50%; top:0; bottom:0; width:2px;
+           background:rgba(31,39,51,.35); transform:translateX(-1px); }
+.dax .tick { position:absolute; top:50%; width:2px; height:14px; transform:translate(-1px,-50%);
+             opacity:.65; }
+.dax .tick.h { background:#0b5d20; }
+.dax .tick.a { background:#7a1210; }
+.dax .dot { position:absolute; top:50%; width:16px; height:16px; border-radius:50%;
+            border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.25);
+            transform:translate(-8px,-50%); z-index:3; }
+.ev .fval { width:90px; text-align:right; font-weight:600; font-size:12px; }
+.sug-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.sug-card { border:1px solid #e7ebf0; border-radius:8px; padding:12px 14px; }
+.sug-head { font-weight:700; font-size:13px; color:#27313f; margin-bottom:6px; }
+.sug-dev { float:right; font-weight:500; font-size:11px; color:#da3633; }
+.sug-body { font-size:13px; color:#4a5562; line-height:1.6; }
+.composite { background:#0f1620; color:#cfe3ff; padding:16px; border-radius:8px;
+             font-size:12px; white-space:pre-wrap; line-height:1.55; overflow-x:auto; }
+.foot { text-align:center; color:#9aa3b0; font-size:12px; padding:16px; }
+</style></head><body><div class="wrap">
+<div class="topbar"><h1>人类写作样本</h1>
+<span class="verdict" style="background:#e8870c">最终判定：人类写作 · 模糊带（正交特征裁决） · 中度疑似</span></div>
+
+<div class="dash">
+  <div class="gauge"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75.0" cy="75.0" r="63.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="75.0" cy="75.0" r="63.0" fill="none" stroke="#e8870c" stroke-width="14" stroke-dasharray="246.09 395.84" stroke-linecap="round" transform="rotate(-90 75.0 75.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#e8870c">62.2%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">P(AI)</text></svg></div>
+  <div class="bars"><div style="font-size:13px;color:#5b6573;margin-bottom:6px">疑似度分布（按段落）</div><div class="row"><span class="lbl">高度疑似</span><div class="track"><div class="fill" style="width:0.0%;background:#da3633"></div></div><span class="pc">0%</span></div>
+<div class="row"><span class="lbl">中度疑似</span><div class="track"><div class="fill" style="width:100.0%;background:#e8870c"></div></div><span class="pc">100%</span></div>
+<div class="row"><span class="lbl">轻度疑似</span><div class="track"><div class="fill" style="width:0.0%;background:#8957e5"></div></div><span class="pc">0%</span></div>
+<div class="row"><span class="lbl">合格</span><div class="track"><div class="fill" style="width:0.0%;background:#2ea043"></div></div><span class="pc">0%</span></div></div>
+  <div class="signals"><div class="sig-item"><span>困惑度 (perplexity)</span><b>29.6</b></div><div class="sig-item"><span>突发性 (burstiness)</span><b>0.350</b></div><div class="sig-item"><span>RoBERTa 原始 P(AI)</span><b>62.2%</b></div><div class="sig-item"><span>判定区域</span><b>ambiguous</b></div><div class="sig-item"><span>字数</span><b>493 词 / 2706 字符</b></div><div class="sig-item"><span>段落数</span><b>1</b></div></div>
+</div>
+
+<div class="card"><h2>正文逐句高亮</h2><div class="legend"><span><i style="background:rgba(218,54,51,0.6)"></i>该句推高AI概率</span><span><i style="background:rgba(46,160,67,0.6)"></i>该句推向人类</span><span style="color:#9aa3b0">底色＝遮挡法：删去该句后文档AI概率的变化量，悬停看数值</span></div><div class="para"><div class="para-tag" style="background:#e8870c">#1 · 段落P(AI) 62% · ppl 30 · burst 0.35</div><div class="para-body"><span class="sent" style="background:rgba(46,160,67,0.53)" title="对文档AI概率的贡献 -0.248（human）">Today, many adults or teenage drivers are hooked onto their phones.</span> <span class="sent" style="background:rgba(46,160,67,0.47)" title="对文档AI概率的贡献 -0.211（human）">While driving, they can be prompted to use their phones for text messaging.</span> <span class="sent" style="background:rgba(46,160,67,0.51)" title="对文档AI概率的贡献 -0.236（human）">It may cause many accidents, death, serious injuries and more.</span> <span class="sent" style="background:rgba(46,160,67,0.51)" title="对文档AI概率的贡献 -0.238（human）">I honestly think that drivers should use phones while driving  because they are taking risks that could kill or injure others and also yourself.</span> <span class="sent" style="background:rgba(46,160,67,0.49)" title="对文档AI概率的贡献 -0.225（human）">There are also laws against using a phone while operating a moving vehicle but people still disobey them.</span> <span class="sent" style="background:rgba(46,160,67,0.45)" title="对文档AI概率的贡献 -0.202（human）">I think that there should be more consequences when it comes down to texting and driving.</span> <span class="sent" style="background:rgba(46,160,67,0.46)" title="对文档AI概率的贡献 -0.208（human）">Using your cell phones causes many distractions.</span> <span class="sent" style="background:rgba(46,160,67,0.51)" title="对文档AI概率的贡献 -0.238（human）">It only takes a blink of an eye to cause an accident.</span> <span class="sent" style="background:rgba(46,160,67,0.52)" title="对文档AI概率的贡献 -0.244（human）">Yeah, resisting the urge to text while driving may be hard but it can and will save lives including yours.</span> <span class="sent" style="background:rgba(46,160,67,0.48)" title="对文档AI概率的贡献 -0.216（human）">When driving, your eyes and mind are programmed to be focused on the road at all times.</span> <span class="sent" style="background:rgba(46,160,67,0.52)" title="对文档AI概率的贡献 -0.245（human）">Having a cellphone on your person is a hazard in my opinion.</span> <span class="sent" style="background:rgba(46,160,67,0.51)" title="对文档AI概率的贡献 -0.239（human）">Just think about it, anyone could be crossing a busy street.</span> <span class="sent" style="background:rgba(46,160,67,0.54)" title="对文档AI概率的贡献 -0.253（human）">The person walking is probably expecting you to slow down and obey the street laws.</span> <span class="sent" style="background:rgba(46,160,67,0.54)" title="对文档AI概率的贡献 -0.255（human）">Meanwhile, you&#x27;re responding to a text that could have waited, now you hit that person and he lost his life.</span> <span class="sent" style="background:rgba(46,160,67,0.49)" title="对文档AI概率的贡献 -0.222（human）">All because of your cell phone.</span> <span class="sent" style="background:rgba(46,160,67,0.55)" title="对文档AI概率的贡献 -0.260（human）">If there is a law for it then you follow that law because there is a reason for it being in full effect.</span> <span class="sent" style="background:rgba(46,160,67,0.50)" title="对文档AI概率的贡献 -0.228（human）">Just imagine you lost a close friend or family member due to breaking the same law you once broke.</span> <span class="sent" style="background:rgba(46,160,67,0.48)" title="对文档AI概率的贡献 -0.218（human）">The death toll in Georgia of people losing their lives to texting and driving drivers is 3,166.</span> <span class="sent" style="background:rgba(46,160,67,0.47)" title="对文档AI概率的贡献 -0.212（human）">That number has increased dramatically ever since 2017.</span> <span class="sent" style="background:rgba(46,160,67,0.49)" title="对文档AI概率的贡献 -0.222（human）">We could do so much better and help decrease that number to at least zero to little deaths.</span> <span class="sent" style="background:rgba(46,160,67,0.57)" title="对文档AI概率的贡献 -0.273（human）">That is unacceptable, literally no one wants to have news broken down to them on how their mom, sister, brother, etc has died in a texting and driving incident.</span> <span class="sent" style="background:rgba(46,160,67,0.47)" title="对文档AI概率的贡献 -0.210（human）">People have their phones on every day.</span> <span class="sent" style="background:rgba(46,160,67,0.50)" title="对文档AI概率的贡献 -0.232（human）">They act as if they cannot live without their cell phone.</span> <span class="sent" style="background:rgba(46,160,67,0.54)" title="对文档AI概率的贡献 -0.254（human）">I get you need your phone for business, social media, long distance calling or texting but that can wait.</span> <span class="sent" style="background:rgba(46,160,67,0.45)" title="对文档AI概率的贡献 -0.202（human）">People should take in consideration of others and just make the roads safer than what they should be.</span> <span class="sent" style="background:rgba(46,160,67,0.49)" title="对文档AI概率的贡献 -0.225（human）">No one is so busy that they need to hurry and send a last minute text or answer a last minute phone call.</span> <span class="sent" style="background:rgba(46,160,67,0.48)" title="对文档AI概率的贡献 -0.218（human）">I believe that everyone has patience and that they should use it.</span> <span class="sent" style="background:rgba(46,160,67,0.50)" title="对文档AI概率的贡献 -0.232（human）">We have come to a society where phones are more important than our lives itself.</span> <span class="sent" style="background:rgba(46,160,67,0.48)" title="对文档AI概率的贡献 -0.219（human）">That should never be the case, if anything I personally think cellphones should be banned while in a motorized vehicle.</span> <span class="sent" style="background:rgba(46,160,67,0.47)" title="对文档AI概率的贡献 -0.215（human）">Choosing to value a text message over your own life is showing us you have no respect for yourself or for others.</span> <span class="sent" style="background:rgba(46,160,67,0.45)" title="对文档AI概率的贡献 -0.203（human）">They should be more considerate and put phones down and make sure they are paying more attention to the road.</span> </div></div></div>
+
+<div class="card"><h2>AI 特征检测（语言学证据）</h2>
+<div class="legend"><span style="color:#9aa3b0">每个特征按高斯似然比映射到判别轴：圆点越靠左＝该特征越确定指向人类，越靠右＝越确定指向AI，正中为决策边界。竖线标出人类均值（深绿）与AI均值（深红）位置。最具区分度的特征排在前。</span></div>
+<table class="ev"><thead><tr><th>特征</th><th><div class="dax-head"><span>← 确定是人类</span><span class="mid">决策边界</span><span>确定是AI →</span></div></th><th>倾向</th></tr></thead><tbody><tr><td class="fname">rhetorical_question_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:71.7%" title="人类均值"></span><span class="tick a" style="left:71.8%" title="AI均值"></span><span class="dot" style="left:71.8%;background:#da3633" title="判别分 +0.44（44% 偏AI）｜本文值 0.000"></span></div></td><td class="fval" style="color:#da3633">44% 偏AI</td></tr>
+<tr><td class="fname">discourse_conclusive</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:30.3%" title="人类均值"></span><span class="tick a" style="left:41.5%" title="AI均值"></span><span class="dot" style="left:29.8%;background:#2ea043" title="判别分 -0.40（40% 偏人类）｜本文值 0.000"></span></div></td><td class="fval" style="color:#2ea043">40% 偏人类</td></tr>
+<tr><td class="fname">pos_bigram_entropy</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:44.0%" title="人类均值"></span><span class="tick a" style="left:56.7%" title="AI均值"></span><span class="dot" style="left:32.9%;background:#2ea043" title="判别分 -0.34（34% 偏人类）｜本文值 5.944"></span></div></td><td class="fval" style="color:#2ea043">34% 偏人类</td></tr>
+<tr><td class="fname">hapax_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:33.7%" title="人类均值"></span><span class="tick a" style="left:42.0%" title="AI均值"></span><span class="dot" style="left:33.4%;background:#2ea043" title="判别分 -0.33（33% 偏人类）｜本文值 0.681"></span></div></td><td class="fval" style="color:#2ea043">33% 偏人类</td></tr>
+<tr><td class="fname">mattr</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:37.9%" title="人类均值"></span><span class="tick a" style="left:49.3%" title="AI均值"></span><span class="dot" style="left:35.6%;background:#2ea043" title="判别分 -0.29（29% 偏人类）｜本文值 0.844"></span></div></td><td class="fval" style="color:#2ea043">29% 偏人类</td></tr>
+<tr><td class="fname">subordination_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:36.4%" title="人类均值"></span><span class="tick a" style="left:37.2%" title="AI均值"></span><span class="dot" style="left:36.3%;background:#2ea043" title="判别分 -0.27（27% 偏人类）｜本文值 1.194"></span></div></td><td class="fval" style="color:#2ea043">27% 偏人类</td></tr>
+<tr><td class="fname">discourse_total_density</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:40.7%" title="人类均值"></span><span class="tick a" style="left:45.6%" title="AI均值"></span><span class="dot" style="left:39.1%;background:#2ea043" title="判别分 -0.22（22% 偏人类）｜本文值 0.065"></span></div></td><td class="fval" style="color:#2ea043">22% 偏人类</td></tr>
+<tr><td class="fname">modal_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:50.4%" title="人类均值"></span><span class="tick a" style="left:50.8%" title="AI均值"></span><span class="dot" style="left:41.3%;background:#2ea043" title="判别分 -0.17（17% 偏人类）｜本文值 0.037"></span></div></td><td class="fval" style="color:#2ea043">17% 偏人类</td></tr>
+<tr><td class="fname">contraction_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:53.9%" title="人类均值"></span><span class="tick a" style="left:57.6%" title="AI均值"></span><span class="dot" style="left:57.7%;background:#da3633" title="判别分 +0.15（15% 偏AI）｜本文值 0.002"></span></div></td><td class="fval" style="color:#da3633">15% 偏AI</td></tr>
+<tr><td class="fname">sentence_length_cv</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:45.9%" title="人类均值"></span><span class="tick a" style="left:53.0%" title="AI均值"></span><span class="dot" style="left:56.9%;background:#da3633" title="判别分 +0.14（14% 偏AI）｜本文值 0.350"></span></div></td><td class="fval" style="color:#da3633">14% 偏AI</td></tr>
+<tr><td class="fname">passive_ratio</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:43.4%" title="人类均值"></span><span class="tick a" style="left:44.0%" title="AI均值"></span><span class="dot" style="left:43.4%;background:#2ea043" title="判别分 -0.13（13% 偏人类）｜本文值 0.058"></span></div></td><td class="fval" style="color:#2ea043">13% 偏人类</td></tr>
+<tr><td class="fname">discourse_additive</td><td class="fbar"><div class="dax"><div class="dax-mid"></div><span class="tick h" style="left:43.0%" title="人类均值"></span><span class="tick a" style="left:45.4%" title="AI均值"></span><span class="dot" style="left:43.5%;background:#2ea043" title="判别分 -0.13（13% 偏人类）｜本文值 0.065"></span></div></td><td class="fval" style="color:#2ea043">13% 偏人类</td></tr></tbody></table></div>
+
+<div class="card"><h2>辅助降 AI 率</h2><div class="sug-grid"><div class="sug-card"><div class="sug-head">词汇 / 多样性 <span class="sug-dev">偏离 1.7</span></div><div class="sug-body">Vocabulary diversity is low (MATTR=0.844, human average=0.783). AI text reuses the same structural phrases repeatedly. Vary your word choices: if you&#x27;ve used &#x27;important&#x27; twice, use &#x27;crucial&#x27;, &#x27;worth noting&#x27;, or &#x27;significant&#x27; instead.</div></div></div><h3>一键降AI Prompt（粘贴到改写模型）</h3><pre class="composite">Rewrite the following text to sound more naturally human-written. Apply ALL of these changes:
+
+[LEXICAL] Avoid repeating the same adjectives or structural phrases. If a word or phrase appears more than once, replace subsequent uses with alternatives.
+
+Text to rewrite:
+{TEXT}</pre></div>
+
+<div class="foot">Region-Aware AI-Text Detector · SemEval-2024 Task 8 · 校准+正交特征两阶段判定<br>
+本报告仅表示文本由 AI 生成的统计可能性，与内容质量无关。</div>
+</div></body></html>

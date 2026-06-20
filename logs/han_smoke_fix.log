@@ -1,0 +1,158 @@
+[HAMI-core Msg(4896:139935730541120:libvgpu.c:837)]: Initializing.....
+[HAMI-core Msg(4896:139935730541120:libvgpu.c:853)]: Initialized
+[transformers] The tokenizer you are loading from '/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Device: cuda
+Loaded MTL boundaries: ['discourse_total_density', 'contraction_ratio', 'first_person_ratio']
+Loading tokenizer from /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large...
+Loading M4 training data...
+M4 train: 3000 docs
+Loading HC3 mixed data...
+HC3 mixed: 5000 docs
+Dev: 300 docs
+Total training records (with HC3 x2): 13000
+Initializing model from /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large...
+Loading weights:   0%|          | 0/390 [00:00<?, ?it/s]Loading weights: 100%|██████████| 390/390 [00:00<00:00, 31413.18it/s]
+[transformers] [1mDebertaV2Model LOAD REPORT[0m from: /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large
+Key                                     | Status     |  | 
+----------------------------------------+------------+--+-
+mask_predictions.LayerNorm.bias         | UNEXPECTED |  | 
+lm_predictions.lm_head.LayerNorm.bias   | UNEXPECTED |  | 
+mask_predictions.LayerNorm.weight       | UNEXPECTED |  | 
+lm_predictions.lm_head.dense.bias       | UNEXPECTED |  | 
+mask_predictions.dense.weight           | UNEXPECTED |  | 
+lm_predictions.lm_head.bias             | UNEXPECTED |  | 
+lm_predictions.lm_head.LayerNorm.weight | UNEXPECTED |  | 
+mask_predictions.classifier.bias        | UNEXPECTED |  | 
+mask_predictions.classifier.weight      | UNEXPECTED |  | 
+mask_predictions.dense.bias             | UNEXPECTED |  | 
+lm_predictions.lm_head.dense.weight     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/src/model_han.py:51: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.cross_sent_encoder = nn.TransformerEncoder(
+
+Starting training: 3 epochs, 13000 docs/epoch
+Grad accum: 8, effective batch: 8
+DeBERTa lr: 2e-05, Head lr: 1e-05
+fp16: True
+
+Ep0 step50 loss=1.0316 t=1.2m
+Ep0 step100 loss=0.9837 t=2.3m
+Ep0 step150 loss=0.9463 t=3.3m
+Ep0 step200 loss=0.9363 t=4.4m
+Ep0 step250 loss=0.9113 t=5.5m
+Ep0 step300 loss=0.8992 t=6.5m
+Ep0 step350 loss=0.8845 t=7.6m
+Ep0 step400 loss=0.8787 t=8.6m
+Ep0 step450 loss=0.8751 t=9.7m
+Ep0 step500 loss=0.8718 t=10.7m
+Ep0 step550 loss=0.8724 t=11.8m
+Ep0 step600 loss=0.8680 t=12.8m
+Ep0 step650 loss=0.8622 t=13.9m
+Ep0 step700 loss=0.8607 t=14.9m
+Ep0 step750 loss=0.8587 t=15.9m
+Ep0 step800 loss=0.8526 t=17.0m
+Ep0 step850 loss=0.8495 t=18.1m
+Ep0 step900 loss=0.8465 t=19.1m
+Ep0 step950 loss=0.8498 t=20.2m
+Ep0 step1000 loss=0.8535 t=21.1m
+Ep0 step1050 loss=0.8558 t=22.2m
+Ep0 step1100 loss=0.8558 t=23.2m
+Ep0 step1150 loss=0.8575 t=24.2m
+Ep0 step1200 loss=0.8614 t=25.2m
+Ep0 step1250 loss=0.8615 t=26.3m
+Ep0 step1300 loss=0.8612 t=27.3m
+Ep0 step1350 loss=0.8612 t=28.3m
+Ep0 step1400 loss=0.8592 t=29.3m
+Ep0 step1450 loss=0.8582 t=30.3m
+Ep0 step1500 loss=0.8550 t=31.4m
+Ep0 step1550 loss=0.8521 t=32.4m
+Ep0 step1600 loss=0.8498 t=33.5m
+
+Epoch 0 finished. avg_loss=0.8491
+Evaluating on dev...
+Dev accuracy: 0.6400
+Saved model to outputs/han_smoke_fix/epoch_0/han_checkpoint.pt
+Saved model to outputs/han_smoke_fix/best_model/han_checkpoint.pt
+  *** New best model saved (dev_acc=0.6400) ***
+Ep1 step50 loss=0.7675 t=1.1m
+Ep1 step100 loss=0.7980 t=2.1m
+Ep1 step150 loss=0.8011 t=3.2m
+Ep1 step200 loss=0.7979 t=4.2m
+Ep1 step250 loss=0.7977 t=5.3m
+Ep1 step300 loss=0.7994 t=6.4m
+Ep1 step350 loss=0.8075 t=7.4m
+Ep1 step400 loss=0.8039 t=8.5m
+Ep1 step450 loss=0.7984 t=9.5m
+Ep1 step500 loss=0.8000 t=10.6m
+Ep1 step550 loss=0.8027 t=11.6m
+Ep1 step600 loss=0.8004 t=12.7m
+Ep1 step650 loss=0.7956 t=13.7m
+Ep1 step700 loss=0.7967 t=14.7m
+Ep1 step750 loss=0.7945 t=15.8m
+Ep1 step800 loss=0.7909 t=16.8m
+Ep1 step850 loss=0.7933 t=17.8m
+Ep1 step900 loss=0.7940 t=18.8m
+Ep1 step950 loss=0.7940 t=19.9m
+Ep1 step1000 loss=0.7934 t=21.0m
+Ep1 step1050 loss=0.7920 t=22.0m
+Ep1 step1100 loss=0.7911 t=23.0m
+Ep1 step1150 loss=0.7921 t=24.1m
+Ep1 step1200 loss=0.7917 t=25.0m
+Ep1 step1250 loss=0.7913 t=26.1m
+Ep1 step1300 loss=0.7901 t=27.2m
+Ep1 step1350 loss=0.7894 t=28.3m
+Ep1 step1400 loss=0.7887 t=29.4m
+Ep1 step1450 loss=0.7879 t=30.4m
+Ep1 step1500 loss=0.7863 t=31.5m
+Ep1 step1550 loss=0.7863 t=32.5m
+Ep1 step1600 loss=0.7854 t=33.6m
+
+Epoch 1 finished. avg_loss=0.7850
+Evaluating on dev...
+Dev accuracy: 0.5900
+Saved model to outputs/han_smoke_fix/epoch_1/han_checkpoint.pt
+Ep2 step50 loss=0.7735 t=1.0m
+Ep2 step100 loss=0.7871 t=2.0m
+Ep2 step150 loss=0.7685 t=3.1m
+Ep2 step200 loss=0.7654 t=4.1m
+Ep2 step250 loss=0.7689 t=5.2m
+Ep2 step300 loss=0.7690 t=6.3m
+Ep2 step350 loss=0.7643 t=7.3m
+Ep2 step400 loss=0.7658 t=8.3m
+Ep2 step450 loss=0.7614 t=9.4m
+Ep2 step500 loss=0.7558 t=10.4m
+Ep2 step550 loss=0.7555 t=11.5m
+Ep2 step600 loss=0.7542 t=12.5m
+Ep2 step650 loss=0.7553 t=13.5m
+Ep2 step700 loss=0.7546 t=14.6m
+Ep2 step750 loss=0.7522 t=15.5m
+Ep2 step800 loss=0.7511 t=16.5m
+Ep2 step850 loss=0.7534 t=17.6m
+Ep2 step900 loss=0.7521 t=18.6m
+Ep2 step950 loss=0.7523 t=19.7m
+Ep2 step1000 loss=0.7539 t=20.7m
+Ep2 step1050 loss=0.7536 t=21.7m
+Ep2 step1100 loss=0.7536 t=22.7m
+Ep2 step1150 loss=0.7532 t=23.8m
+Ep2 step1200 loss=0.7547 t=24.8m
+Ep2 step1250 loss=0.7554 t=25.9m
+Ep2 step1300 loss=0.7549 t=26.9m
+Ep2 step1350 loss=0.7547 t=27.8m
+Ep2 step1400 loss=0.7555 t=28.9m
+Ep2 step1450 loss=0.7559 t=29.9m
+Ep2 step1500 loss=0.7550 t=31.0m
+Ep2 step1550 loss=0.7555 t=32.0m
+Ep2 step1600 loss=0.7548 t=33.0m
+
+Epoch 2 finished. avg_loss=0.7547
+Evaluating on dev...
+Dev accuracy: 0.6667
+Saved model to outputs/han_smoke_fix/epoch_2/han_checkpoint.pt
+Saved model to outputs/han_smoke_fix/best_model/han_checkpoint.pt
+  *** New best model saved (dev_acc=0.6667) ***
+
+Training complete. Best dev accuracy: 0.6667
+Best model saved to: outputs/han_smoke_fix/best_model
+[HAMI-core Msg(4896:139935730541120:multiprocess_memory_limit.c:459)]: Calling exit handler 4896

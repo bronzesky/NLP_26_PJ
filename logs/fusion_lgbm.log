@@ -1,0 +1,16 @@
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/sklearn/utils/validation.py:2749: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Loading data for model=lgbm...
+Building feature matrices...
+{
+  "accuracy": 0.726,
+  "macro_f1": 0.7063307879715148,
+  "micro_f1": 0.726,
+  "auroc": 0.86941664,
+  "fpr_at_95_tpr": 0.6544,
+  "brier": 0.263503535318888,
+  "nll": 2.5331353796197758,
+  "ece": 0.25917052229916165,
+  "rows": 5000,
+  "model": "lgbm"
+}

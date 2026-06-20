@@ -1,0 +1,57 @@
+[HAMI-core Msg(1276:139844422001216:libvgpu.c:837)]: Initializing.....
+[HAMI-core Msg(1276:139844422001216:libvgpu.c:853)]: Initialized
+Device: cuda
+Loading model from outputs/hsad_ls/best_model...
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 25/197 [00:00<00:00, 187.19it/s]Loading weights:  22%|██▏       | 44/197 [00:00<00:01, 94.37it/s] Loading weights:  31%|███▏      | 62/197 [00:00<00:01, 103.81it/s]Loading weights:  38%|███▊      | 74/197 [00:00<00:01, 107.00it/s]Loading weights:  44%|████▎     | 86/197 [00:00<00:01, 108.76it/s]Loading weights:  50%|████▉     | 98/197 [00:00<00:00, 104.73it/s]Loading weights:  55%|█████▌    | 109/197 [00:01<00:00, 89.30it/s]Loading weights:  60%|██████    | 119/197 [00:01<00:00, 88.39it/s]Loading weights:  69%|██████▊   | 135/197 [00:01<00:00, 104.92it/s]Loading weights:  76%|███████▌  | 149/197 [00:01<00:00, 112.97it/s]Loading weights:  85%|████████▍ | 167/197 [00:01<00:00, 124.97it/s]Loading weights:  91%|█████████▏| 180/197 [00:01<00:00, 123.54it/s]Loading weights: 100%|██████████| 197/197 [00:01<00:00, 116.55it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: outputs/roberta_base/best_model
+Key                        | Status     |  | 
+---------------------------+------------+--+-
+classifier.out_proj.weight | UNEXPECTED |  | 
+classifier.dense.weight    | UNEXPECTED |  | 
+classifier.out_proj.bias   | UNEXPECTED |  | 
+classifier.dense.bias      | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/src/model_hsad.py:61: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.cross_sent = nn.TransformerEncoder(enc_layer, num_layers=cross_sent_layers)
+Predicting 34272 documents...
+  0/34272
+  1000/34272
+  2000/34272
+  3000/34272
+  4000/34272
+  5000/34272
+  6000/34272
+  7000/34272
+  8000/34272
+  9000/34272
+  10000/34272
+  11000/34272
+  12000/34272
+  13000/34272
+  14000/34272
+  15000/34272
+  16000/34272
+  17000/34272
+  18000/34272
+  19000/34272
+  20000/34272
+  21000/34272
+  22000/34272
+  23000/34272
+  24000/34272
+  25000/34272
+  26000/34272
+  27000/34272
+  28000/34272
+  29000/34272
+  30000/34272
+  31000/34272
+  32000/34272
+  33000/34272
+  34000/34272
+
+Accuracy: 0.6974  Macro-F1: 0.6567  AUROC: 0.681812930186824
+Saved to outputs/hsad_ls_test
+[HAMI-core Msg(1276:139844422001216:multiprocess_memory_limit.c:459)]: Calling exit handler 1276

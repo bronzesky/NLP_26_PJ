@@ -1,0 +1,75 @@
+[HAMI-core Msg(316545:140059724833344:libvgpu.c:837)]: Initializing.....
+[HAMI-core Msg(316545:140059724833344:libvgpu.c:853)]: Initialized
+Device: cuda
+Loading model from outputs/hsad_full/best_model...
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights:   9%|▊         | 17/197 [00:00<00:01, 142.01it/s]Loading weights:  16%|█▌        | 32/197 [00:00<00:01, 129.35it/s]Loading weights:  23%|██▎       | 45/197 [00:00<00:01, 107.76it/s]Loading weights:  29%|██▉       | 57/197 [00:00<00:01, 83.67it/s] Loading weights:  34%|███▎      | 66/197 [00:00<00:01, 84.46it/s]Loading weights:  38%|███▊      | 75/197 [00:00<00:01, 75.16it/s]Loading weights:  51%|█████▏    | 101/197 [00:00<00:00, 111.66it/s]Loading weights:  57%|█████▋    | 113/197 [00:01<00:00, 94.34it/s] Loading weights:  69%|██████▉   | 136/197 [00:01<00:00, 114.22it/s]Loading weights:  75%|███████▌  | 148/197 [00:01<00:00, 108.74it/s]Loading weights:  84%|████████▍ | 166/197 [00:01<00:00, 115.04it/s]Loading weights:  94%|█████████▍| 186/197 [00:01<00:00, 119.88it/s]Loading weights: 100%|██████████| 197/197 [00:01<00:00, 113.48it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: outputs/roberta_base/best_model
+Key                        | Status     |  | 
+---------------------------+------------+--+-
+classifier.dense.bias      | UNEXPECTED |  | 
+classifier.out_proj.bias   | UNEXPECTED |  | 
+classifier.dense.weight    | UNEXPECTED |  | 
+classifier.out_proj.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/src/model_hsad.py:61: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.cross_sent = nn.TransformerEncoder(enc_layer, num_layers=cross_sent_layers)
+Predicting 34272 documents...
+  0/34272
+  1000/34272
+  2000/34272
+  3000/34272
+  4000/34272
+  5000/34272
+  6000/34272
+  7000/34272
+  8000/34272
+  9000/34272
+  10000/34272
+  11000/34272
+  12000/34272
+  13000/34272
+  14000/34272
+  15000/34272
+  16000/34272
+  17000/34272
+  18000/34272
+  19000/34272
+  20000/34272
+  21000/34272
+  22000/34272
+  23000/34272
+  24000/34272
+  25000/34272
+  26000/34272
+  27000/34272
+  28000/34272
+  29000/34272
+  30000/34272
+  31000/34272
+  32000/34272
+  33000/34272
+  34000/34272
+Traceback (most recent call last):
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/scripts/predict_hsad.py", line 163, in <module>
+    main()
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/scripts/predict_hsad.py", line 144, in main
+    sent_df.to_csv(args.output_dir / "sent_predictions.csv", index=False)
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/core/generic.py", line 3989, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/io/formats/format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/io/formats/csvs.py", line 270, in save
+    self._save()
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/io/formats/csvs.py", line 275, in _save
+    self._save_body()
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/io/formats/csvs.py", line 313, in _save_body
+    self._save_chunk(start_i, end_i)
+  File "/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/pandas/io/formats/csvs.py", line 324, in _save_chunk
+    libwriters.write_csv_rows(
+  File "pandas/_libs/writers.pyx", line 73, in pandas._libs.writers.write_csv_rows
+_csv.Error: need to escape, but no escapechar set
+[HAMI-core Msg(316545:140059724833344:multiprocess_memory_limit.c:459)]: Calling exit handler 316545

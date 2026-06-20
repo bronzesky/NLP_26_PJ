@@ -1,0 +1,21 @@
+{
+  "experiment": "region_aware_two_stage_decision",
+  "method": "margin>=t_high->AI; margin<t_low->human; ambiguous band decided by LogisticRegression on orthogonal handcrafted features (ttr, repeated_bigram_ratio, repeated_trigram_ratio, avg_word_length, text_length, punctuation_per_token)",
+  "leakage_statement": "P0/P2 use test labels for calibration -> in-distribution ceiling, NOT a test score. P1 is the only legal test score (all params fit on dev, test predicted once).",
+  "protocols": {
+    "P0_intest_band_on_calib": {"macro_f1_mean": 0.9463, "macro_f1_std": 0.0012, "note": "original B-2, optimistic band selection"},
+    "P2_nested_cv_upper_bound": {"macro_f1_mean": 0.9447, "macro_f1_std": 0.0013, "note": "band selected on inner calib split, no optimism; in-dist calib ceiling",
+      "per_generator": {"GPT4": 0.998, "bloomz": 0.698, "dolly": 0.832, "davinci": 0.962, "human_spec": 0.978}},
+    "P1_deploy_dev_to_test_once": {
+      "single_threshold": {"macro_f1": 0.5717, "per_generator": {"GPT4": 1.0, "bloomz": 0.98, "dolly": 1.0, "davinci": 1.0, "human_spec": 0.25}},
+      "region_aware": {"macro_f1": 0.8567, "band": [-10.58, 10.91], "routed_fraction": 0.35,
+        "per_generator": {"GPT4": 0.994, "bloomz": 0.997, "dolly": 0.999, "davinci": 1.0, "human_spec": 0.71}},
+      "note": "ONLY legal test score; dev=bloomz+human, full distribution shift vs test"}
+  },
+  "key_findings": [
+    "P0 vs P2 differ by only 0.0016 -> band-selection is not overfitting; method is genuinely effective",
+    "P1 region-aware 0.857 > old single-model SOTA Fusion-LGBM 0.835 (which was test-tuned)",
+    "P1-vs-P2 gap 0.088 = cost of dev not representing test (distribution shift)",
+    "single global threshold ceiling 0.886 was an artifact of single-threshold + class imbalance, NOT a data limit"
+  ]
+}

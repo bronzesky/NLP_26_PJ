@@ -1,0 +1,50 @@
+[HAMI-core Msg(50512:140149651784256:libvgpu.c:837)]: Initializing.....
+[HAMI-core Msg(50512:140149651784256:libvgpu.c:853)]: Initialized
+Device: cuda
+Loading tokenizer from /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/outputs/roberta_base/best_model...
+Loading semeval train data...
+Semeval train: 2000 docs
+Running in doc-only mode (no subtask C)
+Total training records: 2000
+Loading dev data...
+Dev: 300 docs
+Initializing HSAD from /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/outputs/roberta_base/best_model...
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 7307.41it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/outputs/roberta_base/best_model
+Key                        | Status     |  | 
+---------------------------+------------+--+-
+classifier.dense.bias      | UNEXPECTED |  | 
+classifier.dense.weight    | UNEXPECTED |  | 
+classifier.out_proj.bias   | UNEXPECTED |  | 
+classifier.out_proj.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/src/model_hsad.py:61: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.cross_sent = nn.TransformerEncoder(enc_layer, num_layers=cross_sent_layers)
+Params: 138.5M total, 42.8M trainable
+
+Starting training: 2 epochs, 2000 docs/epoch
+Grad accum: 8  RoBERTa lr: 2e-05  Head lr: 5e-05
+Sent loss weight: 0.3  fp16: True
+
+Ep0 step50 loss=0.2010 t=0.2m
+Ep0 step100 loss=0.1096 t=0.4m
+Ep0 step150 loss=0.0794 t=0.6m
+Ep0 step200 loss=0.0632 t=0.7m
+Ep0 step250 loss=0.0542 t=0.9m
+Epoch 0 finished. avg_loss=0.0542
+Evaluating on dev...
+Dev accuracy: 0.8300
+  *** New best model saved (dev_acc=0.8300) ***
+Ep1 step50 loss=0.0001 t=0.2m
+Ep1 step100 loss=0.0001 t=0.3m
+Ep1 step150 loss=0.0001 t=0.5m
+Ep1 step200 loss=0.0004 t=0.7m
+Ep1 step250 loss=0.0029 t=0.8m
+Epoch 1 finished. avg_loss=0.0029
+Evaluating on dev...
+Dev accuracy: 0.8300
+
+Training complete. Best dev accuracy: 0.8300
+[HAMI-core Msg(50512:140149651784256:multiprocess_memory_limit.c:459)]: Calling exit handler 50512

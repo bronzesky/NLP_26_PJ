@@ -1,0 +1,89 @@
+[HAMI-core Msg(183725:139807607992896:libvgpu.c:837)]: Initializing.....
+[HAMI-core Msg(183725:139807607992896:libvgpu.c:853)]: Initialized
+[transformers] The tokenizer you are loading from '/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Device: cuda
+Loaded MTL boundaries: ['discourse_total_density', 'contraction_ratio', 'first_person_ratio']
+Loading tokenizer from /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large...
+Loading M4 training data...
+M4 train: 1000 docs
+Loading HC3 mixed data...
+HC3 mixed: 200 docs
+Dev: 300 docs
+Total training records (with HC3 x2): 1400
+Initializing model from /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large...
+Loading weights:   0%|          | 0/390 [00:00<?, ?it/s]Loading weights: 100%|██████████| 390/390 [00:00<00:00, 34932.38it/s]
+[transformers] [1mDebertaV2Model LOAD REPORT[0m from: /inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/models/deberta-v3-large
+Key                                     | Status     |  | 
+----------------------------------------+------------+--+-
+lm_predictions.lm_head.dense.weight     | UNEXPECTED |  | 
+mask_predictions.classifier.weight      | UNEXPECTED |  | 
+mask_predictions.LayerNorm.weight       | UNEXPECTED |  | 
+lm_predictions.lm_head.LayerNorm.bias   | UNEXPECTED |  | 
+lm_predictions.lm_head.LayerNorm.weight | UNEXPECTED |  | 
+lm_predictions.lm_head.bias             | UNEXPECTED |  | 
+mask_predictions.dense.bias             | UNEXPECTED |  | 
+mask_predictions.classifier.bias        | UNEXPECTED |  | 
+lm_predictions.lm_head.dense.bias       | UNEXPECTED |  | 
+mask_predictions.dense.weight           | UNEXPECTED |  | 
+mask_predictions.LayerNorm.bias         | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/src/model_han.py:51: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.cross_sent_encoder = nn.TransformerEncoder(
+
+Starting training: 2 epochs, 1400 docs/epoch
+Grad accum: 8, effective batch: 8
+DeBERTa lr: 2e-05, Head lr: 5e-05
+fp16: True
+
+Ep0 step10 loss=1.2560 t=0.2m
+Ep0 step20 loss=1.3448 t=0.5m
+Ep0 step30 loss=1.2220 t=0.7m
+Ep0 step40 loss=1.1729 t=0.9m
+Ep0 step50 loss=1.1155 t=1.1m
+Ep0 step60 loss=1.1225 t=1.3m
+Ep0 step70 loss=1.1130 t=1.5m
+Ep0 step80 loss=1.1068 t=1.7m
+Ep0 step90 loss=1.1413 t=1.9m
+Ep0 step100 loss=1.1305 t=2.1m
+Ep0 step110 loss=1.0981 t=2.2m
+Ep0 step120 loss=1.0721 t=2.5m
+Ep0 step130 loss=1.0463 t=2.7m
+Ep0 step140 loss=1.0316 t=2.9m
+Ep0 step150 loss=1.0145 t=3.1m
+Ep0 step160 loss=1.0056 t=3.3m
+Ep0 step170 loss=0.9989 t=3.5m
+
+Epoch 0 finished. avg_loss=0.9888
+Evaluating on dev...
+Dev accuracy: 0.6233
+Saved model to outputs/han_smoke/epoch_0/han_checkpoint.pt
+Saved model to outputs/han_smoke/best_model/han_checkpoint.pt
+  *** New best model saved (dev_acc=0.6233) ***
+Ep1 step10 loss=0.7561 t=0.2m
+Ep1 step20 loss=0.7943 t=0.4m
+Ep1 step30 loss=0.8397 t=0.6m
+Ep1 step40 loss=0.8728 t=0.8m
+Ep1 step50 loss=0.8690 t=1.0m
+Ep1 step60 loss=0.8718 t=1.2m
+Ep1 step70 loss=0.8646 t=1.4m
+Ep1 step80 loss=0.8602 t=1.6m
+Ep1 step90 loss=0.8616 t=1.8m
+Ep1 step100 loss=0.8508 t=2.0m
+Ep1 step110 loss=0.8538 t=2.2m
+Ep1 step120 loss=0.8497 t=2.4m
+Ep1 step130 loss=0.8425 t=2.6m
+Ep1 step140 loss=0.8359 t=2.8m
+Ep1 step150 loss=0.8254 t=3.0m
+Ep1 step160 loss=0.8173 t=3.2m
+Ep1 step170 loss=0.8138 t=3.4m
+
+Epoch 1 finished. avg_loss=0.8144
+Evaluating on dev...
+Dev accuracy: 0.5933
+Saved model to outputs/han_smoke/epoch_1/han_checkpoint.pt
+
+Training complete. Best dev accuracy: 0.6233
+Best model saved to: outputs/han_smoke/best_model
+[HAMI-core Msg(183725:139807607992896:multiprocess_memory_limit.c:459)]: Calling exit handler 183725

@@ -1,0 +1,5 @@
+Loading HC3 from data/hc3/all.jsonl...
+Loaded 23867 QA pairs
+Generated 5000 mixed documents (1404 skipped, too short)
+Docs: data/hc3_mixed/docs.jsonl
+Spans: data/hc3_mixed/spans.jsonl

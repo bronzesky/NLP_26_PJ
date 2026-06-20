@@ -1,0 +1,16 @@
+/inspire/hdd/project/fdu-aidake-cfff/public/hanz/semeval2024_task8a_en_baseline/.conda/lib/python3.10/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+Loading data for model=lr...
+Building feature matrices...
+{
+  "accuracy": 0.7176,
+  "macro_f1": 0.6971256971256972,
+  "micro_f1": 0.7176,
+  "auroc": 0.9019368,
+  "fpr_at_95_tpr": 0.4784,
+  "brier": 0.24835925628063704,
+  "nll": 1.6428172403058758,
+  "ece": 0.23993019553091116,
+  "rows": 5000,
+  "model": "lr"
+}

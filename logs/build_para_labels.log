@@ -1,0 +1,4 @@
+Loading /inspire/hdd/project/fdu-aidake-cfff/public/wangyanqing/NLPPJ/data/processed/semeval/semeval_train_full.csv...
+Loaded 119756 documents
+Kept 119705 paragraphs, skipped 51 (< 15 words)
+Output: data/paragraph_labels.jsonl

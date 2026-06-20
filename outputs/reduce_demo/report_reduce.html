@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>降 AIGC 前后对比报告</title><style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif;
+       margin: 0; background: #f4f6f9; color: #1f2733; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+.topbar { display:flex; justify-content:space-between; align-items:center;
+          background:#fff; border-radius:12px; padding:18px 24px; margin-bottom:18px;
+          box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.topbar h1 { font-size:18px; margin:0; }
+.topbar .verdict { font-size:14px; font-weight:700; padding:6px 14px; border-radius:20px;
+                   color:#fff; }
+.dash { display:grid; grid-template-columns: 170px 1fr 1fr; gap:20px;
+        background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); align-items:center; }
+.dash .gauge { text-align:center; }
+.bars { }
+.bars .row { display:flex; align-items:center; margin:6px 0; font-size:13px; }
+.bars .lbl { width:110px; color:#5b6573; }
+.bars .track { flex:1; height:12px; background:#eceff3; border-radius:6px; overflow:hidden; margin:0 8px; }
+.bars .fill { height:100%; border-radius:6px; }
+.bars .pc { width:48px; text-align:right; font-weight:600; }
+.signals { font-size:13px; color:#5b6573; }
+.signals .sig-item { display:flex; justify-content:space-between; padding:6px 0;
+                     border-bottom:1px solid #eef1f5; }
+.signals .sig-item b { color:#1f2733; }
+.card { background:#fff; border-radius:12px; padding:22px; margin-bottom:18px;
+        box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.card h2 { font-size:16px; margin:0 0 14px; color:#27313f; }
+.legend { font-size:12px; color:#6b7480; margin-bottom:12px; }
+.legend span { display:inline-block; margin-right:14px; }
+.legend i { display:inline-block; width:22px; height:4px; vertical-align:middle;
+            margin-right:5px; border-radius:2px; }
+.para { margin:14px 0; }
+.para-tag { display:inline-block; color:#fff; font-size:11px; font-weight:600;
+            padding:2px 10px; border-radius:10px; margin-bottom:6px; }
+.para-body { line-height:2.0; font-size:15px; }
+.sent { padding:1px 0; }
+table.ev { width:100%; border-collapse:collapse; font-size:13px; }
+table.ev td { padding:7px 8px; border-bottom:1px solid #eef1f5; vertical-align:middle; }
+.ev .fname { width:200px; color:#3a4452; font-family:monospace; font-size:12px; }
+.ev .fbar { width:auto; }
+.ev .track { position:relative; height:18px; background:linear-gradient(90deg,#eafaef,#fdeaea);
+             border-radius:9px; }
+.ev .marker { position:absolute; top:-1px; width:4px; height:20px; border-radius:2px; }
+.ev .hm,.ev .am { position:absolute; top:2px; font-size:10px; color:#9aa3b0; }
+.ev .fval { width:70px; text-align:right; font-family:monospace; }
+.ev .fsig { width:80px; font-weight:600; }
+.sug-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.sug-card { border:1px solid #e7ebf0; border-radius:8px; padding:12px 14px; }
+.sug-head { font-weight:700; font-size:13px; color:#27313f; margin-bottom:6px; }
+.sug-dev { float:right; font-weight:500; font-size:11px; color:#da3633; }
+.sug-body { font-size:13px; color:#4a5562; line-height:1.6; }
+.composite { background:#0f1620; color:#cfe3ff; padding:16px; border-radius:8px;
+             font-size:12px; white-space:pre-wrap; line-height:1.55; overflow-x:auto; }
+.foot { text-align:center; color:#9aa3b0; font-size:12px; padding:16px; }
+
+.rd-head { display:flex; align-items:center; justify-content:center; gap:30px; }
+.rd-col { text-align:center; }
+.rd-lbl { font-weight:700; color:#5b6573; margin-bottom:6px; }
+.rd-meta { font-size:12px; color:#8a94a6; margin-top:6px; }
+.rd-arrow { font-size:26px; color:#b6c0cf; text-align:center; }
+.rd-arrow span { font-size:11px; color:#8a94a6; }
+.rd-delta { text-align:center; font-size:14px; font-weight:600; color:#27313f;
+            background:#f0f4fa; border-radius:8px; padding:10px; margin-top:16px; }
+.rd-side { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+.rd-pane h3 { font-size:14px; color:#344054; margin:0 0 8px; }
+.rd-text { font-size:13px; line-height:1.85; white-space:pre-wrap; background:#fafbfc;
+           border:1px solid #eef1f5; border-radius:8px; padding:14px; max-height:560px; overflow:auto; }
+</style></head><body><div class="wrap">
+<div class="topbar"><h1>降 AIGC 前后对比报告</h1>
+<span class="verdict" style="background:#2ea043">改写后判定：人类</span></div>
+<div class="card"><div class="rd-head"><div class="rd-col"><div class="rd-lbl">降AIGC前</div><div class="rd-ring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#da3633" stroke-width="14" stroke-dasharray="333.01 333.01" stroke-linecap="round" transform="rotate(-90 65.0 65.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#da3633">100.0%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">AI疑似度</text></svg></div><div class="rd-meta">RoBERTa P(AI) 90.6% · margin 12.2 · ppl 13 · burst 0.30</div></div><div class="rd-arrow">→<br><span>claude-sonnet-4-6<br>递归改写</span></div><div class="rd-col"><div class="rd-lbl">降AIGC后</div><div class="rd-ring"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#eceff3" stroke-width="14"/><circle cx="65.0" cy="65.0" r="53.0" fill="none" stroke="#2ea043" stroke-width="14" stroke-dasharray="0.00 333.01" stroke-linecap="round" transform="rotate(-90 65.0 65.0)"/><text x="50%" y="48%" text-anchor="middle" font-size="30" font-weight="700" fill="#2ea043">0.0%</text><text x="50%" y="64%" text-anchor="middle" font-size="12" fill="#8a94a6">AI疑似度</text></svg></div><div class="rd-meta">RoBERTa P(AI) 82.7% · margin 8.4 · ppl 36 · burst 0.33</div></div></div><div class="rd-delta">疑似度 100% → 0%（↓ 100 个百分点）· RoBERTa 深层信号 90.6% → 82.7%</div></div>
+<div class="card"><h2>原文 / 降AIGC后 全文对比</h2><div class="rd-side"><div class="rd-pane"><h3>原文</h3><div class="rd-text">In recent years, the debate surrounding the use of online classes in schools has intensified. With the onset of the COVID-19 pandemic, many educational institutions were forced to adopt remote learning methodologies. However, the question remains: should schools continue to offer online classes even beyond the pandemic? Although online classes have their benefits, such as flexibility and accessibility, I argue against their widespread use in schools due to their potential negative impact on student learning and teacher employment.
+
+One of the key arguments against online classes is the loss of hands-on learning experiences. Traditional classrooms provide a dynamic environment where students can actively engage in discussions, experiments, and group activities. These experiences foster critical thinking, problem-solving, and social skills, which are essential for a well-rounded education. Online classes, on the other hand, often lack the collaborative aspect and can limit students&#x27; ability to fully grasp complex concepts. The absence of hands-on learning can hinder students&#x27; overall development and limit their potential for success in future endeavors.
+
+Furthermore, the value of teachers&#x27; education and expertise cannot be undermined. Teachers play a crucial role in guiding and motivating students. They possess the knowledge and experience to tailor lessons based on individual students&#x27; needs and provide real-time feedback. Online classes, though beneficial in certain circumstances, cannot replicate the same level of personalization and interaction that teachers offer. Moreover, widespread adoption of online classes may result in a decline in teacher employment, exacerbating unemployment rates and contributing to economic instability.
+
+While it is true that online classes offer flexibility and accessibility, particularly for students in remote areas or with limited resources, these benefits should not be overshadowed by the potential drawbacks. To address the limitations of online classes, schools should invest in technology that enhances interactive learning experiences, such as virtual reality and specialized software. This way, students can still benefit from the advantages of technology while maintaining the vital aspects of in-person education.
+
+In conclusion, while online classes have their merits, such as flexibility and accessibility, their widespread use in schools should be carefully considered. Their potential negative impact on student learning and teacher employment suggests that a balanced approach, combining hands-on learning experiences with well-supported online resources, would provide the best educational outcome for students.</div></div><div class="rd-pane"><h3>降AIGC后</h3><div class="rd-text">Here&#x27;s the rewritten text:
+
+The debate over online classes in schools has been building for years, but the COVID-19 pandemic forced the question into the open. Nearly every educational institution had to pivot to remote learning almost overnight. Now that the immediate crisis has passed, the question is whether schools should keep offering online classes as a permanent fixture. Flexible and accessible as they are, the case against making them the norm is worth taking seriously — the costs to student learning and teacher employment are too significant to brush aside.
+
+The most immediate concern is what students lose when they&#x27;re not in a physical classroom. Traditional learning environments give students room to debate ideas, run experiments, and work through problems as a group. That kind of engagement builds critical thinking and social skills in ways that are hard to replicate on a screen. Remote formats tend to strip away the collaborative texture of a lesson, and without it, students often struggle to get a genuine grip on difficult material. The long-term effects on their development are easy to underestimate until the gaps start to show.
+
+Teachers bring something to the room that a recorded lecture or auto-graded quiz simply can&#x27;t. They read the energy of a class, adjust on the fly, and give the kind of specific, timely feedback that actually moves a student forward. Shifting to a predominantly digital model doesn&#x27;t just dilute that — it puts real pressure on teacher employment, with ripple effects that go beyond any single school budget.
+
+Online learning does have genuine advantages, especially for students in rural areas or those without reliable access to in-person education. Schools can close some of those gaps by investing in tools like virtual reality or purpose-built educational software that make digital lessons more engaging. That&#x27;s a reasonable middle ground — using technology to support learning rather than replace the conditions that make it work.</div></div></div></div>
+<div class="foot">攻防评测：改写攻击使 AI 疑似度下降，量化检测器鲁棒性。仅研究用途。</div>
+</div></body></html>

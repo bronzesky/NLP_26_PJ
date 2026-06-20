@@ -1,0 +1,41 @@
+# ===== conda env / installers (huge, machine-specific) =====
+.conda/
+Miniconda3/
+Miniconda3-latest-Linux-x86_64.sh
+
+# ===== python caches =====
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ===== outputs: 31GB of checkpoints/csv — exclude ALL by default =====
+# (selected small artifacts are force-added: HTML reports + small JSON)
+outputs/
+
+# ===== large data / model artifacts =====
+*.tar
+*.tar.gz
+*.safetensors
+*.joblib
+*.pt
+*.bin
+models/*/model.safetensors
+data/**/*.parquet
+
+# ===== datasets: large, exclude all except the small baselines the pipeline needs =====
+data/
+!data/feature_baselines.json
+
+# ===== HF / torch caches =====
+.cache/
+.huggingface/
+.torch/
+
+# ===== editor / OS =====
+.vscode/
+.DS_Store
+
+# ===== secrets — never commit =====
+*.key
+.env
+.git-credentials
