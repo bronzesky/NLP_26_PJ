@@ -111,16 +111,20 @@ class RegionAwareDetector:
         z = float(np.dot(self.ortho_coef, x) + self.ortho_intercept)
         return 1.0 / (1.0 + np.exp(-z))
 
-    def _region_decide(self, margin: float, feats: dict[str, float]) -> tuple[int, str, float]:
-        """Return (label, region, suspicion) using the frozen two-stage rule.
-        suspicion is the region-aware AI probability that drives the verdict:
-        in clean regions it is the saturated margin-implied prob; in the
-        ambiguous band it is the orthogonal-feature classifier prob. This keeps
-        the headline number coherent with the final label."""
+    def _region_decide(self, margin: float, cal_prob: float,
+                       feats: dict[str, float]) -> tuple[int, str, float]:
+        """Return (label, region, final_prob). final_prob is the single
+        coherent AI probability that BOTH drives the verdict and is shown as
+        the headline, so they can never disagree:
+          - clean regions: the calibrated RoBERTa P(AI) (continuous, not a
+            hardcoded 0/1 -- that discrete jump was the old bug);
+          - ambiguous band: the orthogonal-feature classifier P(AI), which is
+            what actually decides the verdict there.
+        verdict = (final_prob >= 0.5)."""
         if margin >= self.t_high:
-            return 1, "clean_ai", 1.0
+            return int(cal_prob >= 0.5), "clean_ai", float(cal_prob)
         if margin < self.t_low:
-            return 0, "clean_human", 0.0
+            return int(cal_prob >= 0.5), "clean_human", float(cal_prob)
         # ambiguous band -> orthogonal-feature classifier is the deciding signal
         p = self._ortho_prob_ai(feats)
         return int(p >= 0.5), "ambiguous", float(p)
@@ -178,12 +182,21 @@ class RegionAwareDetector:
         text = (text or "").strip()
         paragraphs = split_paragraphs(text)
 
-        # document-level (headline = real calibrated prob; region = final verdict)
+        # document-level. THE AI RATE IS A SINGLE FIXED RoBERTa calibrated prob,
+        # used identically before/after polishing. Region/ortho are metadata
+        # only -- they never override the AI rate or the verdict.
         doc_logits = self._logits([text])[0]
         doc_margin = float(self._margin(doc_logits[None, :])[0])
         doc_prob = float(self._calibrated_prob_ai(doc_logits[None, :])[0])
         doc_feats = full_features(text)
-        doc_label, doc_region, _ = self._region_decide(doc_margin, doc_feats)
+        doc_label = int(doc_prob >= 0.5)
+        # region info kept for the report (which decision zone the doc falls in)
+        if doc_margin >= self.t_high:
+            doc_region = "clean_ai"
+        elif doc_margin < self.t_low:
+            doc_region = "clean_human"
+        else:
+            doc_region = "ambiguous"
 
         # ---- occlusion sentence scoring (coherent with the document score) ----
         # Each sentence's AI contribution = doc_prob(full) - doc_prob(without it).
@@ -216,7 +229,9 @@ class RegionAwareDetector:
             p_margin = float(self._margin(p_logits[None, :])[0])
             p_prob = float(self._calibrated_prob_ai(p_logits[None, :])[0])
             p_feats = full_features(para)
-            p_label, p_region, _ = self._region_decide(p_margin, p_feats)
+            p_label = int(p_prob >= 0.5)
+            p_region = ("clean_ai" if p_margin >= self.t_high
+                        else "clean_human" if p_margin < self.t_low else "ambiguous")
 
             sents = split_sentences(para)
             sent_results = []

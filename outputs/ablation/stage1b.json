@@ -1,0 +1,99 @@
+{
+  "a3_sweep": [
+    {
+      "config": "single-thr",
+      "macro_f1": 0.5712,
+      "bloomz": 0.98
+    },
+    {
+      "config": "full-band(pure-ortho)",
+      "macro_f1": 0.4854,
+      "bloomz": 0.998,
+      "frac": 1.0
+    },
+    {
+      "t_low": -12,
+      "t_high": 8,
+      "frac": 0.259,
+      "macro_f1": 0.7457,
+      "bloomz": 1.0
+    },
+    {
+      "t_low": -12,
+      "t_high": 10.91,
+      "frac": 0.383,
+      "macro_f1": 0.8572,
+      "bloomz": 0.998
+    },
+    {
+      "t_low": -12,
+      "t_high": 12,
+      "frac": 0.543,
+      "macro_f1": 0.9654,
+      "bloomz": 0.997
+    },
+    {
+      "t_low": -10.58,
+      "t_high": 8,
+      "frac": 0.231,
+      "macro_f1": 0.7454,
+      "bloomz": 0.999
+    },
+    {
+      "t_low": -10.58,
+      "t_high": 10.91,
+      "frac": 0.354,
+      "macro_f1": 0.8569,
+      "bloomz": 0.997
+    },
+    {
+      "t_low": -10.58,
+      "t_high": 12,
+      "frac": 0.515,
+      "macro_f1": 0.965,
+      "bloomz": 0.995
+    },
+    {
+      "t_low": -8,
+      "t_high": 8,
+      "frac": 0.178,
+      "macro_f1": 0.7447,
+      "bloomz": 0.995
+    },
+    {
+      "t_low": -8,
+      "t_high": 10.91,
+      "frac": 0.302,
+      "macro_f1": 0.8561,
+      "bloomz": 0.993
+    },
+    {
+      "t_low": -8,
+      "t_high": 12,
+      "frac": 0.462,
+      "macro_f1": 0.9641,
+      "bloomz": 0.99
+    },
+    {
+      "t_low": -5,
+      "t_high": 8,
+      "frac": 0.13,
+      "macro_f1": 0.7435,
+      "bloomz": 0.976
+    },
+    {
+      "t_low": -5,
+      "t_high": 10.91,
+      "frac": 0.254,
+      "macro_f1": 0.8547,
+      "bloomz": 0.974
+    },
+    {
+      "t_low": -5,
+      "t_high": 12,
+      "frac": 0.414,
+      "macro_f1": 0.9626,
+      "bloomz": 0.971
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "title": "chatGPT样本",
+  "ai_rate_before": 0.9061,
+  "ai_rate_after": 0.4371,
+  "ai_rate_drop": 0.469,
+  "verdict_before": "AI",
+  "verdict_after": "human",
+  "rounds_used": 4,
+  "trajectory": [
+    {
+      "round": 0,
+      "prob_ai": 0.9061,
+      "verdict": "AI",
+      "rewritten_sents": 0
+    },
+    {
+      "round": 1,
+      "prob_ai": 0.9044,
+      "verdict": "AI",
+      "rewritten_sents": 5
+    },
+    {
+      "round": 2,
+      "prob_ai": 0.8977,
+      "verdict": "AI",
+      "rewritten_sents": 6
+    },
+    {
+      "round": 3,
+      "prob_ai": 0.8246,
+      "verdict": "AI",
+      "rewritten_sents": 6
+    },
+    {
+      "round": 4,
+      "prob_ai": 0.4371,
+      "verdict": "human",
+      "rewritten_sents": 6
+    }
+  ],
+  "edits": [
+    {
+      "round": 1,
+      "original": "Therefore, it is not surprising that when presented with a rocky landform on Mars with two depressions for eyes and a prominent ridge for a nose, we see a face.",
+      "rewritten": "A rocky Martian landform with two shadowed depressions and a jutting central ridge — of course we see a face."
+    },
+    {
+      "round": 1,
+      "original": "These images reveal that the \"Face on Mars\" is actually an eroded mesa called the Cydonia region.",
+      "rewritten": "What those images actually show is an eroded mesa — the Cydonia region, nothing more."
+    },
+    {
+      "round": 1,
+      "original": "Furthermore, the area surrounding the mesa also shows signs of other geological formations, such as ridges, valleys, and craters.",
+      "rewritten": "The land around the mesa is far from featureless — ridges, valleys, and craters mark the terrain in every direction."
+    },
+    {
+      "round": 1,
+      "original": "While the idea of discovering extraterrestrial life is intriguing, it is essential to approach such claims with a critical mindset and rely on evidence-based explanations.",
+      "rewritten": "The idea of finding extraterrestrial life is genuinely exciting, but excitement isn't evidence, and any serious claim deserves the same skeptical, evidence-driven scrutiny we'd apply to anything else."
+    },
+    {
+      "round": 1,
+      "original": "Science thrives on skepticism and rigorous inquiry, and it is through this approach that we can continue to explore and uncover the mysteries of our universe.",
+      "rewritten": "Skepticism and rigorous inquiry are what keep science alive — and what keep us reaching into the unknown."
+    },
+    {
+      "round": 2,
+      "original": "One of the main arguments in favor of the natural origin of the landform is the concept of pareidolia.",
+      "rewritten": "Pareidolia is the go-to explanation for anyone arguing the landform has a natural origin."
+    },
+    {
+      "round": 2,
+      "original": "Pareidolia is the psychological phenomenon where our brains perceive familiar patterns, such as faces, in random stimuli.",
+      "rewritten": "Pareidolia is what happens when your brain insists it sees a face — or some other familiar shape — in something completely random."
+    },
+    {
+      "round": 2,
+      "original": "These formations are consistent with the known geological processes on Mars, such as impacts from asteroids and the Martian wind.",
+      "rewritten": "The formations line up with what we already know drives geology on Mars — asteroid impacts and the relentless Martian wind."
+    },
+    {
+      "round": 2,
+      "original": "The controversy surrounding the landform on Mars that appears to resemble a face has captured the imagination of space enthusiasts and conspiracy theorists alike.",
+      "rewritten": "That face-shaped landform on Mars has fascinated space enthusiasts and conspiracy theorists for decades."
+    },
+    {
+      "round": 2,
+      "original": "However, I firmly believe that the \"Face on Mars\" is simply a natural landform and not evidence of extraterrestrial life.",
+      "rewritten": "The \"Face on Mars\" is just a rock formation, nothing more."
+    },
+    {
+      "round": 2,
+      "original": "Moreover, additional evidence supporting the natural origin of the landform comes from NASA's Mars Reconnaissance Orbiter, which captured high-resolution images of the area.",
+      "rewritten": "NASA's Mars Reconnaissance Orbiter captured high-resolution images of the area, adding to the case for a natural origin."
+    },
+    {
+      "round": 3,
+      "original": "This suggests that the \"Face on Mars\" is just one of many naturally occurring landforms on the planet, rather than a solitary evidence of extraterrestrial life.",
+      "rewritten": "The \"Face on Mars\" is, it turns out, nothing more than one landform among countless others scattered across the planet — not some lone relic of alien life."
+    },
+    {
+      "round": 3,
+      "original": "The mesa is a result of natural geological processes, such as wind erosion, which can create symmetrical features resembling a face.",
+      "rewritten": "Wind and time carved that mesa into something uncanny — symmetrical enough, if you catch it at the right angle, to look like a face staring back at you."
+    },
+    {
+      "round": 3,
+      "original": "NASA's Mars Reconnaissance Orbiter captured high-resolution images of the area, adding to the case for a natural origin.",
+      "rewritten": "The Mars Reconnaissance Orbiter swept the area with its high-resolution cameras, and what it found only strengthened the argument that nature, not anything else, made this."
+    },
+    {
+      "round": 3,
+      "original": "The land around the mesa is far from featureless — ridges, valleys, and craters mark the terrain in every direction.",
+      "rewritten": "Ridges, valleys, and craters cut across the terrain in every direction around the mesa."
+    },
+    {
+      "round": 3,
+      "original": "In the case of the \"Face on Mars,\" the evidence overwhelmingly points towards a natural landform rather than an indication of intelligent beings.",
+      "rewritten": "The \"Face on Mars\" is just a rock formation."
+    },
+    {
+      "round": 3,
+      "original": "The idea of finding extraterrestrial life is genuinely exciting, but excitement isn't evidence, and any serious claim deserves the same skeptical, evidence-driven scrutiny we'd apply to anything else.",
+      "rewritten": "Finding extraterrestrial life would be one of the most profound discoveries in human history — but wanting it to be true has never made anything true, and every serious claim, no matter how thrilling, still has to survive the same hard, evidence-driven scrutiny we'd apply to anything else."
+    },
+    {
+      "round": 4,
+      "original": "The \"Face on Mars\" is just a rock formation.",
+      "rewritten": "The \"Face on Mars\" is just a rock."
+    },
+    {
+      "round": 4,
+      "original": "The \"Face on Mars\" is just a rock formation, nothing more.",
+      "rewritten": "It's a rock."
+    },
+    {
+      "round": 4,
+      "original": "Skepticism and rigorous inquiry are what keep science alive — and what keep us reaching into the unknown.",
+      "rewritten": "Science stays alive because we keep asking hard questions and refuse to stop reaching."
+    },
+    {
+      "round": 4,
+      "original": "The Mars Reconnaissance Orbiter swept the area with its high-resolution cameras, and what it found only strengthened the argument that nature, not anything else, made this.",
+      "rewritten": "The Mars Reconnaissance Orbiter ran its high-resolution cameras across the area, and everything it captured pointed back to the same conclusion: nature did this."
+    },
+    {
+      "round": 4,
+      "original": "That face-shaped landform on Mars has fascinated space enthusiasts and conspiracy theorists for decades.",
+      "rewritten": "That face on Mars has gripped space enthusiasts and conspiracy theorists alike for decades."
+    },
+    {
+      "round": 4,
+      "original": "Wind and time carved that mesa into something uncanny — symmetrical enough, if you catch it at the right angle, to look like a face staring back at you.",
+      "rewritten": "That mesa got worked over by wind and centuries until it became something unsettling — hit the right angle and it's a face, staring straight back."
+    }
+  ],
+  "guidance": "remove formulaic connectors (however, furthermore, moreover, in conclusion); vary sentence length sharply; mix very short and long sentences",
+  "original_text": "The controversy surrounding the landform on Mars that appears to resemble a face has captured the imagination of space enthusiasts and conspiracy theorists alike. However, I firmly believe that the \"Face on Mars\" is simply a natural landform and not evidence of extraterrestrial life.\n\nOne of the main arguments in favor of the natural origin of the landform is the concept of pareidolia. Pareidolia is the psychological phenomenon where our brains perceive familiar patterns, such as faces, in random stimuli. This is the same reason why we see shapes in clouds or faces in random patterns. The human brain is wired to recognize and interpret faces, even in ambiguous or abstract forms. Therefore, it is not surprising that when presented with a rocky landform on Mars with two depressions for eyes and a prominent ridge for a nose, we see a face.\n\nMoreover, additional evidence supporting the natural origin of the landform comes from NASA's Mars Reconnaissance Orbiter, which captured high-resolution images of the area. These images reveal that the \"Face on Mars\" is actually an eroded mesa called the Cydonia region. The mesa is a result of natural geological processes, such as wind erosion, which can create symmetrical features resembling a face.\n\nFurthermore, the area surrounding the mesa also shows signs of other geological formations, such as ridges, valleys, and craters. These formations are consistent with the known geological processes on Mars, such as impacts from asteroids and the Martian wind. This suggests that the \"Face on Mars\" is just one of many naturally occurring landforms on the planet, rather than a solitary evidence of extraterrestrial life.\n\nWhile the idea of discovering extraterrestrial life is intriguing, it is essential to approach such claims with a critical mindset and rely on evidence-based explanations. In the case of the \"Face on Mars,\" the evidence overwhelmingly points towards a natural landform rather than an indication of intelligent beings. Science thrives on skepticism and rigorous inquiry, and it is through this approach that we can continue to explore and uncover the mysteries of our universe.",
+  "rewritten_text": "That face on Mars has gripped space enthusiasts and conspiracy theorists alike for decades. It's a rock.\n\nPareidolia is the go-to explanation for anyone arguing the landform has a natural origin. Pareidolia is what happens when your brain insists it sees a face — or some other familiar shape — in something completely random. This is the same reason why we see shapes in clouds or faces in random patterns. The human brain is wired to recognize and interpret faces, even in ambiguous or abstract forms. A rocky Martian landform with two shadowed depressions and a jutting central ridge — of course we see a face.\n\nThe Mars Reconnaissance Orbiter ran its high-resolution cameras across the area, and everything it captured pointed back to the same conclusion: nature did this. What those images actually show is an eroded mesa — the Cydonia region, nothing more. That mesa got worked over by wind and centuries until it became something unsettling — hit the right angle and it's a face, staring straight back.\n\nRidges, valleys, and craters cut across the terrain in every direction around the mesa. The formations line up with what we already know drives geology on Mars — asteroid impacts and the relentless Martian wind. The \"Face on Mars\" is, it turns out, nothing more than one landform among countless others scattered across the planet — not some lone relic of alien life.\n\nFinding extraterrestrial life would be one of the most profound discoveries in human history — but wanting it to be true has never made anything true, and every serious claim, no matter how thrilling, still has to survive the same hard, evidence-driven scrutiny we'd apply to anything else. The \"Face on Mars\" is just a rock. Science stays alive because we keep asking hard questions and refuse to stop reaching."
+}

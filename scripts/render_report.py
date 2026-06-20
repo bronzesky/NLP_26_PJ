@@ -33,6 +33,14 @@ def _grade_color(grade: str) -> str:
     return GRADE.get(grade, GRADE["ok"])[0]
 
 
+def _grade(prob: float) -> str:
+    p = prob * 100
+    if p >= 70: return "high"
+    if p >= 60: return "middle"
+    if p >= 50: return "low"
+    return "ok"
+
+
 def _esc(s) -> str:
     return _html.escape(str(s))
 
@@ -266,10 +274,10 @@ def render(result: dict, output_file, title: str = None) -> Path:
     sig_html = "".join(
         f'<div class="sig-item"><span>{k}</span><b>{v}</b></div>'
         for k, v in [
+            ("AI 率 (RoBERTa 校准)", f'{result.get("doc_prob_ai",0)*100:.1f}%'),
             ("困惑度 (perplexity)", f'{result.get("ppl",0):.1f}'),
             ("突发性 (burstiness)", f'{result.get("burstiness",0):.3f}'),
-            ("RoBERTa 原始 P(AI)", f'{result.get("doc_prob_ai",0)*100:.1f}%'),
-            ("判定区域", result.get("doc_region", "-")),
+            ("判定区域", {"clean_ai":"高置信AI区","clean_human":"高置信人类区","ambiguous":"模糊带"}.get(result.get("doc_region",""), result.get("doc_region","-"))),
             ("字数", f'{result.get("word_count",0)} 词 / {result.get("char_count",0)} 字符'),
             ("段落数", result.get("paragraph_count", 0)),
         ]
@@ -382,6 +390,110 @@ def render_reduce(bundle: dict, output_file, title: str = "降 AIGC 前后对比
 <div class="card">{head}</div>
 <div class="card"><h2>原文 / 降AIGC后 全文对比</h2>{side}</div>
 <div class="foot">攻防评测：改写攻击使 AI 疑似度下降，量化检测器鲁棒性。仅研究用途。</div>
+</div></body></html>"""
+    output_file.write_text(html, encoding="utf-8")
+    return output_file
+
+
+def render_polish_trajectory(data: dict, output_file, title: str = "降 AI 率过程报告") -> Path:
+    """Render the targeted+recursive de-AI process: per-round AI-rate descent
+    (measured by the SAME fixed RoBERTa), plus original vs final text with the
+    rewritten sentences highlighted (red = AI-incriminating source sentence,
+    green = its human-like rewrite), tagged by round."""
+    output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    traj = data.get("trajectory", [])
+    edits = data.get("edits", [])
+    before = data.get("ai_rate_before", 0) * 100
+    after = data.get("ai_rate_after", 0) * 100
+    vb, va = data.get("verdict_before", "?"), data.get("verdict_after", "?")
+    bc = _grade_color(_grade(data.get("ai_rate_before", 0)))
+    ac = _grade_color(_grade(data.get("ai_rate_after", 0)))
+
+    def highlight(text, key, cls):
+        """Wrap each edited sentence (by `key`: 'original' or 'rewritten') in a
+        colored span with a round badge."""
+        spans = sorted(((e[key], e["round"]) for e in edits if e.get(key)),
+                       key=lambda x: -len(x[0]))  # longest first to avoid nesting
+        out = _esc(text)
+        for sent, rnd in spans:
+            esc = _esc(sent)
+            if esc in out:
+                out = out.replace(
+                    esc,
+                    f'<span class="ed {cls}">{esc}<sup>r{rnd}</sup></span>', 1)
+        return out
+
+    orig_html = highlight(data.get("original_text", ""), "original", "src")
+    final_html = highlight(data.get("rewritten_text", ""), "rewritten", "dst")
+
+    # descent bar chart (SVG)
+    n = len(traj)
+    W, H, pad = 640, 200, 30
+    bw = (W - 2 * pad) / max(n, 1)
+    bars = []
+    for i, t in enumerate(traj):
+        p = t["prob_ai"]
+        h = p * (H - 2 * pad)
+        x = pad + i * bw
+        y = H - pad - h
+        col = _grade_color(_grade(p))
+        bars.append(
+            f'<rect x="{x+4:.0f}" y="{y:.0f}" width="{bw-8:.0f}" height="{h:.0f}" fill="{col}" rx="3"/>'
+            f'<text x="{x+bw/2:.0f}" y="{y-4:.0f}" text-anchor="middle" font-size="11" fill="#27313f">{p:.2f}</text>'
+            f'<text x="{x+bw/2:.0f}" y="{H-pad+14:.0f}" text-anchor="middle" font-size="10" fill="#8a94a6">r{t["round"]}</text>'
+        )
+    # 0.5 threshold line
+    thr_y = H - pad - 0.5 * (H - 2 * pad)
+    chart = (
+        f'<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}">'
+        f'<line x1="{pad}" y1="{thr_y:.0f}" x2="{W-pad}" y2="{thr_y:.0f}" stroke="#da3633" '
+        f'stroke-dasharray="4 4" stroke-width="1"/>'
+        f'<text x="{W-pad}" y="{thr_y-4:.0f}" text-anchor="end" font-size="10" fill="#da3633">判定阈值 0.5</text>'
+        + "".join(bars) + '</svg>'
+    )
+
+    extra = """
+.tj-head { display:flex; gap:24px; align-items:center; justify-content:center; margin-bottom:8px; }
+.tj-num { text-align:center; } .tj-num b { font-size:30px; } .tj-num span { font-size:12px; color:#8a94a6; }
+.tj-arrow { font-size:24px; color:#b6c0cf; }
+.note { background:#f0f4fa; border-radius:8px; padding:10px 14px; font-size:13px; color:#3a4452; margin-top:10px; }
+.rd-side { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.rd-pane h3 { font-size:14px; color:#344054; margin:0 0 8px; }
+.rd-text { font-size:13px; line-height:2.0; white-space:pre-wrap; background:#fafbfc;
+           border:1px solid #eef1f5; border-radius:8px; padding:14px; max-height:520px; overflow:auto; }
+.ed { border-radius:3px; padding:0 2px; }
+.ed.src { background:rgba(218,54,51,0.16); }
+.ed.dst { background:rgba(46,160,67,0.18); }
+.ed sup { font-size:9px; color:#8a94a6; margin-left:1px; }
+.hl-legend { font-size:12px; color:#6b7480; margin-bottom:8px; }
+.hl-legend i { display:inline-block; width:18px; height:11px; vertical-align:middle; margin:0 4px; border-radius:3px; }
+"""
+    html = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{_esc(title)}</title><style>{_CSS}{extra}</style></head><body><div class="wrap">
+<div class="topbar"><h1>{_esc(title)}</h1>
+<span class="verdict" style="background:{ac}">{va.upper()} · {data.get('rounds_used','?')} 轮</span></div>
+<div class="card">
+  <div class="tj-head">
+    <div class="tj-num" style="color:{bc}"><b>{before:.1f}%</b><br><span>降AI前 ({vb})</span></div>
+    <div class="tj-arrow">→</div>
+    <div class="tj-num" style="color:{ac}"><b>{after:.1f}%</b><br><span>降AI后 ({va})</span></div>
+  </div>
+  <div style="text-align:center;color:#5b6573;font-size:13px;margin-bottom:6px">每轮 AI 率（同一固定 RoBERTa 检测器测量）</div>
+  <div style="text-align:center">{chart}</div>
+  <div class="note">方法：遮挡法定位对 AI 率贡献最高的句子 → 仅重写这些句（定点）→ 同一 RoBERTa 重测 → 未达阈值则对新高贡献句递归。
+  <b>检测模型自始至终固定不变</b>，降AI前后是同一个 RoBERTa 测出的同一种 AI 率。制导特征：{_esc(data.get('guidance',''))}</div>
+</div>
+<div class="card"><h2>原文 / 降AI后 全文对比（逐句高亮）</h2>
+<div class="hl-legend"><i style="background:rgba(218,54,51,0.16)"></i>原文中被改写的高AI贡献句
+<i style="background:rgba(46,160,67,0.18)"></i>降AI后对应的改写句
+<span>上标 r<sub>n</sub> = 第几轮改写（共 {data.get('rounds_used','?')} 轮，{len(edits)} 处改写）</span></div>
+<div class="rd-side">
+<div class="rd-pane"><h3>原文（AI率 {before:.1f}%）</h3><div class="rd-text">{orig_html}</div></div>
+<div class="rd-pane"><h3>降AI后（AI率 {after:.1f}%）</h3><div class="rd-text">{final_html}</div></div>
+</div></div>
+<div class="foot">检测器固定为单一 RoBERTa 校准概率。仅研究用途：量化检测器在定点递归改写下的鲁棒性。</div>
 </div></body></html>"""
     output_file.write_text(html, encoding="utf-8")
     return output_file

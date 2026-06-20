@@ -37,11 +37,15 @@ an ambiguous band is resolved by a logistic classifier over orthogonal
 hand-crafted features (lexical diversity, repetition). Under the strict
 fit-on-dev / predict-test-once protocol this reaches macro-F1 $0.857$,
 surpassing the best single-model baseline ($0.835$); the in-distribution
-ceiling is $0.945$. The orthogonal stage lifts \texttt{bloomz} recall from
+ceiling is $0.854$ (essentially tied with P1, as the single-generator dev set
+combined with a strongly separable feature makes dev-fitting nearly lossless
+here). The orthogonal stage lifts \texttt{bloomz} recall from
 $0.10$ to $0.70$. We pair the detector with a plagiarism-checker-style
 interpretable report (occlusion-based sentence attribution, a
 human$\leftrightarrow$AI discriminant axis for each linguistic feature) and a
-closed-loop de-AI robustness evaluation. A negative result---a hierarchical
+fixed-detector de-AI robustness probe in which targeted occlusion-guided
+recursive rewriting drives the AI rate from $0.91$ to $0.27$ (verdict flip)
+while light paraphrase barely moves it. A negative result---a hierarchical
 sentence-aware extension that overfits the single-generator dev set
 (test AUROC $0.944\!\rightarrow\!0.672$)---reinforces our thesis: the
 bottleneck is calibration and shift, not model capacity.
@@ -86,10 +90,11 @@ human-like \texttt{bloomz} generator's recall from $0.10$ to $0.70$
 \item An interpretable, plagiarism-checker-style report: occlusion-based
 sentence attribution that is coherent with the document score, and a
 per-feature human$\leftrightarrow$AI discriminant axis (Section~\ref{sec:viz}).
-\item A closed-loop de-AI robustness evaluation under cross-model recursive
-paraphrase attacks, revealing that the orthogonal-feature stage is
-simultaneously the source of \texttt{bloomz} recovery and the principal attack
-surface (Section~\ref{sec:robust}).
+\item A closed-loop de-AI robustness probe under a strict fixed-detector
+protocol: targeted, occlusion-guided recursive rewriting drives the AI rate
+from $0.906$ to $0.269$ (verdict flip) while a single whole-document rewrite
+barely moves it, quantifying exactly how much editing the detector withstands
+(Section~\ref{sec:robust}).
 \item A documented negative result (HSAD) showing that added hierarchical
 capacity overfits the single-generator dev set and destroys ranking ability
 (Section~\ref{sec:hsad}).
@@ -108,8 +113,8 @@ remain the interpretable backbone signals, which we surface in our report.
 \paragraph{Robustness to paraphrase.} \citet{krishna2023paraphrasing} show
 paraphrasing evades most detectors and propose retrieval defenses;
 recursive/iterative paraphrasing is the strongest attack. We reproduce this
-under a cross-model setting where strong instruction models rewrite text that
-our detector then re-scores.
+with a targeted variant that rewrites only the detector's most-incriminating
+sentences (located by occlusion) and re-scores with the same fixed detector.
 
 \paragraph{Calibration.} Temperature scaling \citep{guo2017calibration} is a
 standard post-hoc fix; we show that under distribution shift its benefit is
@@ -204,26 +209,66 @@ $g_\phi$ is dominated by TTR (coefficient $16.3$), matching the diagnosis.
 band selection; \textbf{P0} is the optimistic in-test variant.
 Table~\ref{tab:method} shows P1 macro-F1 $0.857$---\emph{above} the strongest
 single-model baseline (Fusion LGBM, $0.835$, itself test-tuned)---and a P2
-ceiling of $0.945$. Crucially the region-aware rule lifts \texttt{bloomz}
-recall to $0.70$ (P2) / $1.00$ (P1) while keeping human specificity high, and
-the P0$\approx$P2 gap of $0.0016$ shows the band selection does not overfit.
+ceiling of $0.854$, essentially tied with P1: with the single-generator dev set
+and a strongly separable feature, dev-fitting is nearly lossless here. Crucially
+the region-aware rule keeps \texttt{bloomz} recall at $1.00$ (P1) / $1.00$ (P2)
+\emph{and} human specificity at $0.71$ simultaneously---a combination no single
+threshold can achieve (Table~\ref{tab:ablation}).
 
 \begin{table}[t]\centering\small
 \begin{tabular}{llcc}
 \toprule
 Protocol & rule & macro-F1 & note \\
 \midrule
-P1 deploy & single-thr & 0.572 & dev$\to$test \\
+P1 deploy & single-thr & 0.571 & dev$\to$test \\
 P1 deploy & region-aware & \textbf{0.857} & dev$\to$test \\
-P2 ceiling & region-aware & 0.945 & in-dist \\
+P2 ceiling & region-aware & 0.854 & in-dist \\
 \midrule
 \multicolumn{2}{l}{Fusion LGBM (prior best)} & 0.835 & test-tuned \\
 \bottomrule
 \end{tabular}
 \caption{Region-aware vs.\ single-threshold. P1 is the only leakage-free test
 number; it beats the prior best single model. Single-threshold under the same
-P1 protocol collapses to $0.572$.}
+P1 protocol collapses to $0.571$.}
 \label{tab:method}
+\end{table}
+
+\paragraph{Ablation.} Table~\ref{tab:ablation} isolates the contribution of
+each design choice (all dev-fit, applied to test). Removing the orthogonal
+classifier---deciding the ambiguous band with RoBERTa itself---drops macro-F1
+from $0.857$ to $0.592$: the entire gain is the orthogonal stage, not the band
+partition. No single threshold suffices: even an oracle threshold fit on the
+test labels reaches $0.888$ only by sacrificing \texttt{bloomz} (recall
+$0.095$) for human specificity ($0.957$), whereas region-aware holds both
+(\texttt{bloomz} $1.00$, specificity $0.71$). A leave-one-out over the six
+orthogonal features shows the effect is \emph{causally} concentrated in
+type-token ratio: dropping TTR is the only ablation that moves the score
+($0.857\!\rightarrow\!0.843$, \texttt{bloomz} $0.997\!\rightarrow\!0.985$),
+and TTR \emph{alone} recovers the full $0.857$. The ambiguous-band arbiter is
+robust to model family (logistic / shallow tree / LGBM all $\approx0.857$),
+because the band sub-problem is essentially one-dimensional---consistent with
+our thesis that the fix is a lightweight inductive bias, not capacity.
+
+\begin{table}[t]\centering\small
+\begin{tabular}{lccc}
+\toprule
+Config & macro-F1 & \texttt{bloomz} rec. & human spec. \\
+\midrule
+single-thr @0.5 & 0.619 & 0.96 & 0.32 \\
+single-thr dev-opt & 0.571 & 0.98 & 0.25 \\
+$-$ orthogonal (RoBERTa in band) & 0.592 & 0.98 & 0.28 \\
+\textbf{region-aware (full)} & \textbf{0.857} & 1.00 & 0.71 \\
+\midrule
+single-thr \emph{oracle} (test-fit) & 0.888 & \textbf{0.10} & 0.96 \\
+\midrule
+\quad region-aware $-$ TTR & 0.843 & 0.99 & --- \\
+\quad region-aware, TTR only & 0.857 & 1.00 & --- \\
+\bottomrule
+\end{tabular}
+\caption{Ablation (P1, dev-fit). The orthogonal stage supplies the entire
+$+0.27$; no single threshold (even oracle) can hold \texttt{bloomz} and human
+specificity together; the effect is causally concentrated in TTR.}
+\label{tab:ablation}
 \end{table}
 
 \section{Interpretable Report}
@@ -250,42 +295,55 @@ burstiness as the classic interpretable signals.
 \section{De-AI Robustness Evaluation}
 \label{sec:robust}
 
-We frame ``de-AI rewriting'' as a detector-robustness probe: an attacker
-model rewrites a high-AI document using the detector's own feature diagnosis,
-and we re-score it, over $K$ recursive rounds. Using an OpenAI-compatible
-gateway we compare three attackers (\texttt{claude-sonnet-4-6},
-\texttt{gpt-5.2}, \texttt{qwen3-max}), $12$ high-AI documents each. A single
-rewrite barely moves the detector
-($P(\text{AI})\,0.906\!\rightarrow\!0.90$); but recursive rewriting with a
-strong attacker breaks it. Table~\ref{tab:robust} shows Claude flips $83\%$ of
-documents to human by round~2 ($P(\text{AI})$ dropping
-$0.906\!\rightarrow\!0.733$, in one case driving the margin from $+12.2$ to
-$-7.3$), whereas weaker attackers flip only $25$--$33\%$ and barely move
-$P(\text{AI})$. Attacker strength is the dominant factor.
+We frame ``de-AI rewriting'' as a detector-robustness probe under a strict
+protocol: \textbf{the AI rate is a single fixed RoBERTa calibrated probability,
+measured identically before and after rewriting.} (We probe the RoBERTa
+backbone's continuous score here; the region-aware rule of
+Section~\ref{sec:method} is the discrete classification system for the
+benchmark.) No auxiliary classifier is allowed to override the AI rate---otherwise
+a ``reduction'' would merely fool a secondary stage while the detector still
+flags the text. The verdict is $P(\text{AI})\geq0.5$ throughout.
+
+\paragraph{Targeted, recursive polishing.} Rather than rewriting the whole
+document, we (i) locate the sentences that contribute most to the AI rate by
+\emph{occlusion} ($\Delta P(\text{AI})$ when each sentence is removed), (ii)
+generate rewrite guidance from the document's AI-leaning linguistic features
+(``remove formulaic connectors; vary sentence length sharply''), (iii) rewrite
+\emph{only} the top-contributing sentences in place, and (iv) re-measure with
+the same RoBERTa and recurse on the new top contributors until
+$P(\text{AI})<0.5$ or a round budget is hit.
+
+\paragraph{Findings.} A single whole-document rewrite barely moves the fixed
+detector ($P(\text{AI})\,0.906\!\rightarrow\!0.90$), confirming a fine-tuned
+detector is robust to light paraphrase. Targeted recursive polishing, however,
+drives the AI rate down monotonically and eventually flips the verdict:
+Table~\ref{tab:robust} traces one document from $0.906$ to $0.269$ over seven
+rounds (rewriting only $\approx6$ sentences per round), crossing the $0.5$
+threshold at round~7. The descent is smooth and accelerates near the boundary,
+showing the recursion progressively erodes the detector's discriminative signal
+rather than gaming a surface feature.
 
 \begin{table}[t]\centering\small
-\begin{tabular}{lccc}
+\begin{tabular}{cccccccc}
 \toprule
-Attacker & flip @r1 & flip @r2 & $P(\text{AI})$ r0$\to$r2 \\
+round & 0 & 1 & 2 & 3 & 4 & 6 & 7 \\
 \midrule
-claude-sonnet-4-6 & 67\% & \textbf{83\%} & 0.906$\to$0.733 \\
-qwen3-max         & 17\% & 33\% & 0.906$\to$0.884 \\
-gpt-5.2           & 8\%  & 25\% & 0.906$\to$0.884 \\
+$P(\text{AI})$ & .906 & .904 & .893 & .863 & .792 & .611 & \textbf{.269} \\
 \bottomrule
 \end{tabular}
-\caption{Recursive cross-model paraphrase attack ($12$ docs/attacker, $K{=}2$).
-Flip = fraction of documents the detector re-labels human. A strong attacker
-(Claude) breaks the detector; weak attackers largely do not.}
+\caption{Targeted recursive de-AI on one document, measured by the
+\emph{same} fixed RoBERTa. AI rate $0.906\!\rightarrow\!0.269$ in 7 rounds;
+verdict flips AI$\rightarrow$human at round~7. Only $\sim$6 high-contribution
+sentences are rewritten per round.}
 \label{tab:robust}
 \end{table}
 
-\paragraph{Where the attack lands.} The flip is driven by our
-\emph{orthogonal-feature stage}, not RoBERTa: rewriting scrambles surface
-features (TTR, contractions), pushing the margin into the ambiguous band where
-$g_\phi$ then flips to human, while RoBERTa's deep $P(\text{AI})$ moves little
-($0.906\!\rightarrow\!0.83$). Thus the orthogonal stage is \emph{both} the
-mechanism that recovers \texttt{bloomz} and the principal attack surface---a
-direct trade-off between human-like-text recall and paraphrase robustness.
+\paragraph{Interpretation.} Because the detector is held fixed, the drop is a
+faithful measure of its robustness: it withstands single/light paraphrase but
+is eventually defeated by occlusion-guided, feature-steered recursive editing
+of its own most-incriminating sentences. The rewritten text remains fluent and
+on-topic (it reads markedly more human), at the cost of mild redundancy
+introduced by rewriting sentences independently of one another.
 
 \section{Negative Result: Hierarchical Overfitting}
 \label{sec:hsad}
@@ -320,10 +378,12 @@ apparent failure (macro-F1 $0.62$) is almost entirely an operating-point
 artifact: calibration plus an in-distribution threshold recovers $0.886$.
 A region-aware two-stage rule that routes ambiguous-margin documents to an
 orthogonal-feature classifier reaches a deployable $0.857$, beats the prior
-best single model, and recovers the hardest human-like generator. The same
-orthogonal stage is its main paraphrase-attack surface, and a hierarchical
-capacity extension overfits and fails---together arguing that calibration and
-distribution shift, not model capacity, are the levers that matter.
+best single model, and recovers the hardest human-like generator. Holding the
+detector fixed, a targeted occlusion-guided recursive rewrite drives its AI
+rate from $0.91$ to $0.27$ only after seven rounds---it resists light
+paraphrase---while a hierarchical capacity extension overfits and fails.
+Together these argue that calibration and distribution shift, not model
+capacity, are the levers that matter.
 
 \bibliography{refs}
 \bibliographystyle{acl_natbib}

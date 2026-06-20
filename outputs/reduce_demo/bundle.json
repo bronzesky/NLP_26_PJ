@@ -3,6 +3,7 @@
   "before": {
     "title": "原文",
     "doc_prob_ai": 0.9061,
+    "doc_prob_roberta": 0.9061,
     "doc_label": 1,
     "doc_verdict": "AI",
     "doc_region": "clean_ai",
@@ -504,11 +505,12 @@
   },
   "after": {
     "title": "降AIGC后",
-    "doc_prob_ai": 0.702,
+    "doc_prob_ai": 0.0,
+    "doc_prob_roberta": 0.702,
     "doc_label": 0,
     "doc_verdict": "human",
     "doc_region": "ambiguous",
-    "doc_grade": "high",
+    "doc_grade": "ok",
     "doc_margin": 4.599,
     "char_count": 1832,
     "word_count": 290,
@@ -785,34 +787,34 @@
       {
         "index": 0,
         "text": "In recent years, the debate around online classes in schools has grown louder. When the COVID-19 pandemic hit, educational institutions scrambled to shift to remote learning almost overnight. Now that things have stabilized, a real question lingers: should schools keep offering online classes going forward? There are genuine benefits — flexibility, broader access — but the case against making them the norm is hard to ignore, especially when you look at what students lose and what it means for teachers.",
-        "prob_ai": 0.8721,
+        "prob_ai": 0.0,
         "label": 0,
         "region": "ambiguous",
-        "grade": "high",
+        "grade": "ok",
         "sentences": [
           {
             "text": "In recent years, the debate around online classes in schools has grown louder.",
-            "contrib": 0.3251,
-            "heat": 0.8375,
-            "direction": "AI"
+            "contrib": -0.3769,
+            "heat": 0.2597,
+            "direction": "human"
           },
           {
             "text": "When the COVID-19 pandemic hit, educational institutions scrambled to shift to remote learning almost overnight.",
-            "contrib": -0.0821,
-            "heat": 0.4147,
+            "contrib": -0.7841,
+            "heat": 0.0,
             "direction": "human"
           },
           {
             "text": "Now that things have stabilized, a real question lingers: should schools keep offering online classes going forward?",
-            "contrib": 0.3145,
-            "heat": 0.8265,
-            "direction": "AI"
+            "contrib": -0.3875,
+            "heat": 0.2529,
+            "direction": "human"
           },
           {
             "text": "There are genuine benefits — flexibility, broader access — but the case against making them the norm is hard to ignore, especially when you look at what students lose and what it means for teachers.",
-            "contrib": 0.4815,
-            "heat": 1.0,
-            "direction": "AI"
+            "contrib": -0.2204,
+            "heat": 0.3594,
+            "direction": "human"
           }
         ],
         "ppl": 43.65,
@@ -828,32 +830,32 @@
         "sentences": [
           {
             "text": "The most immediate cost is the loss of hands-on learning.",
-            "contrib": 0.1032,
-            "heat": 0.6072,
-            "direction": "AI"
+            "contrib": -0.5988,
+            "heat": 0.1182,
+            "direction": "human"
           },
           {
             "text": "Traditional classrooms give students a space to debate ideas, run experiments, and work through problems together.",
-            "contrib": 0.1657,
-            "heat": 0.6721,
-            "direction": "AI"
+            "contrib": -0.5362,
+            "heat": 0.1581,
+            "direction": "human"
           },
           {
             "text": "That kind of environment builds critical thinking and social skills in ways that are difficult to replicate on a screen.",
-            "contrib": 0.2956,
-            "heat": 0.8069,
-            "direction": "AI"
+            "contrib": -0.4064,
+            "heat": 0.2409,
+            "direction": "human"
           },
           {
             "text": "Remote setups tend to strip away the collaborative texture of learning, leaving students to wrestle with complex material in isolation.",
-            "contrib": 0.2396,
-            "heat": 0.7488,
-            "direction": "AI"
+            "contrib": -0.4624,
+            "heat": 0.2052,
+            "direction": "human"
           },
           {
             "text": "For many, that gap shows up not just in grades but in confidence and long-term readiness.",
-            "contrib": -0.0312,
-            "heat": 0.4676,
+            "contrib": -0.7331,
+            "heat": 0.0325,
             "direction": "human"
           }
         ],
@@ -863,34 +865,34 @@
       {
         "index": 2,
         "text": "Teachers are another piece of this that often gets glossed over. A good teacher does more than deliver content — they read the room, adjust on the fly, and push individual students in ways an algorithm simply cannot. That responsiveness is hard to replace. Beyond the classroom itself, a wide shift to online learning could quietly erode teaching jobs, with real ripple effects on employment and the communities that depend on those positions.",
-        "prob_ai": 0.819,
+        "prob_ai": 0.0,
         "label": 0,
         "region": "ambiguous",
-        "grade": "high",
+        "grade": "ok",
         "sentences": [
           {
             "text": "Teachers are another piece of this that often gets glossed over.",
-            "contrib": 0.0151,
-            "heat": 0.5157,
-            "direction": "neutral"
+            "contrib": -0.6868,
+            "heat": 0.062,
+            "direction": "human"
           },
           {
             "text": "A good teacher does more than deliver content — they read the room, adjust on the fly, and push individual students in ways an algorithm simply cannot.",
-            "contrib": 0.3206,
-            "heat": 0.8329,
-            "direction": "AI"
+            "contrib": -0.3813,
+            "heat": 0.2568,
+            "direction": "human"
           },
           {
             "text": "That responsiveness is hard to replace.",
-            "contrib": 0.0392,
-            "heat": 0.5407,
-            "direction": "AI"
+            "contrib": -0.6627,
+            "heat": 0.0774,
+            "direction": "human"
           },
           {
             "text": "Beyond the classroom itself, a wide shift to online learning could quietly erode teaching jobs, with real ripple effects on employment and the communities that depend on those positions.",
-            "contrib": 0.3299,
-            "heat": 0.8426,
-            "direction": "AI"
+            "contrib": -0.372,
+            "heat": 0.2628,
+            "direction": "human"
           }
         ],
         "ppl": 49.43,
@@ -899,22 +901,22 @@
       {
         "index": 3,
         "text": "Online classes do work well in specific situations — for students in remote areas, or those juggling circumstances that make a fixed schedule impossible. Schools could invest in tools like virtual reality or adaptive software to make those options richer and more interactive, bridging some of the gap without abandoning what works about in-person learning.",
-        "prob_ai": 0.8021,
+        "prob_ai": 0.0,
         "label": 0,
         "region": "ambiguous",
-        "grade": "high",
+        "grade": "ok",
         "sentences": [
           {
             "text": "Online classes do work well in specific situations — for students in remote areas, or those juggling circumstances that make a fixed schedule impossible.",
-            "contrib": 0.1944,
-            "heat": 0.7019,
-            "direction": "AI"
+            "contrib": -0.5075,
+            "heat": 0.1764,
+            "direction": "human"
           },
           {
             "text": "Schools could invest in tools like virtual reality or adaptive software to make those options richer and more interactive, bridging some of the gap without abandoning what works about in-person learning.",
-            "contrib": 0.1113,
-            "heat": 0.6156,
-            "direction": "AI"
+            "contrib": -0.5906,
+            "heat": 0.1234,
+            "direction": "human"
           }
         ],
         "ppl": 75.34,
@@ -922,10 +924,10 @@
       }
     ],
     "grade_distribution": {
-      "high": 100.0,
+      "high": 25.0,
       "middle": 0.0,
       "low": 0.0,
-      "ok": 0.0
+      "ok": 75.0
     },
     "suggestions": {
       "tier1_lexical": [

@@ -122,41 +122,115 @@ class APIHumanizer:
         return _strip_preamble(d["choices"][0]["message"]["content"])
 
 
-def closed_loop(text: str, title: str = "sample", detector=None, humanizer=None,
-                with_report: bool = False) -> dict:
-    """Detect -> de-AI rewrite -> re-detect. Returns before/after deltas."""
-    from src.detector_pipeline import RegionAwareDetector
+def _ai_feature_guidance(evidence: list, top_k: int = 5) -> str:
+    """Turn the detector's AI-leaning linguistic features into concrete rewrite
+    guidance (the 'why it looks AI' that steers the polish)."""
+    tips = {
+        "discourse_total_density": "remove formulaic connectors (however, furthermore, moreover, in conclusion)",
+        "discourse_additive": "drop additive connectors (furthermore, moreover, additionally)",
+        "discourse_causal": "drop causal connectors (therefore, thus, consequently)",
+        "discourse_conclusive": "delete summary phrases (in conclusion, to summarize, overall)",
+        "structural_completeness": "break the rigid topic-sentence/evidence/transition template; vary paragraph shapes",
+        "mattr": "vary vocabulary; stop reusing the same adjectives and phrasings",
+        "latinate_ratio": "replace formal Latinate words (utilization->use, implementation->how it works)",
+        "passive_ratio": "convert passive voice to active",
+        "sentence_length_cv": "vary sentence length sharply; mix very short and long sentences",
+        "sentence_length_std": "vary sentence length sharply",
+        "contraction_ratio": "add contractions (don't, it's, we're, I've)",
+        "first_person_ratio": "add a genuine first-person perspective and a concrete personal detail",
+        "hedge_density": "move hedging to where you are actually uncertain, not just start/end",
+        "modal_ratio": "reduce stacked modals (may, might, could, should)",
+        "avg_word_length": "prefer shorter, plainer words",
+    }
+    picked = []
+    for e in evidence:
+        if e.get("signal") == "AI-like" and e["feature"] in tips:
+            picked.append(tips[e["feature"]])
+        if len(picked) >= top_k:
+            break
+    if not picked:
+        return "make phrasing less uniform and less formulaic"
+    return "; ".join(picked)
+
+
+def targeted_recursive_polish(text, detector=None, humanizer=None, title="sample",
+                              target=0.5, max_rounds=4, top_frac=0.4,
+                              max_new_tokens=400):
+    """Lower the (fixed) RoBERTa AI rate by rewriting ONLY the sentences that
+    contribute most to it (occlusion-located), guided by the AI-leaning
+    features (why they look AI). Recurse on the new top contributors until the
+    same RoBERTa AI rate drops below `target` or rounds run out.
+
+    The detector is FIXED; AI rate before/after is the same RoBERTa prob."""
+    from src.detector_pipeline import RegionAwareDetector, split_sentences
     det = detector or RegionAwareDetector()
     hum = humanizer or Humanizer()
 
-    before = det.analyze(text, title=title)
-    composite = before.get("suggestions", {}).get("composite_prompt", "")
-    rewritten = hum.rewrite(text, composite)
-    after = det.analyze(rewritten, title=title + " (降AI后)")
+    res0 = det.analyze(text, title=title, with_suggestions=True)
+    guidance = _ai_feature_guidance(res0.get("feature_evidence", []))
+    cur = text
+    all_edits = []
+    trajectory = [{"round": 0, "prob_ai": res0["doc_prob_ai"],
+                   "verdict": res0["doc_verdict"], "rewritten_sents": 0}]
 
-    result = {
+    for rnd in range(1, max_rounds + 1):
+        res = det.analyze(cur, title=title, with_suggestions=False)
+        if res["doc_prob_ai"] < target:
+            break
+        # collect (sentence, contrib) across paragraphs, rank by AI contribution
+        sents = []
+        for p in res["paragraphs"]:
+            for s in p.get("sentences", []):
+                sents.append((s["text"], s.get("contrib", 0.0)))
+        if not sents:
+            sents = [(s, 0.0) for s in split_sentences(cur)]
+        # pick the top fraction of sentences pushing toward AI (contrib > 0)
+        ranked = sorted(sents, key=lambda x: -x[1])
+        n_target = max(1, int(len(ranked) * top_frac))
+        targets = [s for s, c in ranked[:n_target] if c > 0] or [ranked[0][0]]
+
+        # rewrite ONLY those sentences, in context, with feature guidance
+        new_cur = cur
+        round_edits = []
+        for sent in targets:
+            prompt = (
+                "Rewrite ONLY this sentence to read as natural human writing. "
+                f"Specifically: {guidance}. Keep the meaning and keep it one sentence. "
+                "Output only the rewritten sentence.\n\nSentence:\n" + sent)
+            try:
+                rw = hum.rewrite(sent, prompt, max_new_tokens=max_new_tokens)
+                rw = rw.split("\n")[0].strip()
+                if rw and rw != sent:
+                    new_cur = new_cur.replace(sent, rw, 1)
+                    round_edits.append({"round": rnd, "original": sent, "rewritten": rw})
+            except Exception as e:
+                print(f"  [round {rnd}] rewrite failed: {type(e).__name__}")
+        cur = new_cur
+        all_edits.extend(round_edits)
+        res_after = det.analyze(cur, title=title, with_suggestions=False)
+        trajectory.append({"round": rnd, "prob_ai": res_after["doc_prob_ai"],
+                           "verdict": res_after["doc_verdict"],
+                           "rewritten_sents": len(round_edits)})
+        if res_after["doc_prob_ai"] < target:
+            break
+
+    final = det.analyze(cur, title=title + " (降AI后)", with_suggestions=True)
+    return {
         "title": title,
-        "before": {
-            "suspicion": before["doc_suspicion"], "prob_ai": before["doc_prob_ai"],
-            "label": before["doc_label"], "grade": before["doc_grade"],
-            "region": before["doc_region"], "ppl": before["ppl"],
-            "burstiness": before["burstiness"],
-        },
-        "after": {
-            "suspicion": after["doc_suspicion"], "prob_ai": after["doc_prob_ai"],
-            "label": after["doc_label"], "grade": after["doc_grade"],
-            "region": after["doc_region"], "ppl": after["ppl"],
-            "burstiness": after["burstiness"],
-        },
-        "suspicion_drop": round(before["doc_suspicion"] - after["doc_suspicion"], 4),
-        "prob_ai_drop": round(before["doc_prob_ai"] - after["doc_prob_ai"], 4),
+        "ai_rate_before": res0["doc_prob_ai"],
+        "ai_rate_after": final["doc_prob_ai"],
+        "ai_rate_drop": round(res0["doc_prob_ai"] - final["doc_prob_ai"], 4),
+        "verdict_before": res0["doc_verdict"],
+        "verdict_after": final["doc_verdict"],
+        "rounds_used": len(trajectory) - 1,
+        "trajectory": trajectory,
+        "edits": all_edits,
+        "guidance": guidance,
         "original_text": text,
-        "rewritten_text": rewritten,
+        "rewritten_text": cur,
+        "before": res0,
+        "after": final,
     }
-    if with_report:
-        result["_before_full"] = before
-        result["_after_full"] = after
-    return result
 
 
 def main():
@@ -174,15 +248,16 @@ def main():
     else:
         text = sys.stdin.read()
 
-    r = closed_loop(text, title=args.title)
+    r = targeted_recursive_polish(text, title=args.title)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(r, ensure_ascii=False, indent=2))
-    b, a = r["before"], r["after"]
-    print(f"BEFORE: suspicion={b['suspicion']:.3f} prob_ai={b['prob_ai']:.3f} "
-          f"grade={b['grade']} ppl={b['ppl']} burst={b['burstiness']}")
-    print(f"AFTER : suspicion={a['suspicion']:.3f} prob_ai={a['prob_ai']:.3f} "
-          f"grade={a['grade']} ppl={a['ppl']} burst={a['burstiness']}")
-    print(f"DROP  : suspicion -{r['suspicion_drop']:.3f}  prob_ai -{r['prob_ai_drop']:.3f}")
+    # keep json light: drop the heavy nested before/after analyze dicts
+    slim = {k: v for k, v in r.items() if k not in ("before", "after")}
+    args.out.write_text(json.dumps(slim, ensure_ascii=False, indent=2))
+    print(f"AI rate (RoBERTa): {r['ai_rate_before']:.3f} -> {r['ai_rate_after']:.3f} "
+          f"(drop {r['ai_rate_drop']:.3f}) in {r['rounds_used']} round(s)")
+    print(f"verdict: {r['verdict_before']} -> {r['verdict_after']}")
+    print(f"trajectory: {[(t['round'], round(t['prob_ai'],3), t['rewritten_sents']) for t in r['trajectory']]}")
+    print(f"guidance: {r['guidance']}")
     print(f"Wrote {args.out}")
 
 

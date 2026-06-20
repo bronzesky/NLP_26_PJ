@@ -1,0 +1,137 @@
+{
+  "table1": [
+    {
+      "name": "P0 single-thr @0.5 (margin>=0)",
+      "macro_f1": 0.6186,
+      "GPT4": 1.0,
+      "bloomz": 0.963,
+      "chatGPT": 1.0,
+      "cohere": 1.0,
+      "davinci": 1.0,
+      "dolly": 1.0,
+      "human_spec": 0.315
+    },
+    {
+      "name": "P1 single-thr dev-opt (t*=-5.87)",
+      "macro_f1": 0.5712,
+      "GPT4": 1.0,
+      "bloomz": 0.98,
+      "chatGPT": 1.0,
+      "cohere": 1.0,
+      "davinci": 1.0,
+      "dolly": 1.0,
+      "human_spec": 0.249
+    },
+    {
+      "name": "A2 region - ortho (RoBERTa in band)",
+      "macro_f1": 0.5917,
+      "GPT4": 1.0,
+      "bloomz": 0.975,
+      "chatGPT": 1.0,
+      "cohere": 1.0,
+      "davinci": 1.0,
+      "dolly": 1.0,
+      "human_spec": 0.277
+    },
+    {
+      "name": "Region-aware FULL (P1)",
+      "macro_f1": 0.8567,
+      "GPT4": 0.994,
+      "bloomz": 0.997,
+      "chatGPT": 1.0,
+      "cohere": 1.0,
+      "davinci": 1.0,
+      "dolly": 0.999,
+      "human_spec": 0.71
+    },
+    {
+      "name": "Region-aware (P2 ceiling)",
+      "macro_f1": 0.8541,
+      "GPT4": 0.999,
+      "bloomz": 0.998,
+      "chatGPT": 1.0,
+      "cohere": 1.0,
+      "davinci": 1.0,
+      "dolly": 0.999,
+      "human_spec": 0.704
+    },
+    {
+      "name": "Single-thr ORACLE (test-fit)",
+      "macro_f1": 0.8875,
+      "GPT4": 0.888,
+      "bloomz": 0.095,
+      "chatGPT": 0.999,
+      "cohere": 0.998,
+      "davinci": 0.994,
+      "dolly": 0.973,
+      "human_spec": 0.957
+    }
+  ],
+  "table3_loo": [
+    {
+      "name": "all features",
+      "macro_f1": 0.8567,
+      "bloomz": 0.997
+    },
+    {
+      "name": "- ttr",
+      "macro_f1": 0.8434,
+      "bloomz": 0.985
+    },
+    {
+      "name": "- repeated_bigram_ratio",
+      "macro_f1": 0.8566,
+      "bloomz": 0.997
+    },
+    {
+      "name": "- repeated_trigram_ratio",
+      "macro_f1": 0.8566,
+      "bloomz": 0.997
+    },
+    {
+      "name": "- avg_word_length",
+      "macro_f1": 0.857,
+      "bloomz": 0.998
+    },
+    {
+      "name": "- text_length",
+      "macro_f1": 0.8567,
+      "bloomz": 0.998
+    },
+    {
+      "name": "- punctuation_per_token",
+      "macro_f1": 0.8563,
+      "bloomz": 0.997
+    },
+    {
+      "name": "TTR only",
+      "macro_f1": 0.8568,
+      "bloomz": 0.998
+    }
+  ],
+  "a5_classifier": [
+    {
+      "name": "LR",
+      "macro_f1": 0.8567,
+      "bloomz": 0.997,
+      "overfit_gap": -0.067
+    },
+    {
+      "name": "DecisionTree",
+      "macro_f1": 0.8566,
+      "bloomz": 0.999,
+      "overfit_gap": -0.042
+    },
+    {
+      "name": "LGBM",
+      "macro_f1": 0.8554,
+      "bloomz": 0.997,
+      "overfit_gap": 0.007
+    }
+  ],
+  "test_auroc": 0.9441,
+  "deploy_band": [
+    -10.576387214660643,
+    10.906830406188966
+  ]
+}
