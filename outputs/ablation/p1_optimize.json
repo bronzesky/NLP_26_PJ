@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "v": "B0",
+      "macro_f1": 0.8569,
+      "bloomz": 0.997,
+      "human_spec": 0.711
+    },
+    {
+      "v": "B1",
+      "macro_f1": 0.857,
+      "bloomz": 0.998,
+      "human_spec": 0.711
+    },
+    {
+      "v": "B2",
+      "macro_f1": 0.8563,
+      "bloomz": 0.998,
+      "human_spec": 0.709
+    },
+    {
+      "v": "B3",
+      "macro_f1": 0.8561,
+      "bloomz": 0.998,
+      "human_spec": 0.709
+    },
+    {
+      "v": "A1",
+      "macro_f1": 0.8572,
+      "bloomz": 0.997,
+      "human_spec": 0.712
+    }
+  ],
+  "best_ortho_thr": 0.46,
+  "best_cw": "None",
+  "a1_thr": 0.56
+}

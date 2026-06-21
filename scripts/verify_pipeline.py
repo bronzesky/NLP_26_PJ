@@ -16,5 +16,5 @@ for model in ["human", "bloomz", "GPT4", "chatGPT"]:
     row = sub.iloc[0]
     r = det.analyze(str(row["text"]), title=model, with_suggestions=False)
     tl = int(row["label"])
-    print(f"{model:8s} true={tl} pred={r['doc_label']} susp={r['doc_suspicion']:.3f} "
+    print(f"{model:8s} true={tl} pred={r['doc_label']} pAI={r['doc_prob_ai']:.3f} "
           f"region={r['doc_region']:12s} margin={r['doc_margin']:.2f} | acc@20={n_ok}/20")

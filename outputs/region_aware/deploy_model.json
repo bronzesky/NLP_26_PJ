@@ -2,24 +2,14 @@
   "protocol": "P1_deploy_fit_on_dev",
   "temperature": 5.367681468392405,
   "ortho_features": [
-    "ttr",
-    "repeated_bigram_ratio",
-    "repeated_trigram_ratio",
-    "avg_word_length",
-    "text_length",
-    "punctuation_per_token"
+    "ttr"
   ],
   "margin_t_low": -10.576387214660643,
   "margin_t_high": 10.906830406188966,
   "ortho_lr_coef": [
-    16.290631555029407,
-    0.45410305708875925,
-    3.735761264355187,
-    -0.4804477885994493,
-    4.7952024690951985e-05,
-    1.1891736557689183
+    15.369605998555754
   ],
-  "ortho_lr_intercept": -9.066437579025575,
-  "dev_fit_macro_f1": 0.9401755892474366,
+  "ortho_lr_intercept": -10.442794053891676,
+  "dev_fit_macro_f1": 0.9365698554581079,
   "note": "margin>=t_high->AI; margin<t_low->human; ambiguous->ortho LR. margin = (logit_ai - logit_human). Logits from roberta_base/best_model."
 }

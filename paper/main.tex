@@ -33,14 +33,13 @@ show that a single global threshold is structurally unable to catch the
 human-like \texttt{bloomz} generator (recall $0.096$), because its decision
 margin overlaps the human upper tail. We propose a \emph{region-aware
 two-stage detector}: confident-margin documents are decided directly, while
-an ambiguous band is resolved by a logistic classifier over orthogonal
-hand-crafted features (lexical diversity, repetition). Under the strict
+an ambiguous band is resolved by a one-dimensional logistic classifier on
+type-token ratio---a feature orthogonal to the RoBERTa margin (an ablation
+shows TTR alone carries the effect). Under the strict
 fit-on-dev / predict-test-once protocol this reaches macro-F1 $0.857$,
-surpassing the best single-model baseline ($0.835$); the in-distribution
-ceiling is $0.854$ (essentially tied with P1, as the single-generator dev set
-combined with a strongly separable feature makes dev-fitting nearly lossless
-here). The orthogonal stage lifts \texttt{bloomz} recall from
-$0.10$ to $0.70$. We pair the detector with a plagiarism-checker-style
+surpassing the best single-model baseline ($0.835$). The TTR arbiter lifts the
+human-like \texttt{bloomz} generator's recall from $0.10$ to $1.00$ while
+holding human specificity. We pair the detector with a plagiarism-checker-style
 interpretable report (occlusion-based sentence attribution, a
 human$\leftrightarrow$AI discriminant axis for each linguistic feature) and a
 fixed-detector de-AI robustness probe: a fine-tuned detector resists light or
@@ -83,10 +82,11 @@ representation: temperature scaling plus an in-distribution threshold recovers
 $0.619\!\rightarrow\!0.886$ (oracle $0.888$) with the model frozen
 (Section~\ref{sec:diag}).
 \item \textbf{Region-aware two-stage detection}: a confident-margin fast path
-plus an ambiguous-band classifier over \emph{orthogonal} hand-crafted features.
+plus a one-dimensional TTR arbiter for the ambiguous band (an ablation shows
+this single orthogonal feature carries the entire effect).
 Under the strict fit-on-dev / test-once protocol it reaches macro-F1 $0.857$,
 beating the strongest single-model baseline ($0.835$), and lifts the
-human-like \texttt{bloomz} generator's recall from $0.10$ to $0.70$
+human-like \texttt{bloomz} generator's recall from $0.10$ to $1.00$
 (Section~\ref{sec:method}).
 \item An interpretable, plagiarism-checker-style report: occlusion-based
 sentence attribution that is coherent with the document score, and a
@@ -213,26 +213,30 @@ We exploit this with a two-stage rule. Let $m=\text{logit}_{\text{AI}}-
 \begin{cases}
 \text{AI} & m \geq t_{\text{high}}\\
 \text{human} & m < t_{\text{low}}\\
-g_\phi(\mathbf{f}) & t_{\text{low}}\leq m < t_{\text{high}}
+g(\text{TTR}) & t_{\text{low}}\leq m < t_{\text{high}}
 \end{cases}
 \end{equation}
-where $g_\phi$ is a logistic classifier over six orthogonal features
-(TTR, repeated bi/tri-gram ratios, avg.\ word length, length, punctuation
-density). All of $t_{\text{low}}, t_{\text{high}}, \phi$ and the temperature
-are fit on the dev split only (the deployable P1 protocol). The learned
-$g_\phi$ is dominated by TTR (coefficient $16.3$), matching the diagnosis.
+where $g$ is a one-dimensional logistic classifier on type-token ratio alone.
+We initially fit $g$ on six orthogonal hand-crafted features, but a
+leave-one-out ablation (Table~\ref{tab:ablation}) shows the decision is
+\emph{causally} carried by TTR: dropping it is the only change that moves the
+score, and TTR alone reproduces the full result. We therefore collapse the
+arbiter to a single feature---an interpretable, overfit-resistant rule
+``trust the RoBERTa margin when confident, else threshold TTR.'' Both band
+edges $t_{\text{low}}, t_{\text{high}}$, the TTR logistic, and the temperature
+are fit on the dev split only (the deployable P1 protocol).
 
-\paragraph{Protocols.} We report three numbers to separate effects honestly:
-\textbf{P1} (deployable) fits everything on dev and predicts test once;
-\textbf{P2} (in-distribution ceiling) uses a nested split of test for honest
-band selection; \textbf{P0} is the optimistic in-test variant.
-Table~\ref{tab:method} shows P1 macro-F1 $0.857$---\emph{above} the strongest
-single-model baseline (Fusion LGBM, $0.835$, itself test-tuned)---and a P2
-ceiling of $0.854$, essentially tied with P1: with the single-generator dev set
-and a strongly separable feature, dev-fitting is nearly lossless here. Crucially
-the region-aware rule keeps \texttt{bloomz} recall at $1.00$ (P1) / $1.00$ (P2)
-\emph{and} human specificity at $0.71$ simultaneously---a combination no single
-threshold can achieve (Table~\ref{tab:ablation}).
+\paragraph{Protocols and result.} We separate effects with three readings:
+\textbf{P0} (default $0.5$ threshold, no adaptation), \textbf{P1} (deployable:
+fit everything on dev, predict test once), and \textbf{P2} (fit on an
+in-distribution test split). Table~\ref{tab:method} shows the deployable P1
+macro-F1 is $0.857$---above the strongest single-model baseline (Fusion LGBM,
+$0.835$, itself test-tuned); P2 is $0.854$, essentially tied with P1 (the
+single-generator dev set plus a strongly separable feature make dev-fitting
+nearly lossless, so we do not treat P2 as a meaningful ceiling). Crucially the
+rule keeps \texttt{bloomz} recall at $1.00$ \emph{and} human specificity at
+$0.71$ at once---a combination no single threshold achieves
+(Table~\ref{tab:ablation}).
 
 \begin{table}[t]\centering\small
 \begin{tabular}{llcc}
@@ -252,21 +256,23 @@ P1 protocol collapses to $0.571$.}
 \label{tab:method}
 \end{table}
 
-\paragraph{Ablation.} Table~\ref{tab:ablation} isolates the contribution of
-each design choice (all dev-fit, applied to test). Removing the orthogonal
-classifier---deciding the ambiguous band with RoBERTa itself---drops macro-F1
-from $0.857$ to $0.592$: the entire gain is the orthogonal stage, not the band
-partition. No single threshold suffices: even an oracle threshold fit on the
-test labels reaches $0.888$ only by sacrificing \texttt{bloomz} (recall
-$0.095$) for human specificity ($0.957$), whereas region-aware holds both
-(\texttt{bloomz} $1.00$, specificity $0.71$). A leave-one-out over the six
-orthogonal features shows the effect is \emph{causally} concentrated in
-type-token ratio: dropping TTR is the only ablation that moves the score
-($0.857\!\rightarrow\!0.843$, \texttt{bloomz} $0.997\!\rightarrow\!0.985$),
-and TTR \emph{alone} recovers the full $0.857$. The ambiguous-band arbiter is
-robust to model family (logistic / shallow tree / LGBM all $\approx0.857$),
-because the band sub-problem is essentially one-dimensional---consistent with
-our thesis that the fix is a lightweight inductive bias, not capacity.
+\paragraph{Ablation.} Table~\ref{tab:ablation} isolates each design choice
+(all dev-fit, applied to test). Removing the orthogonal arbiter---deciding the
+ambiguous band with RoBERTa itself---drops macro-F1 from $0.857$ to $0.592$:
+the entire gain is the orthogonal stage, not the band partition. No single
+threshold suffices, and \texttt{bloomz} recall is strongly threshold-dependent:
+at a low threshold \texttt{bloomz} is easy ($0.96$ recall at margin~$0$) but
+human specificity collapses to $0.32$; at the high threshold needed to protect
+human specificity ($0.95$), \texttt{bloomz} recall falls to $0.10$. Even an
+oracle threshold fit on test labels reaches $0.888$ only by sacrificing
+\texttt{bloomz} ($0.10$) for specificity ($0.96$); the region-aware rule instead
+holds both (\texttt{bloomz} $1.00$, specificity $0.71$) by routing the
+overlapping band to TTR. The leave-one-out confirms the effect is causally
+concentrated in TTR (dropping it is the only ablation that moves the score,
+$0.857\!\rightarrow\!0.843$; TTR alone recovers $0.857$), and the arbiter is
+robust to model family (logistic / shallow tree / LGBM all $\approx0.857$)
+because the band sub-problem is essentially one-dimensional---supporting our
+thesis that the fix is a lightweight inductive bias, not capacity.
 
 \begin{table}[t]\centering\small
 \begin{tabular}{lccc}
@@ -401,9 +407,13 @@ flip rates are directional rather than precise. The orthogonal-feature
 baselines are corpus statistics estimated on this dataset and may not transfer
 to other domains. P2/oracle numbers use test labels for calibration and are
 explicitly upper bounds, not deployable scores; only the P1 number ($0.857$)
-is leakage-free. The de-AI component is strictly a robustness probe; we do not
-endorse using it to evade academic-integrity systems. Finally, our study is
-English-only and single-domain at test time.
+is leakage-free. A residual ceiling remains in human specificity ($0.71$ inside
+the ambiguous band): we found this is \emph{not} a tunable artifact---sweeping
+the band arbiter's decision threshold and class weight does not move it---but a
+genuine \texttt{bloomz}$\leftrightarrow$human overlap in TTR space, the price of
+recovering a human-like generator. The de-AI component is strictly a robustness
+probe; we do not endorse using it to evade academic-integrity systems. Finally,
+our study is English-only and single-domain at test time.
 
 \section{Conclusion}
 

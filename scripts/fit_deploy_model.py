@@ -17,8 +17,10 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 from src.metrics import macro_f1
 
-ORTHO = ["ttr", "repeated_bigram_ratio", "repeated_trigram_ratio",
-         "avg_word_length", "text_length", "punctuation_per_token"]
+# Ablation (LOO + B1) showed TTR is the sole causal feature: the 6-feature LR
+# and a 1-D TTR logistic give identical test macro-F1 (0.857). Collapse to TTR
+# for an interpretable, overfit-resistant arbiter ("RoBERTa margin, else TTR").
+ORTHO = ["ttr"]
 
 dev = pd.read_csv(REPO / "outputs/analysis_dev/features.csv").reset_index(drop=True)
 dev["margin"] = dev["logit_ai"] - dev["logit_human"]
